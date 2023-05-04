@@ -17,6 +17,46 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 
 from wordcloud import WordCloud
 ########################################################################################################################
+# 데이터 로드 상수
+df_리뷰_감성분석결과 = pd.read_csv('/app/streamlit/data/리뷰6차.csv')
+df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'])
+
+stopwords = ['언늘', '결국', '생각', '후기', '감사', '진짜', '완전', '사용', '요즘', '정도', '이번', '달리뷰', '결과', 
+             '지금', '동영상', '조금', '안테', '입제', '영상', '이번건', '며칠', '이제', '거시기', '얼듯', '처음', '다음']
+########################################################################################################################
+# 레이아웃
+with st.container():
+    col0_1, col0_2, col0_3, col0_4 = st.columns([1,1,1,1])
+with st.container():
+    col1, col2 = st.columns([1,1])
+with st.container():
+    col0_5, col0_6, col0_7, col0_8 = st.columns([1,1,1,1])
+with st.container():
+    col3, col4 = st.columns([1,1])
+########################################################################################################################
+# 사용자 입력
+with col0_1:
+    option = st.selectbox(
+        '고르세요',
+        ('카운트', 'td-idf'))
+    st.write('이것: ', option)
+
+with col0_2:
+    품사옵션 = st.selectbox(
+        '고르세요',
+        ('명사', '동사+형용사', '명사+동사+형용사'))
+    st.write('이것: ', 품사옵션)
+
+with col0_5:
+    추가불용어 = st.text_input('불용어를 추가하세요', '예시 : 영양제, 식물, 배송')
+    st.write('추가된 불용어', 추가불용어)
+
+
+if 추가불용어.find(',') != -1:
+    stopwords = stopwords.extend([i.strip() for i in 추가불용어.split(',')])
+if 추가불용어.find(',') == -1:
+    stopwords = stopwords.append(추가불용어) 
+########################################################################################################################
 def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None, sentiment = None, item = None, source = None , 품사='noun'):
     if name is not None:
         df = df[df['name'] == name]
@@ -57,46 +97,6 @@ def get_tfidf_top_words(df, start_date=None, last_date=None, num_words=10, name=
     tfidf_top_words = tfidf_df.sum().sort_values(ascending=False).head(num_words).to_dict()
     return tfidf_top_words
 ########################################################################################################################
-# 데이터 로드 상수
-df_리뷰_감성분석결과 = pd.read_csv('/app/streamlit/data/리뷰6차.csv')
-df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'])
-
-stopwords = ['언늘', '결국', '생각', '후기', '감사', '진짜', '완전', '사용', '요즘', '정도', '이번', '달리뷰', '결과', 
-             '지금', '동영상', '조금', '안테', '입제', '영상', '이번건', '며칠', '이제', '거시기', '얼듯', '처음', '다음']
-########################################################################################################################
-# 레이아웃
-with st.container():
-    col0_1, col0_2, col0_3, col0_4 = st.columns([1,1,1,1])
-with st.container():
-    col1, col2 = st.columns([1,1])
-with st.container():
-    col0_5, col0_6, col0_7, col0_8 = st.columns([1,1,1,1])
-with st.container():
-    col3, col4 = st.columns([1,1])
-########################################################################################################################
-# 사용자 입력
-with col0_1:
-    option = st.selectbox(
-        '고르세요',
-        ('카운트', 'td-idf'))
-    st.write('이것: ', option)
-
-with col0_2:
-    품사옵션 = st.selectbox(
-        '고르세요',
-        ('명사', '동사+형용사', '명사+동사+형용사'))
-    st.write('이것: ', 품사옵션)
-
-with col0_5:
-    추가불용어 = st.text_input('불용어를 추가하세요', '예시 : 영양제, 식물, 배송')
-    st.write('The current movie title is', 추가불용어)
-
-
-if 추가불용어.find(',') != -1:
-    stopwords = stopwords.extend([i.strip() for i in 추가불용어.split(',')])
-if 추가불용어.find(',') == -1:
-    stopwords = stopwords.append(추가불용어) 
-
 if 품사옵션 == '명사':
     품사 = 'noun'
 if 품사옵션 == '동사+형용사':
