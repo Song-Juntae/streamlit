@@ -154,8 +154,8 @@ net = Network(notebook=True, cdn_resources='in_line')
 
 net.from_nx(G)
 
-net.save_graph(f'/app/stramlit/pyvis_graph.html')
-HtmlFile = open(f'/app/stramlit/pyvis_graph.html', 'r', encoding='utf-8')
+net.save_graph(f'/app/streamlit/pyvis_graph.html')
+HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
 components.html(HtmlFile.read(), height=435)
 
 ########################################################################################################################
