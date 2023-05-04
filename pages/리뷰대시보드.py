@@ -97,20 +97,22 @@ if 추가불용어.find(',') != -1:
 if 추가불용어.find(',') == -1:
     stopwords = stopwords.append(추가불용어) 
 
-카운트 = get_count_top_words(df_리뷰_감성분석결과)
-tdidf = get_tfidf_top_words(df_리뷰_감성분석결과)
-
-if option == '카운트':
-    words = 카운트
-if option == 'td-idf':
-    words = tdidf
-
 if 품사옵션 == '명사':
     품사 = 'noun'
 if 품사옵션 == '동사+형용사':
     품사 = 'v_ad'
 if 품사옵션 == '명사+동사+형용사':
     품사 = 'n_v_ad'
+
+카운트 = get_count_top_words(df_리뷰_감성분석결과, 품사옵션)
+tdidf = get_tfidf_top_words(df_리뷰_감성분석결과, 품사옵션)
+
+if option == '카운트':
+    words = 카운트
+if option == 'td-idf':
+    words = tdidf
+
+
 ########################################################################################################################
 # 파이차트
 with col3:
