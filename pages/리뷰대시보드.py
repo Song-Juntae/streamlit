@@ -91,13 +91,6 @@ with col0_5:
     추가불용어 = st.text_input('불용어를 추가하세요', '예시 : 영양제, 식물, 배송')
     st.write('The current movie title is', 추가불용어)
 
-with col0_6:
-    타입 = type(추가불용어)
-    타입
-
-카운트 = get_count_top_words(df_리뷰_감성분석결과)
-tdidf = get_tfidf_top_words(df_리뷰_감성분석결과)
-
 if option == '카운트':
     words = 카운트
 if option == 'td-idf':
@@ -114,6 +107,9 @@ if 추가불용어.find(',') != -1:
     stopwords = stopwords.extend([i.strip() for i in 추가불용어.split(',')])
 if 추가불용어.find(',') == -1:
     stopwords = stopwords.append(추가불용어) 
+
+카운트 = get_count_top_words(df_리뷰_감성분석결과)
+tdidf = get_tfidf_top_words(df_리뷰_감성분석결과)
 ########################################################################################################################
 # 파이차트
 with col3:
