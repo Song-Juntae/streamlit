@@ -57,9 +57,13 @@ else:
 ########################################################################################################################
 # 파이차트
 with col3:
-    df_파이차트 = pd.DataFrame(df_리뷰_감성분석결과['감성결과'].value_counts())
-    pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
-    st.plotly_chart(pie_chart, use_container_width=True), st.bar_chart(words)
+    col3_1,col3_2 = st.columns([1,1])
+    with col3_1:
+        df_파이차트 = pd.DataFrame(df_리뷰_감성분석결과['감성결과'].value_counts())
+        pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
+        st.plotly_chart(pie_chart, use_container_width=True)
+    with col3_2:
+        st.bar_chart(words)
 ########################################################################################################################
 # 워드클라우드
 with col1:
