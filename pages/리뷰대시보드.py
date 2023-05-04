@@ -32,7 +32,7 @@ def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=
         last_date = df['time'].max().strftime('%Y-%m-%d')
     df = df[(df['time'] >= start_date) & (df['time'] <= last_date)]
     count_vectorizer = CountVectorizer()
-    count = count_vectorizer.fit_transform(df['kha_nng_은어전처리_sentence'].values)
+    count = count_vectorizer.fit_transform(df['noun'].values)
     count_df = pd.DataFrame(count.todense(), columns=count_vectorizer.get_feature_names_out())
     count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
     return count_top_words
