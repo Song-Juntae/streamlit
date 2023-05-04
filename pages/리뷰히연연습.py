@@ -17,11 +17,11 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 
 from wordcloud import WordCloud
 ########################################################################################################################
-def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None, 감성결과 = None, item = None, source = None ):
+def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None, sentiment = None, item = None, source = None ):
     if name is not None:
         df = df[df['name'] == name]
-    if 감성결과 is not None:
-        df = df[df['감성결과'] == 감성결과]
+    if sentiment is not None:
+        df = df[df['sentiment'] == 감성결과]
     if item is not None:
         df = df[df['item'] == item]
     if source is not None:
@@ -32,13 +32,13 @@ def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=
         last_date = df['time'].max().strftime('%Y-%m-%d')
     df = df[(df['time'] >= start_date) & (df['time'] <= last_date)]
     count_vectorizer = CountVectorizer()
-    count = count_vectorizer.fit_transform(df['kha_nng_은어전처리_sentence'].values)
+    count = count_vectorizer.fit_transform(df['noun'].values)
     count_df = pd.DataFrame(count.todense(), columns=count_vectorizer.get_feature_names_out())
     count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
     return count_top_words
 ########################################################################################################################
 # 데이터 로드
-df_리뷰_감성분석결과 = pd.read_csv('/app/streamlit/data/리뷰_감성분석결과.csv')
+df_리뷰_감성분석결과 = pd.read_csv('/app/streamlit/data/리뷰6차.csv')
 df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'])
 
 words = get_count_top_words(df_리뷰_감성분석결과)
@@ -51,7 +51,7 @@ with st.container():
 ########################################################################################################################
 # 파이차트
 with col1:
-    df_파이차트 = pd.DataFrame(df_리뷰_감성분석결과['감성결과'].value_counts())
+    df_파이차트 = pd.DataFrame(df_리뷰_감성분석결과['sentiment'].value_counts())
     pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
     st.plotly_chart(pie_chart, use_container_width=True)
 ########################################################################################################################
@@ -85,7 +85,7 @@ from pyvis.network import Network
 
 keywords = ['뿌리','제라늄', '식물', '응애']
 
-reviews = [eval(i) for i in df_리뷰_감성분석결과['kha_nng_은어전처리_sentence']]
+reviews = [eval(i) for i in df_리뷰_감성분석결과['noun']]
 
 networks = []
 for review in reviews:
