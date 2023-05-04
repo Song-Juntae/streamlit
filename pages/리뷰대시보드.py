@@ -92,8 +92,8 @@ with col0_5:
     st.write('The current movie title is', 추가불용어)
 
 with col0_6:
-    type(추가불용어)
-    stopwords
+    타입 = type(추가불용어)
+    타입
 
 카운트 = get_count_top_words(df_리뷰_감성분석결과)
 tdidf = get_tfidf_top_words(df_리뷰_감성분석결과)
