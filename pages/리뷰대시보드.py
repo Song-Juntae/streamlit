@@ -63,7 +63,8 @@ with col3:
         pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
         st.plotly_chart(pie_chart, use_container_width=True)
     with col3_2:
-        st.bar_chart(words)
+        # st.plotly_chart(words)
+        fig = go.Figure([go.Bar(x=words)])
 ########################################################################################################################
 # 워드클라우드
 with col1:
