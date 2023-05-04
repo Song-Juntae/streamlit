@@ -42,7 +42,6 @@ df_리뷰_감성분석결과 = pd.read_csv('/app/streamlit/data/리뷰_감성분
 df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'])
 
 words = get_count_top_words(df_리뷰_감성분석결과)
-st.write(words.keys())
 ########################################################################################################################
 # 레이아웃
 with st.container():
@@ -65,7 +64,7 @@ with col3:
         st.plotly_chart(pie_chart, use_container_width=True)
     with col3_2:
         # st.plotly_chart(words)
-        바차트 = go.Figure([go.Bar(x=words.keys(),y=words.values())])
+        바차트 = go.Figure([go.Bar(x=list(words.keys()),y=list(words.values()))])
         st.plotly_chart(바차트, use_container_width=True)
 ########################################################################################################################
 # 워드클라우드
