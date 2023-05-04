@@ -78,7 +78,7 @@ with col1:
         figsize=(6,4)
     )
     ax.imshow(워드클라우드, interpolation='bilinear')
-    st.pyplot(fig, dpi=300)
+    st.pyplot(fig, dpi=10)
 ########################################################################################################################
 # 바차트
 with col4:
