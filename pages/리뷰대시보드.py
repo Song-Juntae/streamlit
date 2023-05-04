@@ -55,7 +55,6 @@ if st.button('Say hello'):
 else:
     st.write('Goodbye')
 ########################################################################################################################
-words
 # 파이차트
 with col3:
     col3_1,col3_2 = st.columns([1,1])
@@ -65,7 +64,7 @@ with col3:
         st.plotly_chart(pie_chart, use_container_width=True)
     with col3_2:
         # st.plotly_chart(words)
-        바차트 = go.Figure([go.Bar(x=words)])
+        바차트 = go.Figure([go.Bar(x=words.keys,y=words.values)])
         st.plotly_chart(바차트, use_container_width=True)
 ########################################################################################################################
 # 워드클라우드
