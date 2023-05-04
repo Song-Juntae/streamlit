@@ -165,7 +165,7 @@ net.save_graph(f'/app/streamlit/pyvis_graph.html')
 HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
 
 with col2:
-    components.html(HtmlFile.read(), height=400)
+    components.html(HtmlFile.read(), height=435)
 
 ########################################################################################################################
 ########################################################################################################################
