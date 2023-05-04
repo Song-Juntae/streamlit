@@ -42,7 +42,7 @@ df_리뷰_감성분석결과 = pd.read_csv('/app/streamlit/data/리뷰_감성분
 df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'])
 
 words = get_count_top_words(df_리뷰_감성분석결과)
-words.keys()
+st.write(words.keys())
 ########################################################################################################################
 # 레이아웃
 with st.container():
