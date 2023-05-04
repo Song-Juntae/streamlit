@@ -91,6 +91,9 @@ with col0_5:
     추가불용어 = st.text_input('불용어를 추가하세요', '예시 : 영양제, 식물, 배송')
     st.write('The current movie title is', 추가불용어)
 
+with col0_6:
+    stopwords
+
 카운트 = get_count_top_words(df_리뷰_감성분석결과)
 tdidf = get_tfidf_top_words(df_리뷰_감성분석결과)
 
