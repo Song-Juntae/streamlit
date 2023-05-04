@@ -104,8 +104,8 @@ if 품사옵션 == '동사+형용사':
 if 품사옵션 == '명사+동사+형용사':
     품사 = 'n_v_ad'
 
-카운트 = get_count_top_words(df_리뷰_감성분석결과, 품사옵션)
-tdidf = get_tfidf_top_words(df_리뷰_감성분석결과, 품사옵션)
+카운트 = get_count_top_words(df_리뷰_감성분석결과, 품사)
+tdidf = get_tfidf_top_words(df_리뷰_감성분석결과, 품사)
 
 if option == '카운트':
     words = 카운트
