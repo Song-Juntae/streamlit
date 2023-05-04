@@ -68,9 +68,9 @@ stopwords = ['언늘', '결국', '생각', '후기', '감사', '진짜', '완전
 with st.container():
     col0_1, col0_2, col0_3, col0_4 = st.columns([1,1,1,1])
 with st.container():
-    col0_5, col0_6, col0_7, col0_8 = st.columns([1,1,1,1])
-with st.container():
     col1, col2 = st.columns([1,1])
+with st.container():
+    col0_5, col0_6, col0_7, col0_8 = st.columns([1,1,1,1])
 with st.container():
     col3, col4 = st.columns([1,1])
 ########################################################################################################################
