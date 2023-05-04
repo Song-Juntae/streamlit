@@ -36,6 +36,26 @@ def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=
     count_df = pd.DataFrame(count.todense(), columns=count_vectorizer.get_feature_names_out())
     count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
     return count_top_words
+
+def get_tfidf_top_words(df, start_date=None, last_date=None, num_words=10, name=None, sentiment = None, item = None, source = None ):
+    if name is not None:
+        df = df[df['name'] == name]
+    if sentiment is not None:
+        df = df[df['sentiment'] == sentiment]
+    if item is not None:
+        df = df[df['item'] == item]
+    if source is not None:
+        df = df[df['source'] == source]
+    if start_date is None:
+        start_date = df['time'].min().strftime('%Y-%m-%d')
+    if last_date is None:
+        last_date = df['time'].max().strftime('%Y-%m-%d')
+    df = df[(df['time'] >= start_date) & (df['time'] <= last_date)]
+    tfidf_vectorizer = TfidfVectorizer(stop_words=stopwords)
+    tfidf = tfidf_vectorizer.fit_transform(df['n_v_ad'].values)
+    tfidf_df = pd.DataFrame(tfidf.todense(), columns=tfidf_vectorizer.get_feature_names_out())
+    tfidf_top_words = tfidf_df.sum().sort_values(ascending=False).head(num_words).to_dict()
+    return tfidf_top_words
 ########################################################################################################################
 # 데이터 로드
 df_리뷰_감성분석결과 = pd.read_csv('/app/streamlit/data/리뷰_감성분석결과.csv')
@@ -53,10 +73,11 @@ with st.container():
 ########################################################################################################################
 # 사용자 입력
 with col0_1:
-    if st.button('Say hello'):
-        st.write('Why hello there')
-    else:
-        st.write('Goodbye')
+    option = st.selectbox(
+        '고르세요',
+        ('카운트', 'td-idf'))
+
+    st.write('이것: ', option)
 ########################################################################################################################
 # 파이차트
 with col3:
