@@ -71,7 +71,11 @@ with col1:
         contour_width=3, 
         colormap='Spectral', 
         contour_color='white',
-        mask=cand_mask).generate_from_frequencies(words)
+        mask=cand_mask,
+        width=100,
+        height=200
+        ).generate_from_frequencies(words),
+        
     fig, ax = plt.subplots(
         figsize=(6,4)
     )
