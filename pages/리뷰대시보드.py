@@ -54,7 +54,7 @@ with col0_5:
 with col0_6:
     values = st.slider(
         'Select a range of values',
-        0.0, 100.0, (25.0, 75.0))
+        0.0, 100.0)
     st.write('Values:', values)
 
 if 추가불용어.find(',') != -1:
