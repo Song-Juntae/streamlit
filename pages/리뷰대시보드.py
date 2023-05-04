@@ -60,8 +60,6 @@ def get_tfidf_top_words(df, start_date=None, last_date=None, num_words=10, name=
 # 데이터 로드
 df_리뷰_감성분석결과 = pd.read_csv('/app/streamlit/data/리뷰_감성분석결과.csv')
 df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'])
-
-words = get_count_top_words(df_리뷰_감성분석결과)
 ########################################################################################################################
 # 레이아웃
 with st.container():
@@ -78,6 +76,14 @@ with col0_1:
         ('카운트', 'td-idf'))
 
     st.write('이것: ', option)
+
+카운트 = get_count_top_words(df_리뷰_감성분석결과)
+tdidf = get_tfidf_top_words(df_리뷰_감성분석결과)
+
+if option == '카운트':
+    words = 카운트
+if option == 'td-idf':
+    words = tdidf
 ########################################################################################################################
 # 파이차트
 with col3:
