@@ -52,7 +52,7 @@ def get_tfidf_top_words(df, start_date=None, last_date=None, num_words=10, name=
         last_date = df['time'].max().strftime('%Y-%m-%d')
     df = df[(df['time'] >= start_date) & (df['time'] <= last_date)]
     tfidf_vectorizer = TfidfVectorizer(stop_words=stopwords)
-    tfidf = tfidf_vectorizer.fit_transform(df['n_v_ad'].values)
+    tfidf = tfidf_vectorizer.fit_transform(df['noun'].values)
     tfidf_df = pd.DataFrame(tfidf.todense(), columns=tfidf_vectorizer.get_feature_names_out())
     tfidf_top_words = tfidf_df.sum().sort_values(ascending=False).head(num_words).to_dict()
     return tfidf_top_words
