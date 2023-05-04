@@ -55,8 +55,6 @@ if 추가불용어.find(',') != -1:
     stopwords.extend([i.strip() for i in 추가불용어.split(',')])
 if 추가불용어.find(',') == -1:
     stopwords.append(추가불용어) 
-
-stopwords
 ########################################################################################################################
 def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None, sentiment = None, item = None, source = None , 품사='noun'):
     if name is not None:
