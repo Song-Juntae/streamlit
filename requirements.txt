@@ -9,3 +9,4 @@ scikit-learn
 gensim
 streamlit-elements
 networkx
+pyvis
