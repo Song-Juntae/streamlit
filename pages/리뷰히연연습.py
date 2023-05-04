@@ -21,7 +21,7 @@ def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=
     if name is not None:
         df = df[df['name'] == name]
     if sentiment is not None:
-        df = df[df['sentiment'] == 감성결과]
+        df = df[df['sentiment'] == sentiment]
     if item is not None:
         df = df[df['item'] == item]
     if source is not None:
@@ -44,10 +44,28 @@ df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결�
 words = get_count_top_words(df_리뷰_감성분석결과)
 ########################################################################################################################
 # 레이아웃
-with st.container():
-    col1, col2, col3 = st.columns([1,1,1])
-with st.container():
-    col4, col5, col6 = st.columns([1,1,1])
+# with st.container():
+#     col1, col2, col3 = st.columns([1,1,1])
+# with st.container():
+#     col4, col5, col6 = st.columns([1,1,1])
+
+tab1, tab2, tab3 = st.tabs(["All", "Positive😊", "Negative😫"])
+
+with tab1:
+    st.header("모든 리뷰")
+    st.
+
+
+with st.expander('=== 기업선택하기 ==='):
+
+    st.write(df_리뷰_감성분석결과['name'].unique())
+
+
+
+
+
+
+
 ########################################################################################################################
 # 파이차트
 with col1:
@@ -82,6 +100,10 @@ with col5:
 from gensim.models import Word2Vec
 import networkx as nx
 from pyvis.network import Network
+
+st.title('키워드 네트워크 파악')
+keywords = st.text_imput('키워드를 입력해주세요', value='제라늄')
+
 
 keywords = ['뿌리','제라늄', '식물', '응애']
 
@@ -157,6 +179,10 @@ net.from_nx(G)
 net.save_graph(f'/app/streamlit/pyvis_graph.html')
 HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
 components.html(HtmlFile.read(), height=435)
+
+st.success(f'<{}>')
+
+
 
 ########################################################################################################################
 ########################################################################################################################
