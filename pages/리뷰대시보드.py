@@ -38,7 +38,7 @@ def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=
     return count_top_words
 ########################################################################################################################
 # 데이터 로드
-df_리뷰_감성분석결과 = pd.read_csv('/app/busypeople-stramlit/data/리뷰_감성분석결과.csv')
+df_리뷰_감성분석결과 = pd.read_csv('/app/streamlit/data/리뷰_감성분석결과.csv')
 df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'])
 
 words = get_count_top_words(df_리뷰_감성분석결과)
@@ -57,11 +57,11 @@ with col1:
 ########################################################################################################################
 # 워드클라우드
 with col2:
-    cand_mask = np.array(Image.open('/app/busypeople-stramlit/data/circle.png'))
+    cand_mask = np.array(Image.open('/app/streamlit/data/circle.png'))
     워드클라우드 = WordCloud(
         background_color="white", 
         max_words=1000,
-        font_path = "/app/busypeople-stramlit/font/NanumBarunGothic.ttf", 
+        font_path = "/app/streamlit/font/NanumBarunGothic.ttf", 
         contour_width=3, 
         colormap='Spectral', 
         contour_color='white',
@@ -94,7 +94,7 @@ for review in reviews:
 
 model = Word2Vec(networks, vector_size=100, window=5, min_count=1, workers=4, epochs=100)
 
-G = nx.Graph(font_path='/usr/share/fonts/truetype/nanum/NanumBarunGothic.ttf')
+G = nx.Graph(font_path='/app/streamlit/font/NanumBarunGothic.ttf')
 
 # 중심 노드들을 노드로 추가
 for keyword in keywords:
@@ -154,8 +154,8 @@ net = Network(notebook=True, cdn_resources='in_line')
 
 net.from_nx(G)
 
-net.save_graph(f'/app/busypeople-stramlit/pyvis_graph.html')
-HtmlFile = open(f'/app/busypeople-stramlit/pyvis_graph.html', 'r', encoding='utf-8')
+net.save_graph(f'/app/stramlit/pyvis_graph.html')
+HtmlFile = open(f'/app/stramlit/pyvis_graph.html', 'r', encoding='utf-8')
 components.html(HtmlFile.read(), height=435)
 
 ########################################################################################################################

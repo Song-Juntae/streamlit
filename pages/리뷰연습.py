@@ -6,7 +6,7 @@ from wordcloud import WordCloud
 
 import streamlit as st
 
-df = pd.read_csv('/app/busypeople-stramlit/data/어간.csv')
+df = pd.read_csv('/app/streamlit/data/어간.csv')
 
 df.columns = ['index','count']
 
@@ -19,7 +19,7 @@ wc = WordCloud(
     # relative_scaling=0.5,
     width=800,
     height=400,
-    font_path='/app/busypeople-stramlit/font/NanumBarunGothic.ttf'
+    font_path='/app/streamlit/font/NanumBarunGothic.ttf'
     )
 cloud = wc.generate_from_frequencies(dict(dict_0))
 
