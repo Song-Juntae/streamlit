@@ -30,9 +30,12 @@ with st.container():
 with st.container():
     col1, col2 = st.columns([1,1])
 with st.container():
-    col0_5, col0_6, col0_7, col0_8 = st.columns([1,1,1,1])
-with st.container():
-    col3, col4 = st.columns([1,1])
+    col3_1, col3_2 = st.columns([1,1])
+    with col3_1:
+        with st.container():
+            col0_5, col0_6, col0_7, col0_8 = st.columns([1,1,1,1])
+        with st.container():
+            col3, col4 = st.columns([1,1])
 ########################################################################################################################
 # 사용자 입력
 with col0_1:
@@ -146,7 +149,7 @@ with col1:
 
     st.image(워드클라우드.to_array(), use_column_width=True)
 ########################################################################################################################
-with col4:
+with col3_2:
     st.dataframe(df_리뷰_감성분석결과[['name','sentiment']])
 ########################################################################################################################
 # 네트워크 차트
