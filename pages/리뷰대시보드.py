@@ -54,7 +54,7 @@ with col0_5:
 with col0_6:
     단어수 = st.slider(
         '단어 수를 조정하세요',
-        0, 300, step=1)
+        10, 300, step=1)
     st.write('단어수: ', 단어수)
 
 if 추가불용어.find(',') != -1:
