@@ -1,3 +1,5 @@
 wget
 numpy
 pandas
+plotly
+matplotlib
