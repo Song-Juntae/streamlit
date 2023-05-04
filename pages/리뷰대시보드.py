@@ -76,7 +76,7 @@ with col1:
         height=400
         ).generate_from_frequencies(words)
 
-    st.image(워드클라우드.to_array(), use_container_width=True)
+    st.image(워드클라우드.to_array(), use_column_width=True)
 ########################################################################################################################
 # 바차트
 with col4:
