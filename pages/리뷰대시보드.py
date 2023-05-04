@@ -71,7 +71,7 @@ with col1:
         contour_width=3, 
         colormap='Spectral', 
         contour_color='white',
-        mask=cand_mask,
+        # mask=cand_mask,
         width=800,
         height=400
         ).generate_from_frequencies(words)
