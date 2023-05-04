@@ -52,10 +52,10 @@ with col0_5:
     st.write('추가된 불용어: ', 추가불용어)
 
 with col0_6:
-    values = st.slider(
-        'Select a range of values',
-        0.0, 100.0)
-    st.write('Values:', values)
+    단어수 = st.slider(
+        '단어 수를 조정하세요',
+        0, 300, step=1)
+    st.write('단어수: ', 단어수)
 
 if 추가불용어.find(',') != -1:
     stopwords.extend([i.strip() for i in 추가불용어.split(',')])
@@ -109,8 +109,8 @@ if 품사옵션 == '동사+형용사':
 if 품사옵션 == '명사+동사+형용사':
     품사 = 'n_v_ad'
 
-카운트 = get_count_top_words(df_리뷰_감성분석결과, 품사=품사)
-tdidf = get_tfidf_top_words(df_리뷰_감성분석결과, 품사=품사)
+카운트 = get_count_top_words(df_리뷰_감성분석결과, num_words=단어수, 품사=품사)
+tdidf = get_tfidf_top_words(df_리뷰_감성분석결과, num_words=단어수, 품사=품사)
 
 if option == '카운트':
     words = 카운트
