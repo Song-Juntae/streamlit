@@ -72,7 +72,9 @@ with col1:
         colormap='Spectral', 
         contour_color='white',
         mask=cand_mask).generate_from_frequencies(words)
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(
+        figsize=(12,8)
+    )
     ax.imshow(워드클라우드, interpolation='bilinear')
     st.pyplot(fig, use_container_width=True)
 ########################################################################################################################
