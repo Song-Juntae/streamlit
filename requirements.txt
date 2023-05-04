@@ -11,3 +11,6 @@ streamlit-elements
 networkx
 pyvis
 psutil
+streamlit-modal
+streamlit-elements
+Pillow
