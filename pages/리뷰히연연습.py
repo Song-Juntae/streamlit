@@ -42,6 +42,13 @@ df_리뷰_감성분석결과 = pd.read_csv('/app/streamlit/data/리뷰6차.csv')
 
 words = get_count_top_words(df_리뷰_감성분석결과)
 ########################################################################################################################
+# 대시보드
+st.title('리뷰팀 대시보드')
+
+
+
+########################################################################################################################
+
 # 레이아웃
 with st.container():
     col1, col2, col3 = st.columns([1,1,1])
@@ -50,7 +57,7 @@ with st.container():
 ########################################################################################################################
 # 파이차트
 with col1:
-    df_파이차트 = pd.DataFrame(df_리뷰_감성분석결과['감성결과'].value_counts())
+    df_파이차트 = pd.DataFrame(df_리뷰_감성분석결과['sentiment'].value_counts())
     pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
     st.plotly_chart(pie_chart, use_container_width=True)
 ########################################################################################################################
@@ -84,7 +91,7 @@ from pyvis.network import Network
 
 keywords = ['뿌리','제라늄', '식물', '응애']
 
-reviews = [eval(i) for i in df_리뷰_감성분석결과['kha_nng_은어전처리_sentence']]
+reviews = [eval(i) for i in df_리뷰_감성분석결과['noun']]
 
 networks = []
 for review in reviews:
