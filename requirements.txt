@@ -6,3 +6,4 @@ matplotlib
 koreanize-matplotlib
 wordcloud
 scikit-learn
+gensim
