@@ -17,11 +17,11 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 
 from wordcloud import WordCloud
 ########################################################################################################################
-def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None, 감성결과 = None, item = None, source = None ):
+def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None, sentiment = None, item = None, source = None ):
     if name is not None:
         df = df[df['name'] == name]
-    if 감성결과 is not None:
-        df = df[df['감성결과'] == 감성결과]
+    if sentiment is not None:
+        df = df[df['sentiment'] == sentiment]
     if item is not None:
         df = df[df['item'] == item]
     if source is not None:
@@ -92,7 +92,7 @@ if option == 'td-idf':
 with col3:
     col3_1,col3_2 = st.columns([1,1])
     with col3_1:
-        df_파이차트 = pd.DataFrame(df_리뷰_감성분석결과['감성결과'].value_counts())
+        df_파이차트 = pd.DataFrame(df_리뷰_감성분석결과['sentiment'].value_counts())
         pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
         st.plotly_chart(pie_chart, use_container_width=True)
     with col3_2:
@@ -118,7 +118,7 @@ with col1:
     st.image(워드클라우드.to_array(), use_column_width=True)
 ########################################################################################################################
 with col4:
-    st.dataframe(df_리뷰_감성분석결과[['name','감성결과']])
+    st.dataframe(df_리뷰_감성분석결과[['name','sentiment']])
 ########################################################################################################################
 # 네트워크 차트
 from gensim.models import Word2Vec
