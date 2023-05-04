@@ -9,7 +9,7 @@ file_list = os.listdir(path)
 
 file_list
 
-file_list = os.listdir('/')
+file_list = os.listdir('/usr')
 
 file_list
 
