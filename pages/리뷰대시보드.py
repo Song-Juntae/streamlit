@@ -73,7 +73,7 @@ with col1:
         contour_color='white',
         mask=cand_mask).generate_from_frequencies(words)
     fig, ax = plt.subplots(
-        figsize=(12,8)
+        figsize=(6,4)
     )
     ax.imshow(워드클라우드, interpolation='bilinear')
     st.pyplot(fig)
