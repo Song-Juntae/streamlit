@@ -52,10 +52,11 @@ with st.container():
     col3, col4 = st.columns([1,1])
 ########################################################################################################################
 # 사용자 입력
-if st.button('Say hello'):
-    st.write('Why hello there')
-else:
-    st.write('Goodbye')
+col0_1
+    if st.button('Say hello'):
+        st.write('Why hello there')
+    else:
+        st.write('Goodbye')
 ########################################################################################################################
 # 파이차트
 with col3:
