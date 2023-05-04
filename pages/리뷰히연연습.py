@@ -53,7 +53,6 @@ tab1, tab2, tab3 = st.tabs(["All", "Positive😊", "Negative😫"])
 
 with tab1:
     st.header("모든 리뷰")
-    st.
 
 
 with st.expander('=== 기업선택하기 ==='):
