@@ -7,3 +7,4 @@ koreanize-matplotlib
 wordcloud
 scikit-learn
 gensim
+streamlit-elements
