@@ -52,9 +52,9 @@ with col0_5:
     st.write('추가된 불용어: ', 추가불용어)
 
 if 추가불용어.find(',') != -1:
-    stopwords = stopwords.extend([i.strip() for i in 추가불용어.split(',')])
+    stopwords.extend([i.strip() for i in 추가불용어.split(',')])
 if 추가불용어.find(',') == -1:
-    stopwords = stopwords.append(추가불용어) 
+    stopwords.append(추가불용어) 
 
 stopwords
 ########################################################################################################################
