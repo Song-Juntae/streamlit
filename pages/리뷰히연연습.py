@@ -57,7 +57,7 @@ with st.container():
 ########################################################################################################################
 # 파이차트
 with col1:
-    df_파이차트 = pd.DataFrame(df_리뷰_감성분석결과['sentiment'].value_counts())
+    df_파이차트 = pd.DataFrame(words['sentiment'].value_counts())
     pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
     st.plotly_chart(pie_chart, use_container_width=True)
 ########################################################################################################################
@@ -80,10 +80,6 @@ with col2:
 with col3:
     st.bar_chart(words)
 ########################################################################################################################
-# 바차트
-with col5:
-    st.bar_chart(words)
-########################################################################################################################
 # 네트워크 차트
 from gensim.models import Word2Vec
 import networkx as nx
@@ -91,7 +87,7 @@ from pyvis.network import Network
 
 keywords = ['뿌리','제라늄', '식물', '응애']
 
-reviews = [eval(i) for i in df_리뷰_감성분석결과['noun']]
+reviews = [eval(i) for i in words['noun']]
 
 networks = []
 for review in reviews:
