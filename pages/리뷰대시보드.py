@@ -45,6 +45,8 @@ words = get_count_top_words(df_리뷰_감성분석결과)
 ########################################################################################################################
 # 레이아웃
 with st.container():
+    col0_1, col0_2, col0_3 = st.columns([1,1,2])
+with st.container():
     col1, col2 = st.columns([1,1])
 with st.container():
     col3, col4 = st.columns([1,1])
