@@ -45,9 +45,9 @@ words = get_count_top_words(df_리뷰_감성분석결과)
 ########################################################################################################################
 # 레이아웃
 with st.container():
-    col1, col2, col3 = st.columns([1,1,2])
+    col1, col2 = st.columns([1,1])
 with st.container():
-    col4, col5 = st.columns([1,1])
+    col3, col4, col5 = st.columns([1,1,2])
 ########################################################################################################################
 # 사용자 입력
 if st.button('Say hello'):
@@ -56,13 +56,13 @@ else:
     st.write('Goodbye')
 ########################################################################################################################
 # 파이차트
-with col1:
+with col3:
     df_파이차트 = pd.DataFrame(df_리뷰_감성분석결과['감성결과'].value_counts())
     pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
     st.plotly_chart(pie_chart, use_container_width=True)
 ########################################################################################################################
 # 워드클라우드
-with col2:
+with col1:
     cand_mask = np.array(Image.open('/app/streamlit/data/circle.png'))
     워드클라우드 = WordCloud(
         background_color="white", 
@@ -162,7 +162,7 @@ net.from_nx(G)
 net.save_graph(f'/app/streamlit/pyvis_graph.html')
 HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
 
-with col3:
+with col2:
     components.html(HtmlFile.read(), height=435)
 
 ########################################################################################################################
