@@ -52,7 +52,7 @@ with st.container():
     col3, col4 = st.columns([1,1])
 ########################################################################################################################
 # 사용자 입력
-col0_1
+with col0_1:
     if st.button('Say hello'):
         st.write('Why hello there')
     else:
