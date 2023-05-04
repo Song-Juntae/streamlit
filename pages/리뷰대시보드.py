@@ -51,6 +51,12 @@ with col0_5:
     추가불용어 = st.text_input('불용어를 추가하세요', '예시 : 영양제, 식물, 배송')
     st.write('추가된 불용어: ', 추가불용어)
 
+with col0_6:
+    values = st.slider(
+        'Select a range of values',
+        0.0, 100.0, (25.0, 75.0))
+    st.write('Values:', values)
+
 if 추가불용어.find(',') != -1:
     stopwords.extend([i.strip() for i in 추가불용어.split(',')])
 if 추가불용어.find(',') == -1:
