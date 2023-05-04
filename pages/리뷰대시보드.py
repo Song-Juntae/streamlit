@@ -72,6 +72,7 @@ with col1:
         colormap='Spectral', 
         contour_color='white',
         mask=cand_mask,
+        width=400,
         height=200
         ).generate_from_frequencies(words)
 
@@ -164,7 +165,7 @@ net.save_graph(f'/app/streamlit/pyvis_graph.html')
 HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
 
 with col2:
-    components.html(HtmlFile.read(), height=435)
+    components.html(HtmlFile.read(), height=400)
 
 ########################################################################################################################
 ########################################################################################################################
