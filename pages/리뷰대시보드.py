@@ -47,7 +47,7 @@ words = get_count_top_words(df_리뷰_감성분석결과)
 with st.container():
     col1, col2 = st.columns([1,1])
 with st.container():
-    col3, col4 = st.columns([1,2])
+    col3, col4 = st.columns([1,1])
 ########################################################################################################################
 # 사용자 입력
 if st.button('Say hello'):
