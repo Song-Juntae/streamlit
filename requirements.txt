@@ -10,3 +10,4 @@ gensim
 streamlit-elements
 networkx
 pyvis
+psutil
