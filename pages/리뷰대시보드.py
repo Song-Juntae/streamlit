@@ -72,15 +72,13 @@ with col1:
         colormap='Spectral', 
         contour_color='white',
         mask=cand_mask,
-        width=100,
-        height=200
         ).generate_from_frequencies(words)
     
     fig, ax = plt.subplots(
         figsize=(6,4)
     )
     ax.imshow(워드클라우드, interpolation='bilinear')
-    st.pyplot(fig)
+    st.pyplot(fig, figsize=(6,4))
 ########################################################################################################################
 # 바차트
 with col4:
