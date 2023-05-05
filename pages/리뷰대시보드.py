@@ -382,3 +382,5 @@ def show_network_finish(df, keywords, num_words=20, name=None, sentiment=None, i
 
     # 그래프 출력
     net.show(name)
+
+show_network_finish(df, 키워드)
