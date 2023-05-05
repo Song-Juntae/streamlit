@@ -7,6 +7,7 @@ import plotly.graph_objects as go
 # 기본 라이브러리
 import os
 from datetime import datetime
+from datetime import timedelta
 
 from collections import Counter
 import numpy as np
