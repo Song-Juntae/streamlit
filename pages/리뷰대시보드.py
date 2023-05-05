@@ -98,10 +98,12 @@ with col3_3:
         st.write('예시 : 뿌리, 제라늄, 식물, 응애')
         키워드 = [키워드]
         키워드
-    else 키워드.find(',') != -1:
+    elif 키워드.find(',') != -1:
         st.write('설정된 키워드: ', 키워드)
         키워드 = [i.strip() for i in 키워드.split(',')]
         키워드
+    else:
+        st.write('문제가 생겼어요.')
      
 ########################################################################################################################
 def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None, sentiment = None, item = None, source = None , 품사='noun'):
