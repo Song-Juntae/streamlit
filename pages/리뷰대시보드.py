@@ -100,13 +100,13 @@ with col1_4:
     type(시작날짜) == type(마지막날짜)
     start_date = st.date_input(
         '시작날짜',
-        value=datetime(시작날짜),
+        value=pd.Timestamp(시작날짜),
         min_value=pd.Timestamp(시작날짜),
         max_value=pd.Timestamp(마지막날짜)
     ),
     end_date = st.date_input(
         '마지막날짜',
-        value=datetime(마지막날짜),
+        value=pd.Timestamp(마지막날짜),
         min_value=pd.Timestamp(시작날짜),
         max_value=pd.Timestamp(마지막날짜)
     )
