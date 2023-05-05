@@ -97,6 +97,10 @@ with col1_4:
     마지막날짜 = df_리뷰_감성분석결과['time'][회사종류마스크].max()
     시작날짜
     마지막날짜
+    타입 = type(시작날짜)
+    타입
+    타입 = type(마지막날짜)
+    타입
     start_date = st.date_input(
         '시작날짜',
         value=시작날짜,
