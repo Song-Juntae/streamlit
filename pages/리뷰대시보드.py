@@ -303,7 +303,7 @@ def 네트워크(reviews):
 
 with col2_2:
     try:
-        net = 네트워크(review)
+        net = 네트워크(reviews)
         net.save_graph(f'/app/streamlit/pyvis_graph.html')
         HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
         components.html(HtmlFile.read(), height=435)
