@@ -147,7 +147,7 @@ with tab1:
     st.header("Strength(강점)")
     st.write('자사의 긍정리뷰들을 토픽모델링한 결과입니다. :sunglasses:')
 
-    file_path = '/app/streamlit/data/자사긍정리뷰.csv'
+    file_path = '/app/streamlit/data/자사긍정(6차).csv'
 
     if n_v_type =='명사':
         n_get_topic_model(file_path,8)
@@ -167,7 +167,7 @@ with tab2:
     st.header("Weakness(약점)")
     st.write('자사의 부정리뷰들을 토픽모델링한 결과입니다. :sunglasses:')
 
-    file_path = '/app/streamlit/data/자사부정리뷰.csv'
+    file_path = '/app/streamlit/data/자사부정(6차).csv'
 
     if n_v_type =='명사':
         n_get_topic_model(file_path,4)
@@ -186,7 +186,7 @@ with tab3:
     st.header("Opportunity(기회)")
     st.write('경쟁사의 부정리뷰들을 토픽모델링한 결과입니다. :sunglasses:')
 
-    file_path = '/app/streamlit/data/경쟁사부정리뷰.csv'
+    file_path = '/app/streamlit/data/경쟁사부정(6차).csv'
 
     if n_v_type =='명사':
         n_get_topic_model(file_path,10)
@@ -205,7 +205,7 @@ with tab4:
     st.header("Treatment(위협)")
     st.write('경쟁사의 긍정리뷰들을 토픽모델링한 결과입니다. :sunglasses:')
 
-    file_path = '/app/streamlit/data/경쟁사긍정리뷰.csv'
+    file_path = '/app/streamlit/data/경쟁사긍정(6차).csv'
 
     if n_v_type =='명사':
         n_get_topic_model(file_path,9)
