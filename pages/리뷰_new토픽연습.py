@@ -144,9 +144,9 @@ with tab1:
    
     col1, col2 = st.beta_columns(2)    
     with col1:
-        n_v_type = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'])
+        n_v_type1 = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'])
     with col2:
-        input_str = st.text_input('불용어를 추가하실 수 있습니다.')
+        input_str1 = st.text_input('불용어를 추가하실 수 있습니다.')
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
 
     st.header("Strength(강점)")
@@ -154,7 +154,7 @@ with tab1:
 
     file_path = '/app/streamlit/data/자사긍정(6차).csv'
 
-    if n_v_type =='명사':
+    if n_v_type1 =='명사':
         n_get_topic_model(file_path,8)
     else:
         nv_get_topic_model(file_path,10)
@@ -164,9 +164,9 @@ with tab2:
    
     col1, col2 = st.beta_columns(2)    
     with col1:
-        n_v_type = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'])
+        n_v_type2 = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'])
     with col2:
-        input_str = st.text_input('불용어를 추가하실 수 있습니다.')
+        input_str2 = st.text_input('불용어를 추가하실 수 있습니다.')
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
 
     st.header("Weakness(약점)")
@@ -174,7 +174,7 @@ with tab2:
 
     file_path = '/app/streamlit/data/자사부정(6차).csv'
 
-    if n_v_type =='명사':
+    if n_v_type2 =='명사':
         n_get_topic_model(file_path,4)
     else:
         nv_get_topic_model(file_path,5)
@@ -183,9 +183,9 @@ with tab3:
 
     col1, col2 = st.beta_columns(2)    
     with col1:
-        n_v_type = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'])
+        n_v_type3 = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'])
     with col2:
-        input_str = st.text_input('불용어를 추가하실 수 있습니다.')
+        input_str3 = st.text_input('불용어를 추가하실 수 있습니다.')
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
 
     st.header("Opportunity(기회)")
@@ -193,7 +193,7 @@ with tab3:
 
     file_path = '/app/streamlit/data/경쟁사부정(6차).csv'
 
-    if n_v_type =='명사':
+    if n_v_type3 =='명사':
         n_get_topic_model(file_path,10)
     else:
         nv_get_topic_model(file_path,8)
@@ -202,9 +202,9 @@ with tab4:
 
     col1, col2 = st.beta_columns(2)    
     with col1:
-        n_v_type = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'])
+        n_v_type4 = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'])
     with col2:
-        input_str = st.text_input('불용어를 추가하실 수 있습니다.')
+        input_str4 = st.text_input('불용어를 추가하실 수 있습니다.')
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
 
     st.header("Treatment(위협)")
@@ -212,7 +212,7 @@ with tab4:
 
     file_path = '/app/streamlit/data/경쟁사긍정(6차).csv'
 
-    if n_v_type =='명사':
+    if n_v_type4 =='명사':
         n_get_topic_model(file_path,9)
     else:
         nv_get_topic_model(file_path,9)
