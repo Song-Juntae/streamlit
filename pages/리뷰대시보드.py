@@ -380,7 +380,9 @@ def show_network_finish(df, keywords, num_words=20, name=None, sentiment=None, i
         edge['title'] = f"{edge['from']} - {edge['to']}: {edge['value']}"
         edge['color'] = "#c2c2c2"
 
-    # 그래프 출력
-    net.show(name)
+    return net
 
-show_network_finish(df_리뷰_감성분석결과, 키워드)
+show_network_finish(df_리뷰_감성분석결과, 키워드).save_graph(f'/app/streamlit/tmp.html')
+HtmlFile = open(f'/app/streamlit/tmp.html', 'r', encoding='utf-8')
+
+components.html(HtmlFile.read(), height=435)
