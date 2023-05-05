@@ -14,3 +14,4 @@ psutil
 streamlit-modal
 streamlit-elements
 Pillow
+openai
