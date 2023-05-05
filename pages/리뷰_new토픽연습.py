@@ -72,7 +72,7 @@ def topic_wordcloud(model,num_topics):
     plt.axis('off')
     plt.margins(x=0, y=0)
     plt.tight_layout()
-    plt.show()
+    st.pyplot(fig, use_container_width=True)
 
 # 명사기준 토픽분석(6개씩 나오게 한건 이전 연구자료들 참고)
 def n_get_topic_model(data, topic_number, passes=10, num_words=6):
