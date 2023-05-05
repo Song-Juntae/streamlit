@@ -4,17 +4,22 @@ import streamlit.components.v1 as components
 import plotly.express as px
 import plotly.graph_objects as go
 
+# 기본 라이브러리
+import os
+
 from collections import Counter
-
-from PIL import Image
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import koreanize_matplotlib
 
+from PIL import Image
+
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 
+from gensim.models import Word2Vec
+import networkx as nx
+from pyvis.network import Network
 from wordcloud import WordCloud
 ########################################################################################################################
 # 데이터 로드 상수
@@ -26,35 +31,54 @@ stopwords = ['언늘', '결국', '생각', '후기', '감사', '진짜', '완전
 ########################################################################################################################
 # 레이아웃
 with st.container():
-    col0_1, col0_2, col0_3, col0_4 = st.columns([1,1,1,1])
+    col0_1, col0_2, col0_3, col0_4, col0_4 = st.columns([1,1,1,1,1])
 with st.container():
-    col1, col2 = st.columns([1,1])
+    col1_1, col1_2, col1_3, col1_4 = st.columns([1,1,1,1])
 with st.container():
-    col3_1, col3_2 = st.columns([1,1])
-    with col3_1:
-        with st.container():
-            col0_5, col0_6, col0_7, col0_8 = st.columns([1,1,1,1])
-        with st.container():
-            col3, col4 = st.columns([1,1])
+    col2_1, col2_2 = st.columns([1,1])
+with st.container():
+    col3_1, col3_2, col3_3, col3_4  = st.columns([1,1,1,1])
+with st.container():
+    col4_1, col4_2, col4_3 = st.columns([1,1,2])
 ########################################################################################################################
 # 사용자 입력
-with col0_1:
+with col0_3:
+    긍부정 = st.radio(
+    "긍정 부정 선택",
+    ('All', 'Positive', 'Negative'), horizontal=True)
+if 긍부정 == 'All':
+    긍부정마스크 = ((df_리뷰_감성분석결과['sentiment'] == '긍정') | (df_리뷰_감성분석결과['sentiment'] == '부정'))
+if 긍부정 == 'Positive':
+    긍부정마스크 = (df_리뷰_감성분석결과['sentiment'] == '긍정')
+if 긍부정 == 'Negative':
+    긍부정마스크 = (df_리뷰_감성분석결과['sentiment'] == '부정')
+
+with col1_1:
     option = st.selectbox(
         '고르세요',
         ('카운트', 'td-idf'))
     st.write('이것: ', option)
 
-with col0_2:
+with col1_2:
     품사옵션 = st.selectbox(
         '고르세요',
         ('명사', '동사+형용사', '명사+동사+형용사'))
     st.write('이것: ', 품사옵션)
 
-with col0_5:
+with col1_3:
+    회사종류 = st.selectbox(
+        '고르세요',
+        ('자사+경쟁사', '꽃피우는 시간', '경쟁사-식물영양제', '경쟁사-뿌리영양제', '경쟁사-살충제', '경쟁사-식물등', '경쟁사All'))
+    st.write('이것: ', 회사종류)
+
+with col1_4:
+    ''
+
+with col3_1:
     추가불용어 = st.text_input('불용어를 추가하세요', '예시 : 영양제, 식물, 배송')
     st.write('추가된 불용어: ', 추가불용어)
 
-with col0_6:
+with col3_2:
     단어수 = st.slider(
         '단어 수를 조정하세요',
         10, 300, step=1)
@@ -121,19 +145,17 @@ if option == 'td-idf':
     words = tdidf
 ########################################################################################################################
 # 파이차트
-with col3:
-    col3_1,col3_2 = st.columns([1,1])
-    with col3_1:
-        df_파이차트 = pd.DataFrame(df_리뷰_감성분석결과['sentiment'].value_counts())
-        pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
-        st.plotly_chart(pie_chart, use_container_width=True)
-    with col3_2:
-        # st.plotly_chart(words)
-        바차트 = go.Figure([go.Bar(x=list(words.keys()),y=list(words.values()))])
-        st.plotly_chart(바차트, use_container_width=True)
+with col4_1:
+    df_파이차트 = pd.DataFrame(df_리뷰_감성분석결과['sentiment'].value_counts())
+    pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
+    st.plotly_chart(pie_chart, use_container_width=True)
+with col4_2:
+    # st.plotly_chart(words)
+    바차트 = go.Figure([go.Bar(x=list(words.keys()),y=list(words.values()))])
+    st.plotly_chart(바차트, use_container_width=True)
 ########################################################################################################################
 # 워드클라우드
-with col1:
+with col2_1:
     cand_mask = np.array(Image.open('/app/streamlit/data/circle.png'))
     워드클라우드 = WordCloud(
         background_color="white", 
@@ -149,14 +171,10 @@ with col1:
 
     st.image(워드클라우드.to_array(), use_column_width=True)
 ########################################################################################################################
-with col3_2:
+with col4_3:
     st.dataframe(df_리뷰_감성분석결과[['name','sentiment']])
 ########################################################################################################################
 # 네트워크 차트
-from gensim.models import Word2Vec
-import networkx as nx
-from pyvis.network import Network
-
 keywords = ['뿌리','제라늄', '식물', '응애']
 
 reviews = [eval(i) for i in df_리뷰_감성분석결과['noun']]
@@ -231,7 +249,7 @@ net.from_nx(G)
 net.save_graph(f'/app/streamlit/pyvis_graph.html')
 HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
 
-with col2:
+with col2_2:
     components.html(HtmlFile.read(), height=435)
 
 ########################################################################################################################
