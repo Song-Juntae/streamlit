@@ -147,7 +147,7 @@ with tab1:
         n_v_type1 = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'])
     with col2:
         input_str1 = st.text_input('불용어를 추가하실 수 있습니다.')
-        stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
+        stopwords = stop_words.extend([x.strip() for x in input_str1.split(',')])
 
     st.header("Strength(강점)")
     st.write('자사의 긍정리뷰들을 토픽모델링한 결과입니다. :sunglasses:')
@@ -167,7 +167,7 @@ with tab2:
         n_v_type2 = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'])
     with col2:
         input_str2 = st.text_input('불용어를 추가하실 수 있습니다.')
-        stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
+        stopwords = stop_words.extend([x.strip() for x in input_str2.split(',')])
 
     st.header("Weakness(약점)")
     st.write('자사의 부정리뷰들을 토픽모델링한 결과입니다. :sunglasses:')
@@ -186,7 +186,7 @@ with tab3:
         n_v_type3 = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'])
     with col2:
         input_str3 = st.text_input('불용어를 추가하실 수 있습니다.')
-        stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
+        stopwords = stop_words.extend([x.strip() for x in input_str3.split(',')])
 
     st.header("Opportunity(기회)")
     st.write('경쟁사의 부정리뷰들을 토픽모델링한 결과입니다. :sunglasses:')
@@ -205,7 +205,7 @@ with tab4:
         n_v_type4 = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'])
     with col2:
         input_str4 = st.text_input('불용어를 추가하실 수 있습니다.')
-        stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
+        stopwords = stop_words.extend([x.strip() for x in input_str4.split(',')])
 
     st.header("Treatment(위협)")
     st.write('경쟁사의 긍정리뷰들을 토픽모델링한 결과입니다. :sunglasses:')
