@@ -138,81 +138,53 @@ def nv_get_topic_model(data, topic_number, passes=10, num_words=6):
 st.title('리뷰_토픽모델링')
 
 
-tab1, tab2, tab3, tab4 = st.tabs(["**S**", "**W**", "**O**", "**T**"])
+# 공통으로 사용되는 위젯 생성
+n_v_type = st.sidebar.selectbox('데이터 타입',['명사', '명사+동사+형용사'])
+input_str = st.sidebar.text_input('불용어를 추가하실 수 있습니다.')
+stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
 
-with tab1:
-   
-    col1, col2 = st.beta_columns(2)    
-    with col1:
-        n_v_type1 = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'])
-    with col2:
-        input_str1 = st.text_input('불용어를 추가하실 수 있습니다.')
-        stopwords = stop_words.extend([x.strip() for x in input_str1.split(',')])
-
+# 각 탭에서 위젯 참조
+with st.sidebar:
+    tab = st.sidebar.tabs(["**S**", "**W**", "**O**", "**T**"])
+    
+if tab == "**S**":
     st.header("Strength(강점)")
     st.write('자사의 긍정리뷰들을 토픽모델링한 결과입니다. :sunglasses:')
 
     file_path = '/app/streamlit/data/자사긍정(6차).csv'
-
-    if n_v_type1 =='명사':
+    if n_v_type =='명사':
         n_get_topic_model(file_path,8)
     else:
         nv_get_topic_model(file_path,10)
 
-
-with tab2:
-   
-    col1, col2 = st.beta_columns(2)    
-    with col1:
-        n_v_type2 = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'])
-    with col2:
-        input_str2 = st.text_input('불용어를 추가하실 수 있습니다.')
-        stopwords = stop_words.extend([x.strip() for x in input_str2.split(',')])
-
+if tab == "**W**":
     st.header("Weakness(약점)")
-    st.write('자사의 부정리뷰들을 토픽모델링한 결과입니다. :sunglasses:')
+    st.write('자사의 부정리뷰들을 토픽모델링한 결과입니다. :sweat:')
 
     file_path = '/app/streamlit/data/자사부정(6차).csv'
-
-    if n_v_type2 =='명사':
+    if n_v_type =='명사':
         n_get_topic_model(file_path,4)
     else:
         nv_get_topic_model(file_path,5)
 
-with tab3:
-
-    col1, col2 = st.beta_columns(2)    
-    with col1:
-        n_v_type3 = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'])
-    with col2:
-        input_str3 = st.text_input('불용어를 추가하실 수 있습니다.')
-        stopwords = stop_words.extend([x.strip() for x in input_str3.split(',')])
-
+if tab == "**O**":
     st.header("Opportunity(기회)")
-    st.write('경쟁사의 부정리뷰들을 토픽모델링한 결과입니다. :sunglasses:')
-
-    file_path = '/app/streamlit/data/경쟁사부정(6차).csv'
-
-    if n_v_type3 =='명사':
-        n_get_topic_model(file_path,10)
-    else:
-        nv_get_topic_model(file_path,8)
-
-with tab4:
-
-    col1, col2 = st.beta_columns(2)    
-    with col1:
-        n_v_type4 = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'])
-    with col2:
-        input_str4 = st.text_input('불용어를 추가하실 수 있습니다.')
-        stopwords = stop_words.extend([x.strip() for x in input_str4.split(',')])
-
-    st.header("Treatment(위협)")
-    st.write('경쟁사의 긍정리뷰들을 토픽모델링한 결과입니다. :sunglasses:')
+    st.write('경쟁사들의 긍정리뷰들을 토픽모델링한 결과입니다. :smile:')
 
     file_path = '/app/streamlit/data/경쟁사긍정(6차).csv'
-
-    if n_v_type4 =='명사':
-        n_get_topic_model(file_path,9)
+    if n_v_type =='명사':
+        n_get_topic_model(file_path,5)
     else:
-        nv_get_topic_model(file_path,9)
+        nv_get_topic_model(file_path,7)
+
+if tab == "**T**":
+    st.header("Threat(위협)")
+    st.write('경쟁사들의 부정리뷰들을 토픽모델링한 결과입니다. :rage:')
+    
+    file_path = '/app/streamlit/data/경쟁사부정(6차).csv'
+    if n_v_type =='명사':
+        n_get_topic_model(file_path,4)
+    else:
+        nv_get_topic_model(file_path,6)
+
+########################################################################
