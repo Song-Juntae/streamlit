@@ -315,7 +315,7 @@ with col3_2:
 with col4_3:
     if len(키워드) == 1:
         보여줄df = df_리뷰_감성분석결과[df_리뷰_감성분석결과['noun'].str.contains(키워드[0])]
-        st.dataframe(보여줄df[['name','sentiment','review_sentence']])
+        st.dataframe(보여줄df[['name','sentiment','review_sentence', 'noun', 'replace_slang_sentence']])
         키워드 = [키워드]
     elif len(키워드) > 1:
         보여줄df = df_리뷰_감성분석결과[df_리뷰_감성분석결과['noun'].str.contains('|'.join(키워드))]
