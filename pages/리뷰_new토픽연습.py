@@ -38,7 +38,7 @@ def print_topic_model(topics, rating, key):
     # 토글 생성
     if st.checkbox('토픽별 구성 단어 비율 확인하기', key=key):
     # 토글이 선택되었을 때 데이터프레임 출력
-        st.write(topic_model)
+        st.dataframe(topic_model, use_container_width=True)
 
 
 # 시각화1. 각 주제에서 상위 N개 키워드의 워드 클라우드
