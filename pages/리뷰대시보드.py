@@ -31,10 +31,6 @@ df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결�
 stopwords = ['언늘', '결국', '생각', '후기', '감사', '진짜', '완전', '사용', '요즘', '정도', '이번', '달리뷰', '결과', 
              '지금', '동영상', '조금', '안테', '입제', '영상', '이번건', '며칠', '이제', '거시기', '얼듯', '처음', '다음']
 ########################################################################################################################
-# title
-st.title('🌻식물영양제 리뷰 분석 대시보드🌻')
-
-########################################################################################################################
 # 레이아웃
 with st.container():
     col0_1, col0_2, col0_3, col0_4, col0_4 = st.columns([1,1,1,1,1])
@@ -50,37 +46,37 @@ with st.container():
 # 사용자 입력
 with col0_3:
     긍부정 = st.radio(
-    "**긍정리뷰/부정리뷰 선택**",
-    ('All', '긍정리뷰😊', '부정리뷰😫'), horizontal=True)
+    "긍정 부정 선택",
+    ('All', 'Positive', 'Negative'), horizontal=True)
 if 긍부정 == 'All':
     긍부정마스크 = ((df_리뷰_감성분석결과['sentiment'] == '긍정') | (df_리뷰_감성분석결과['sentiment'] == '부정'))
-if 긍부정 == '긍정리뷰😊':
+if 긍부정 == 'Positive':
     긍부정마스크 = (df_리뷰_감성분석결과['sentiment'] == '긍정')
-if 긍부정 == '부정리뷰😫':
+if 긍부정 == 'Negative':
     긍부정마스크 = (df_리뷰_감성분석결과['sentiment'] == '부정')
 
 with col1_1:
     option = st.selectbox(
-        '🍀단어기준선택🍀',
-        ('빈도(Count)', '중요도(TF-IDF)'))
-    st.write('선택기준: ', option)
+        '고르세요',
+        ('카운트', 'td-idf'))
+    st.write('이것: ', option)
 
 with col1_2:
     품사옵션 = st.selectbox(
-        '🍀품사선택🍀',
+        '고르세요',
         ('명사', '명사+동사+형용사'))
-    st.write('선택품사: ', 품사옵션)
+    st.write('이것: ', 품사옵션)
 
 with col1_3:
     회사종류 = st.selectbox(
-        '🍀제품선택🍀',
+        '고르세요',
         ('자사+경쟁사', '꽃피우는 시간', '경쟁사-식물영양제', 
          '경쟁사-뿌리영양제', 
          '경쟁사-살충제',
          '경쟁사-식물등',
          '경쟁사All',
          ))
-    st.write('선택제품: ', 회사종류)
+    st.write('이것: ', 회사종류)
     if 회사종류 == '자사+경쟁사':
         회사종류마스크 = ((df_리뷰_감성분석결과['name'] == '경쟁사') | (df_리뷰_감성분석결과['name'] == '꽃피우는시간'))
     if 회사종류 == '꽃피우는 시간':
@@ -118,15 +114,15 @@ with col2_4:
 기간마스크 = ((df_리뷰_감성분석결과['time'] >= pd.to_datetime(start_date)) & (df_리뷰_감성분석결과['time'] <= pd.to_datetime(end_date)))
 
 with col2_1:
-    추가불용어 = st.text_input('🍀포함하지 않을 단어입력🍀', '')
+    추가불용어 = st.text_input('불용어를 추가하세요', '')
     if 추가불용어 == '':
         st.write('예시 : 영양제, 식물, 배송')
     if 추가불용어 != '':
-        st.write('제거한 단어: ', 추가불용어)
+        st.write('추가된 불용어: ', 추가불용어)
 
 with col2_2:
     단어수 = st.slider(
-        '🍀단어 수를 조정하기🍀',
+        '단어 수를 조정하세요',
         10, 300, step=1)
     st.write('단어수: ', 단어수)
 
@@ -136,20 +132,18 @@ if 추가불용어.find(',') == -1:
     stopwords.append(추가불용어) 
 
 with col1_4:
-    키워드 = st.text_input('🍀네트워크 단어입력🍀', '제라늄')
+    키워드 = st.text_input('키워드를 입력해주세요', '제라늄')
     if 키워드.find(',') == -1:
-        st.write('예시 : 뿌리, 제라늄, 응애')
+        st.write('예시 : 뿌리, 제라늄, 식물, 응애')
         키워드 = [키워드]
     elif 키워드.find(',') != -1:
-        st.write('설정된 단어: ', 키워드)
+        st.write('설정된 키워드: ', 키워드)
         키워드 = [i.strip() for i in 키워드.split(',')]
     else:
-        st.warning(f'{키워드}는 {회사종류}에 없는단어입니다. 다른 단어를 입력해주세요. 추천키워드: 제라늄, 배송')
-        # st.write('문제가 생겼어요.')
+        st.write('문제가 생겼어요.')
      
 ########################################################################################################################
-def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None, 
-                        sentiment = None, item = None, source = None, 품사='noun'):
+def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None, sentiment = None, item = None, source = None , 품사='noun'):
     if name is not None:
         df = df[df['name'] == name]
     if sentiment is not None:
@@ -169,8 +163,7 @@ def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=
     count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
     return count_top_words
 
-def get_tfidf_top_words(df, start_date=None, last_date=None, num_words=10, name=None, 
-                        sentiment = None, item = None, source = None, 품사='noun'):
+def get_tfidf_top_words(df, start_date=None, last_date=None, num_words=10, name=None, sentiment = None, item = None, source = None, 품사='noun' ):
     if name is not None:
         df = df[df['name'] == name]
     if sentiment is not None:
@@ -213,9 +206,8 @@ with col4_1:
     st.plotly_chart(pie_chart, use_container_width=True)
 with col4_2:
     # st.plotly_chart(words)
-    바차트 = go.Figure([go.Bar(x=list(words.keys()), y=list(words.values()))])
+    바차트 = go.Figure([go.Bar(x=list(words.keys()),y=list(words.values()))])
     st.plotly_chart(바차트, use_container_width=True)
-
 ########################################################################################################################
 # 워드클라우드
 with col3_1:
