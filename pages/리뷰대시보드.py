@@ -109,7 +109,7 @@ with col1_4:
         min_value=시작날짜,
         max_value=마지막날짜
     )
-    기간마스크 = ((df_리뷰_감성분석결과['time'] >= pd.Timestamp(start_date[0]) & df_리뷰_감성분석결과['time'] <= pd.Timestamp(end_date)))
+    기간마스크 = ((df_리뷰_감성분석결과['time'] >= pd.datetime(start_date[0]) & df_리뷰_감성분석결과['time'] <= pd.datetime(end_date)))
 
 with col3_1:
     추가불용어 = st.text_input('불용어를 추가하세요', '')
