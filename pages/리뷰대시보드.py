@@ -97,11 +97,9 @@ with col3_3:
     if 키워드.find(',') == -1:
         st.write('예시 : 뿌리, 제라늄, 식물, 응애')
         키워드 = [키워드]
-        키워드
     elif 키워드.find(',') != -1:
         st.write('설정된 키워드: ', 키워드)
         키워드 = [i.strip() for i in 키워드.split(',')]
-        키워드
     else:
         st.write('문제가 생겼어요.')
      
