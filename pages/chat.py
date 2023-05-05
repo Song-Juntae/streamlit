@@ -4,9 +4,10 @@ from streamlit_chat import message
 
 st.header("ChatGPT-3 (Demo)")
 st.markdown("해당 결과를 보고 궁금한 점은 ChatGPT에게 물어보세요.")
-
+API = st.secrets["JUN_API_KEY"]
+API
 # chatGPT
-openai.api_key = st.secrets["JUN_API_KEY"]
+openai.api_key = API
  
 def generate_response(prompt):
     completions = openai.Completion.create (
