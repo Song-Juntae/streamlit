@@ -139,7 +139,7 @@ if 추가불용어.find(',') == -1:
     stopwords.append(추가불용어) 
 
 with col1_4:
-    키워드 = st.text_input(''🍀네트워크 단어입력🍀', '제라늄')
+    키워드 = st.text_input('🍀네트워크 단어입력🍀', '제라늄')
     if 키워드.find(',') == -1:
         st.write('예시 : 뿌리, 제라늄, 식물, 응애')
         키워드 = [키워드]
