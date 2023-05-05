@@ -313,6 +313,7 @@ with col3_2:
         st.write('존재하지 않는 키워드예요.')
 ########################################################################################################################
 with col4_3:
+    키워드
     if 키워드.find(',') == -1:
         보여줄df = df_리뷰_감성분석결과[df_리뷰_감성분석결과['review_slang_sentence'].str.contains(키워드)]
         st.dataframe(보여줄df[['name','sentiment','review_sentence']])
