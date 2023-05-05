@@ -198,7 +198,7 @@ model = Word2Vec(networks, vector_size=100, window=5, min_count=1, workers=4, ep
 G = nx.Graph(font_path='/app/streamlit/font/NanumBarunGothic.ttf')
 
 # 중심 노드들을 노드로 추가
-for keyword in keywords:
+for keyword in 키워드:
     G.add_node(keyword)
     # 주어진 키워드와 가장 유사한 20개의 단어 추출
     similar_words = model.wv.most_similar(keyword, topn=20)
@@ -213,7 +213,7 @@ size_dict = nx.degree_centrality(G)
 # 노드 크기 설정
 node_size = []
 for node in G.nodes():
-    if node in keywords:
+    if node in 키워드:
         node_size.append(5000)
     else:
         node_size.append(1000)
@@ -240,15 +240,15 @@ nx.draw(G, pos, font_family='NanumGothic', with_labels=True, node_size=node_size
 
 
 # 중심 노드들끼리 겹치는 단어 출력
-overlapping_keywords = set()
-for i, keyword1 in enumerate(keywords):
-    for j, keyword2 in enumerate(keywords):
+overlapping_키워드 = set()
+for i, keyword1 in enumerate(키워드):
+    for j, keyword2 in enumerate(키워드):
         if i < j and keyword1 in G and keyword2 in G:
             if nx.has_path(G, keyword1, keyword2):
-                overlapping_keywords.add(keyword1)
-                overlapping_keywords.add(keyword2)
-if overlapping_keywords:
-    print(f"다음 중심 키워드들끼리 연관성이 있어 중복될 가능성이 있습니다: {', '.join(overlapping_keywords)}")
+                overlapping_키워드.add(keyword1)
+                overlapping_키워드.add(keyword2)
+if overlapping_키워드:
+    print(f"다음 중심 키워드들끼리 연관성이 있어 중복될 가능성이 있습니다: {', '.join(overlapping_키워드)}")
 
 
 net = Network(notebook=True, cdn_resources='in_line')
