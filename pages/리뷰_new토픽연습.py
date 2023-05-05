@@ -195,9 +195,9 @@ with tab3:
     file_path = '/app/streamlit/data/경쟁사부정(6차).csv'
 
     if n_v_type =='명사':
-        n_get_topic_model(file_path,10)
+        n_get_topic_model(file_path,10, key='준탱이5')
     else:
-        nv_get_topic_model(file_path,8)
+        nv_get_topic_model(file_path,8, key='준탱이6')
 
 with tab4:
     col1_4, col2_4 = st.beta_columns(2)    
@@ -215,6 +215,6 @@ with tab4:
     file_path = '/app/streamlit/data/경쟁사긍정(6차).csv'
 
     if n_v_type =='명사':
-        n_get_topic_model(file_path,9)
+        n_get_topic_model(file_path,9, key='준탱이7')
     else:
-        nv_get_topic_model(file_path,9)
+        nv_get_topic_model(file_path,9, key='준탱이8')
