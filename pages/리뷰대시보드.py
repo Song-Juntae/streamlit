@@ -107,6 +107,10 @@ with col1_4:
         min_value=시작날짜,
         max_value=마지막날짜
     )
+    start_date
+    type(start_date)
+    df_리뷰_감성분석결과['time'][0]
+    type(df_리뷰_감성분석결과['time'][0])
     기간마스크 = ((df_리뷰_감성분석결과['time'] >= start_date & df_리뷰_감성분석결과['time'] <= end_date))
 
 with col3_1:
