@@ -107,8 +107,7 @@ with col1_4:
         min_value=시작날짜,
         max_value=마지막날짜
     )
-    type(start_date)
-    type(end_date)
+    type(start_date) == type(end_date)
     end_date
     기간마스크 = ((df_리뷰_감성분석결과['time'] >= pd.Timestamp(start_date[0]) & df_리뷰_감성분석결과['time'] <= pd.Timestamp(end_date)))
 
