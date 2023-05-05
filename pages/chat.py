@@ -9,14 +9,7 @@ API
 # chatGPT
 openai.api_key = API
 
-completions = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt='HELLO',
-        max_tokens=10,
-        stop=None,
-        temperature=0,
-        top_p=1
-    )
+completion = openai.Completion.create(model="ada", prompt="Hello world")
 
 completions
  
