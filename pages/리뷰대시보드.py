@@ -107,7 +107,7 @@ with col1_4:
         min_value=시작날짜,
         max_value=마지막날짜
     )
-    타입 = type(start_date)
+    타입 = type(start_date[0])
     타입
     타입 = type(end_date)
     타입
