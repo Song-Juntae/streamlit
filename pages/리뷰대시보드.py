@@ -93,13 +93,19 @@ with col1_3:
         회사종류마스크 = (df_리뷰_감성분석결과['name'] == '경쟁사')
 
 with col1_4:
+    시작날짜 = df['time'][회사종류마스크].min()
+    마지막날짜 = df['time'][회사종류마스크].max()
     start_date = st.date_input(
         '시작날짜',
-        value=datetime.today() - timedelta(days=45)
+        value=시작날짜,
+        min_value=시작날짜,
+        max_value=마지막날짜
     ),
     end_date = st.date_input(
         '마지막날짜',
-        value=datetime.today() - timedelta(days=45)
+        value=마지막날짜,
+        min_value=시작날짜,
+        max_value=마지막날짜
     )
 
 with col3_1:
