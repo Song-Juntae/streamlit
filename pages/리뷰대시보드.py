@@ -108,14 +108,14 @@ with col1_3:
 
 with col2_3:
     start_date = st.date_input(
-        '시작날짜',
+        '🍀시작날짜🍀',
         value=시작날짜,
         min_value=시작날짜,
         max_value=마지막날짜
     )
 with col2_4:
     end_date = st.date_input(
-        '마지막날짜',
+        '🍀마지막날짜🍀',
         value=마지막날짜,
         min_value=시작날짜,
         max_value=마지막날짜
