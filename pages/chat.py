@@ -8,6 +8,17 @@ API = st.secrets["JUN_API_KEY"]
 API
 # chatGPT
 openai.api_key = API
+
+completions = openai.Completion.create(
+        engine="text-davinci-003",
+        prompt='HELLO',
+        max_tokens=1024,
+        stop=None,
+        temperature=0,
+        top_p=1
+    )
+
+completions
  
 def generate_response(prompt):
     completions = openai.Completion.create(
@@ -22,6 +33,8 @@ def generate_response(prompt):
     message = completions["choices"][0]["text"].replace("\n", "")
     return message
  
+
+
 if 'generated' not in st.session_state:
     st.session_state['generated'] = []
  
