@@ -148,7 +148,8 @@ with col1_4:
         # st.write('문제가 생겼어요.')
      
 ########################################################################################################################
-def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None, sentiment = None, item = None, source = None, 품사='noun'):
+def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None, 
+                        sentiment = None, item = None, source = None, 품사='noun'):
     if name is not None:
         df = df[df['name'] == name]
     if sentiment is not None:
@@ -168,7 +169,8 @@ def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=
     count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
     return count_top_words
 
-def get_tfidf_top_words(df, start_date=None, last_date=None, num_words=10, name=None, sentiment = None, item = None, source = None, 품사='noun'):
+def get_tfidf_top_words(df, start_date=None, last_date=None, num_words=10, name=None, 
+                        sentiment = None, item = None, source = None, 품사='noun'):
     if name is not None:
         df = df[df['name'] == name]
     if sentiment is not None:
