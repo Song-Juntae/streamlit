@@ -16,7 +16,7 @@ def generate_response(prompt):
         max_tokens=1024,
         stop=None,
         temperature=0,
-        top_p=1,
+        top_p=1
     )
  
     message = completions["choices"][0]["text"].replace("\n", "")
