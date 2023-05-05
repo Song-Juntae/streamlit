@@ -155,9 +155,9 @@ with tab1:
     file_path = '/app/streamlit/data/자사긍정(6차).csv'
 
     if n_v_type =='명사':
-        n_get_topic_model(file_path,8 , '준탱이1')
+        n_get_topic_model(file_path,8 , key='준탱이1')
     else:
-        nv_get_topic_model(file_path,10, '준탱이2')
+        nv_get_topic_model(file_path,10, key='준탱이2')
 
 with tab2:
     col1_2, col2_2 = st.beta_columns(2)    
@@ -175,9 +175,9 @@ with tab2:
     file_path = '/app/streamlit/data/자사부정(6차).csv'
 
     if n_v_type =='명사':
-        n_get_topic_model(file_path,4, '준탱이3')
+        n_get_topic_model(file_path,4, key='준탱이3')
     else:
-        nv_get_topic_model(file_path,5, '준탱이4')
+        nv_get_topic_model(file_path,5, key='준탱이4')
 
 with tab3:
     col1_3, col2_3 = st.beta_columns(2)    
