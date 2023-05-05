@@ -108,8 +108,9 @@ with col1_4:
         max_value=마지막날짜
     )
     type(end_date) == type(start_date[0])
-    type(df_리뷰_감성분석결과['time']) == type(pd.to_datetime(start_date[0]))
-    type(df_리뷰_감성분석결과['time']) == type(pd.to_datetime(end_date))
+    타입
+    type(df_리뷰_감성분석결과['time'][0]) == type(pd.Timestamp(start_date[0]))
+    type(df_리뷰_감성분석결과['time'][0]) == type(pd.to_datetime(end_date))
     기간마스크 = ((df_리뷰_감성분석결과['time'] >= pd.to_datetime(start_date[0]) & df_리뷰_감성분석결과['time'] <= pd.to_datetime(end_date)))
 
 with col3_1:
