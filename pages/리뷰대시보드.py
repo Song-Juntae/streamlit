@@ -156,6 +156,7 @@ with col4_2:
 ########################################################################################################################
 # 워드클라우드
 with col2_1:
+    stopwords
     cand_mask = np.array(Image.open('/app/streamlit/data/circle.png'))
     워드클라우드 = WordCloud(
         background_color="white", 
