@@ -73,7 +73,7 @@ def topic_wordcloud(model,num_topics):
     st.pyplot(fig, use_container_width=True)
 
 # 명사기준 토픽분석(6개씩 나오게 한건 이전 연구자료들 참고)
-def n_get_topic_model(data, topic_number, passes=10, num_words=6, key):
+def n_get_topic_model(data, topic_number, passes=10, num_words=6, key=None):
     df = pd.read_csv(data)
 
     # 불용어 리스트
@@ -102,7 +102,7 @@ def n_get_topic_model(data, topic_number, passes=10, num_words=6, key):
     topic_wordcloud(model, num_topics=topic_number)
 
 # 명사+동사+형용사 기준 토픽분석
-def nv_get_topic_model(data, topic_number, passes=10, num_words=6, key):
+def nv_get_topic_model(data, topic_number, passes=10, num_words=6, key=None):
     df = pd.read_csv(data)
 
     # 불용어 리스트
