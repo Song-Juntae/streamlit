@@ -1,9 +1,9 @@
-st.header("ChatGPT-3 (Demo)")
-st.markdown("해당 결과를 보고 궁금한 점은 ChatGPT에게 물어보세요.")
-
 import openai
 import streamlit as st
 from streamlit_chat import message
+
+st.header("ChatGPT-3 (Demo)")
+st.markdown("해당 결과를 보고 궁금한 점은 ChatGPT에게 물어보세요.")
 
 # chatGPT
 openai.api_key = ''
