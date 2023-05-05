@@ -6,10 +6,8 @@ st.header("ChatGPT-3 (Demo)")
 st.markdown("해당 결과를 보고 궁금한 점은 ChatGPT에게 물어보세요.")
 API = st.secrets["JUN_API_KEY"]
 API
-타입 = type(API)
-타입
 # chatGPT
-openai.api_key = API
+openai.api_key = str(API)
 
 completion = openai.Completion.create(model="ada", prompt="Hello world")
 
