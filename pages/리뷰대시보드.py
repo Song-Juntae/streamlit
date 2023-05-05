@@ -148,7 +148,8 @@ with col1_4:
         키워드 = [i.strip() for i in 키워드.split(',')]
     else:
         # st.write('문제가 생겼어요.')
-        st.error(f'{키워드}는 {회사종류}에 없는단어입니다. 다른 단어를 입력해주세요. 추천키워드: 제라늄, 배송')
+        st.error(네트워크)
+        st.write(f'{키워드}는 {회사종류}에 없는단어입니다. 다른 단어를 입력해주세요. 추천키워드: 제라늄, 배송')
 
 ########################################################################################################################
 def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None, sentiment = None, item = None, source = None , 품사='noun'):
