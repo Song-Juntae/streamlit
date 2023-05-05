@@ -143,7 +143,7 @@ with col1:
     n_v_type = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'])
 with col2:
     input_str = st.text_input('불용어를 추가하실 수 있습니다.')
-    stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
+    stopwords = stop_words + [x.strip() for x in input_str.split(',')]
 
 tab1, tab2, tab3, tab4 = st.tabs(["**S**", "**W**", "**O**", "**T**"])
 
