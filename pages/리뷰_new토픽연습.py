@@ -36,7 +36,12 @@ def print_topic_model(topics, rating):
         topic_value = topic[1]
         topic_values.append(topic_value)
     topic_model = pd.DataFrame({"topic_num": list(range(1, len(topics) + 1)), "word_prop": topic_values})
-    display(topic_model)
+    
+    # 토글 생성
+    if st.checkbox('토픽별 구성 단어 비율 확인하기'):
+    # 토글이 선택되었을 때 데이터프레임 출력
+        st.write(topic_model)
+
 
 # 시각화1. 각 주제에서 상위 N개 키워드의 워드 클라우드
 def topic_wordcloud(model,num_topics):
