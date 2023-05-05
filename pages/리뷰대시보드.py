@@ -107,6 +107,7 @@ with col1_4:
         min_value=시작날짜,
         max_value=마지막날짜
     )
+    기간마스크 = (df_리뷰_감성분석결과['time'] >= pd.Timestamp(start_date) & df_리뷰_감성분석결과['time'] <= pd.Timestamp(end_date))
 
 with col3_1:
     추가불용어 = st.text_input('불용어를 추가하세요', '')
@@ -183,8 +184,8 @@ if 품사옵션 == '명사':
 if 품사옵션 == '명사+동사+형용사':
     품사 = 'n_v_ad'
 
-카운트 = get_count_top_words(df_리뷰_감성분석결과[회사종류마스크], num_words=단어수, 품사=품사)
-tdidf = get_tfidf_top_words(df_리뷰_감성분석결과[회사종류마스크], num_words=단어수, 품사=품사)
+카운트 = get_count_top_words(df_리뷰_감성분석결과[기간마스크 & 회사종류마스크], num_words=단어수, 품사=품사)
+tdidf = get_tfidf_top_words(df_리뷰_감성분석결과[기간마스크 & 회사종류마스크], num_words=단어수, 품사=품사)
 
 if option == '카운트':
     words = 카운트
@@ -226,7 +227,7 @@ with col4_3:
 ########################################################################################################################
 # 네트워크 차트
 
-reviews = [eval(i) for i in df_리뷰_감성분석결과[회사종류마스크][품사]]
+reviews = [eval(i) for i in df_리뷰_감성분석결과[기간마스크 & 회사종류마스크][품사]]
 
 networks = []
 for review in reviews:
