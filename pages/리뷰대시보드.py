@@ -298,13 +298,14 @@ def 네트워크(reviews):
 
     net.from_nx(G)
 
-    return net
+    return [net, similar_words]
 
+네트워크 = 네트워크(reviews)
 
 
 with col3_2:
     try:
-        net = 네트워크(reviews)
+        net = 네트워크[0]
         net.save_graph(f'/app/streamlit/pyvis_graph.html')
         HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
         components.html(HtmlFile.read(), height=435)
@@ -312,6 +313,7 @@ with col3_2:
         st.write('존재하지 않는 키워드예요.')
 ########################################################################################################################
 with col4_3:
+    similar_words = 네트워크[1]
     similar_words
     st.dataframe(df_리뷰_감성분석결과[['name','sentiment','review_sentence']])
 ########################################################################################################################
