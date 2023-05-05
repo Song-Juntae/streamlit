@@ -317,7 +317,7 @@ def show_network_finish(df, keywords, num_words=20, name=None, sentiment=None, i
     model = Word2Vec(networks, vector_size=100, window=5, min_count=1, workers=4, epochs=100)
    
     # 그래프 생성
-    net = Network(width='100%', height='750px', font='NanumGothic')
+    net = Network(width='100%', height='750px')
 
     # 중심 노드들을 노드로 추가
     for keyword in central_nodes:
