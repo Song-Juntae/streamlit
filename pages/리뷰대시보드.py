@@ -65,18 +65,18 @@ if 긍부정 == '부정리뷰😫':
 with col1_1:
     option = st.selectbox(
         '🍀단어기준선택🍀',
-        ('빈도(Count)', '중요도(TF-IDF)'))
+        ('카운트', 'td-idf'))
     st.write('이것: ', option)
 
 with col1_2:
     품사옵션 = st.selectbox(
-        '고르세요',
+        '🍀품사선택🍀',
         ('명사', '명사+동사+형용사'))
     st.write('이것: ', 품사옵션)
 
 with col1_3:
     회사종류 = st.selectbox(
-        '고르세요',
+        '🍀제품선택🍀',
         ('자사+경쟁사', '꽃피우는 시간', '경쟁사-식물영양제', 
          '경쟁사-뿌리영양제', 
          '경쟁사-살충제',
@@ -129,7 +129,7 @@ with col2_1:
 
 with col2_2:
     단어수 = st.slider(
-        '단어 수를 조정하세요',
+        '🍀단어 수 조정하기🍀',
         10, 300, step=1)
     st.write('단어수: ', 단어수)
 
@@ -139,7 +139,7 @@ if 추가불용어.find(',') == -1:
     stopwords.append(추가불용어) 
 
 with col1_4:
-    키워드 = st.text_input('키워드를 입력해주세요', '제라늄')
+    키워드 = st.text_input(''🍀네트워크 단어입력🍀', '제라늄')
     if 키워드.find(',') == -1:
         st.write('예시 : 뿌리, 제라늄, 식물, 응애')
         키워드 = [키워드]
@@ -147,8 +147,9 @@ with col1_4:
         st.write('설정된 키워드: ', 키워드)
         키워드 = [i.strip() for i in 키워드.split(',')]
     else:
-        st.write('문제가 생겼어요.')
-     
+        # st.write('문제가 생겼어요.')
+        st.warning(f'{키워드}는 {회사종류}에 없는단어입니다. 다른 단어를 입력해주세요. 추천키워드: 제라늄, 배송')
+
 ########################################################################################################################
 def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None, sentiment = None, item = None, source = None , 품사='noun'):
     if name is not None:
@@ -195,13 +196,13 @@ if 품사옵션 == '명사':
 if 품사옵션 == '명사+동사+형용사':
     품사 = 'n_v_ad'
 
-빈도(Count) = get_count_top_words(df_리뷰_감성분석결과[기간마스크 & 회사종류마스크], num_words=단어수, 품사=품사)
-중요도(TF-IDF) = get_tfidf_top_words(df_리뷰_감성분석결과[기간마스크 & 회사종류마스크], num_words=단어수, 품사=품사)
+카운트 = get_count_top_words(df_리뷰_감성분석결과[기간마스크 & 회사종류마스크], num_words=단어수, 품사=품사)
+tdidf = get_tfidf_top_words(df_리뷰_감성분석결과[기간마스크 & 회사종류마스크], num_words=단어수, 품사=품사)
 
-if option == '빈도(Count)':
-    words = 빈도(Count)
-if option == '중요도(TF-IDF)':
-    words = 중요도(TF-IDF)
+if option == '카운트':
+    words = 카운트
+if option == 'td-idf':
+    words = tdidf
 ########################################################################################################################
 # 사용자 입력후 사용할 데이터 정리
 
