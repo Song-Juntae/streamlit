@@ -140,9 +140,9 @@ st.title('리뷰_토픽모델링')
 col1, col2 = st.beta_columns(2)    
 
 with col1:
-    n_v_type = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'])
+    n_v_type = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'], key='selectbox1')
 with col2:
-    input_str = st.text_input('불용어를 추가하실 수 있습니다.')
+    input_str = st.text_input('불용어를 추가하실 수 있습니다.', key='stopwords_input')
     stopwords = stop_words + [x.strip() for x in input_str.split(',')]
 
 tab1, tab2, tab3, tab4 = st.tabs(["**S**", "**W**", "**O**", "**T**"])
