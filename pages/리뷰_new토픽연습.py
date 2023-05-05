@@ -11,8 +11,6 @@ from PIL import Image
 fix_stop_words = [ '합니다', '하는', '할', '하고', '한다','하다','되다','같다','자다','되다','있다','써다','않다','해보다','주다','되어다', 
              '그리고', '입니다', '그', '등', '이런', '및','제', '더','언늘','결국','생각','식물키',
              '감사','ㅋㅋ','진짜','완전','요ㅎ','사용','정도','엄마','아이','원래','식물']
-stop_words = fix_stop_words.copy()
-
 
 def to_list(text):
     return ast.literal_eval(text)
@@ -137,17 +135,20 @@ def nv_get_topic_model(data, topic_number, passes=10, num_words=6):
 
 st.title('리뷰_토픽모델링')
 
-col1, col2 = st.beta_columns(2)    
 
-with col1:
-    n_v_type = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'], key='selectbox1')
-with col2:
-    input_str = st.text_input('불용어를 추가하실 수 있습니다.', key='stopwords_input')
-    stopwords = stop_words + [x.strip() for x in input_str.split(',')]
 
 tab1, tab2, tab3, tab4 = st.tabs(["**S**", "**W**", "**O**", "**T**"])
 
 with tab1:
+    col1, col2 = st.beta_columns(2)    
+
+    with col1:
+        n_v_type = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'], key='selectbox1')
+    with col2:
+        input_str = st.text_input('불용어를 추가하실 수 있습니다.', key='stopwords_input1')
+        stop_words = fix_stop_words.copy()
+        stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
+
     st.header("Strength(강점)")
     st.write('자사의 긍정리뷰들을 토픽모델링한 결과입니다. :sunglasses:')
 
@@ -160,6 +161,15 @@ with tab1:
 
 
 with tab2:
+    col1, col2 = st.beta_columns(2)    
+
+    with col1:
+        n_v_type = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'], key='selectbox2')
+    with col2:
+        input_str = st.text_input('불용어를 추가하실 수 있습니다.', key='stopwords_input2')
+        stop_words = fix_stop_words.copy()
+        stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
+
     st.header("Weakness(약점)")
     st.write('자사의 부정리뷰들을 토픽모델링한 결과입니다. :sweat:')
 
@@ -171,6 +181,15 @@ with tab2:
         nv_get_topic_model(file_path,5)
 
 with tab3:
+    col1, col2 = st.beta_columns(2)    
+
+    with col1:
+        n_v_type = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'], key='selectbox3')
+    with col2:
+        input_str = st.text_input('불용어를 추가하실 수 있습니다.', key='stopwords_input3')
+        stop_words = fix_stop_words.copy()
+        stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
+    
     st.header("Opportunity(기회)")
     st.write('경쟁사의 부정리뷰들을 토픽모델링한 결과입니다. :wink:')
 
@@ -182,6 +201,15 @@ with tab3:
         nv_get_topic_model(file_path,8)
 
 with tab4:
+    col1, col2 = st.beta_columns(2)    
+
+    with col1:
+        n_v_type = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'], key='selectbox4')
+    with col2:
+        input_str = st.text_input('불용어를 추가하실 수 있습니다.', key='stopwords_input4')
+        stop_words = fix_stop_words.copy()
+        stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
+
     st.header("Treatment(위협)")
     st.write('경쟁사의 긍정리뷰들을 토픽모델링한 결과입니다. :confounded:')
 
