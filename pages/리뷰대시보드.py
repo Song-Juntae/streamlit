@@ -72,6 +72,10 @@ with col1_3:
     st.write('이것: ', 회사종류)
 
 with col1_4:
+    start_date = st.date_input(
+        '시작날짜',
+        value=datetime.today() - timedelta(days=45)
+    )
     if 회사종류 == '꽃피우는 시간':
         start_date = st.date_input("시작 날짜",
                                     value=datetime.today() - timedelta(days=45),
