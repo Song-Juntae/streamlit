@@ -111,7 +111,7 @@ with col2_4:
         max_value=마지막날짜
     )
 
-기간마스크 = ((df_리뷰_감성분석결과['time'] >= pd.to_datetime(start_date[0])) & (df_리뷰_감성분석결과['time'] <= pd.to_datetime(end_date)))
+기간마스크 = ((df_리뷰_감성분석결과['time'] >= pd.to_datetime(start_date)) & (df_리뷰_감성분석결과['time'] <= pd.to_datetime(end_date)))
 
 with col2_1:
     추가불용어 = st.text_input('불용어를 추가하세요', '')
