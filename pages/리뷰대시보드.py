@@ -272,3 +272,113 @@ with col2_2:
 ########################################################################################################################
 ########################################################################################################################
 ########################################################################################################################
+import streamlit as st
+from pyvis.network import Network
+import networkx as nx
+from gensim.models import Word2Vec
+
+
+def show_network_finish(df, keywords, num_words=20, name=None, sentiment=None, item=None, source=None):
+    
+    if name is not None:
+        df = df[df['name'] == name]
+    if sentiment is not None:
+        df = df[df['sentiment'] == sentiment]
+    if item is not None:
+        df = df[df['item'] == item]
+    if source is not None:
+        df = df[df['source'] == source]
+    
+    # 문장 리스트 생성
+    reviews = [eval(i) for i in df['n_v_ad']]
+
+    # 단어 인코딩 및 빈도수 계산
+    networks = []
+    for review in reviews:
+        network_review = [w for w in review if len(w) > 1]
+        networks.append(network_review)
+
+    # 유사도 계산을 위한 Graph 생성
+    G = nx.Graph()
+    for review in networks:
+        for i, word in enumerate(review):
+            if word not in G:
+                G.add_node(word)
+            if i < len(review) - 1:
+                next_word = review[i+1]
+                if not G.has_edge(word, next_word):
+                    G.add_edge(word, next_word, weight=0)
+                G[word][next_word]['weight'] += 1
+    # 중심 노드 계산
+    pagerank = nx.pagerank(G)
+    central_nodes = [node for node, score in sorted(pagerank.items(), key=lambda x: x[1], reverse=True)][:3]
+
+    # Word2Vec 모델 학습
+    model = Word2Vec(networks, size=100, window=5, min_count=1, workers=4, iter=100)
+   
+    # 그래프 생성
+    net = Network(width='100%', height='750px', font='NanumGothic')
+
+    # 중심 노드들을 노드로 추가
+    for keyword in central_nodes:
+        net.add_node(keyword, title=keyword)
+
+        # 주어진 키워드와 가장 유사한 20개의 단어 추출
+        similar_words = model.wv.most_similar(keyword, topn=num_words)
+
+        # 유사한 단어들을 노드로 추가하고, 주어진 키워드와의 연결선 추가
+        for word, score in similar_words:
+            net.add_node(word, title=word)
+            net.add_edge(keyword, word, value=score)
+
+    # 노드 크기 결정
+    size_dict = nx.degree_centrality(G)
+    
+    # 노드 크기 설정
+    node_size = []
+    for node in net.nodes:
+        if node['id'] in central_nodes:
+            node_size.append(5000)
+        else:
+            node_size.append(1000)
+
+    # 클러스터링
+    clusters = list(nx.algorithms.community.greedy_modularity_communities(G))
+    cluster_labels = {}
+    for i, cluster in enumerate(clusters):
+        for node in cluster:
+            cluster_labels[node] = i
+            
+   # 노드 크기 결정
+    size_dict = nx.degree_centrality(G)
+
+    # 노드 크기 설정
+    node_size = []
+    for node in net.nodes:
+        if node['id'] in central_nodes:
+            node_size.append(5000)
+        else:
+            node_size.append(1000)
+
+    # 클러스터링
+    clusters = list(nx.algorithms.community.greedy_modularity_communities(G))
+    cluster_labels = {}
+    for i, cluster in enumerate(clusters):
+        for node in cluster:
+            cluster_labels[node] = i
+    # 노드 색상 결정
+    color_palette = ["#f39c9c", "#f7b977", "#fff4c4", "#d8f4b9", "#9ed6b5", "#9ce8f4", "#a1a4f4", "#e4b8f9", "#f4a2e6", "#c2c2c2"]
+    node_colors = [color_palette[cluster_labels[node['id']] % len(color_palette)] for node in net.nodes]
+
+    # 노드에 라벨과 연결 강도 값 추가
+    for node in net.nodes:
+        node['label'] = node['id']
+        node['title'] += f" ({node['id']})"
+        node['color'] = node_colors[net.nodes.index(node)]
+        node['size'] = node_size[net.nodes.index(node)]
+    for edge in net.edges:
+        edge['title'] = f"{edge['from']} - {edge['to']}: {edge['value']}"
+        edge['color'] = "#c2c2c2"
+
+    # 그래프 출력
+    net.show(name)
