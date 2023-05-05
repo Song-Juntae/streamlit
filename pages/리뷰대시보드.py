@@ -95,23 +95,20 @@ with col1_3:
 with col1_4:
     시작날짜 = df_리뷰_감성분석결과['time'][회사종류마스크].min()
     마지막날짜 = df_리뷰_감성분석결과['time'][회사종류마스크].max()
-    시작날짜
-    마지막날짜
-    type(시작날짜) == type(마지막날짜)
+    타입 = type(시작날짜)
+    타입
     start_date = st.date_input(
         '시작날짜',
-        value=pd.Timestamp(시작날짜),
-        min_value=pd.Timestamp(시작날짜),
-        max_value=pd.Timestamp(마지막날짜)
+        value=시작날짜,
+        min_value=시작날짜,
+        max_value=마지막날짜
     ),
     end_date = st.date_input(
         '마지막날짜',
-        value=pd.Timestamp(마지막날짜),
-        min_value=pd.Timestamp(시작날짜),
-        max_value=pd.Timestamp(마지막날짜)
+        value=마지막날짜,
+        min_value=시작날짜,
+        max_value=마지막날짜
     )
-    type(start_date) == type(end_date)
-    end_date
     기간마스크 = ((df_리뷰_감성분석결과['time'] >= pd.Timestamp(start_date[0]) & df_리뷰_감성분석결과['time'] <= pd.Timestamp(end_date)))
 
 with col3_1:
