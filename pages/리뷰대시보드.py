@@ -6,6 +6,7 @@ import plotly.graph_objects as go
 
 # 기본 라이브러리
 import os
+import ast
 from datetime import datetime
 from datetime import timedelta
 
@@ -21,6 +22,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 
 from gensim.models import Word2Vec
 import networkx as nx
+import gensim
 from pyvis.network import Network
 from wordcloud import WordCloud
 ########################################################################################################################
