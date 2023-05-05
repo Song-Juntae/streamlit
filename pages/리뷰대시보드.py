@@ -47,7 +47,7 @@ with st.container():
 ########################################################################################################################
 # 사용자 입력
 with col0_3:
-    api키 = os.environ['$\{\{secrets.VARIABLE_NAME}}]'
+    api키 = os.environ['$\{\{secrets.VARIABLE_NAME\}\}']
     api키
     api키 = os.getenv('secrets.API_KEY')
     api키
