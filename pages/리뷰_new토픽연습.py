@@ -159,13 +159,12 @@ with tab1:
     else:
         nv_get_topic_model(file_path,10)
 
-
 with tab2:
-    col1, col2 = st.beta_columns(2)    
+    col1_2, col2_2 = st.beta_columns(2)    
 
-    with col1:
+    with col1_2:
         n_v_type = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'], key='selectbox2')
-    with col2:
+    with col2_2:
         input_str = st.text_input('불용어를 추가하실 수 있습니다.', key='stopwords_input2')
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
@@ -181,11 +180,11 @@ with tab2:
         nv_get_topic_model(file_path,5)
 
 with tab3:
-    col1, col2 = st.beta_columns(2)    
+    col1_3, col2_3 = st.beta_columns(2)    
 
-    with col1:
+    with col1_3:
         n_v_type = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'], key='selectbox3')
-    with col2:
+    with col2_3:
         input_str = st.text_input('불용어를 추가하실 수 있습니다.', key='stopwords_input3')
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
@@ -201,11 +200,11 @@ with tab3:
         nv_get_topic_model(file_path,8)
 
 with tab4:
-    col1, col2 = st.beta_columns(2)    
+    col1_4, col2_4 = st.beta_columns(2)    
 
-    with col1:
+    with col1_4:
         n_v_type = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'], key='selectbox4')
-    with col2:
+    with col2_4:
         input_str = st.text_input('불용어를 추가하실 수 있습니다.', key='stopwords_input4')
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
