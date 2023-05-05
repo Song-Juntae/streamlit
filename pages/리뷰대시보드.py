@@ -144,7 +144,7 @@ with col1_4:
         st.write('설정된 단어: ', 키워드)
         키워드 = [i.strip() for i in 키워드.split(',')]
     else:
-        st.warning(f'{키워드}는 {회사종류}에 없는단어입니다. 다른 단어를 입력해주세요. 추천키워드: 제라늄, 배송')
+        # st.warning(f'{키워드}는 {회사종류}에 없는단어입니다. 다른 단어를 입력해주세요. 추천키워드: 제라늄, 배송')
         # st.write('문제가 생겼어요.')
      
 ########################################################################################################################
@@ -211,8 +211,9 @@ with col4_1:
     st.plotly_chart(pie_chart, use_container_width=True)
 with col4_2:
     # st.plotly_chart(words)
-    바차트 = go.Figure(data=[go.Bar(x=list(words.keys()),y=list(words.values()))])
+    바차트 = go.Figure([go.Bar(x=list(words.keys()), y=list(words.values()))])
     st.plotly_chart(바차트, use_container_width=True)
+
 ########################################################################################################################
 # 워드클라우드
 with col3_1:
