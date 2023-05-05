@@ -69,13 +69,13 @@ with col1_1:
     option = st.selectbox(
         '🍀단어기준선택🍀',
         ('빈도(Count)', '중요도(TF-IDF)'))
-    st.write('이것: ', option)
+    st.write('선택기준: ', option)
 
 with col1_2:
     품사옵션 = st.selectbox(
         '🍀품사선택🍀',
         ('명사', '명사+동사+형용사'))
-    st.write('이것: ', 품사옵션)
+    st.write('선택품사: ', 품사옵션)
 
 with col1_3:
     회사종류 = st.selectbox(
@@ -86,7 +86,7 @@ with col1_3:
          '경쟁사-식물등',
          '경쟁사All',
          ))
-    st.write('이것: ', 회사종류)
+    st.write('선택제품: ', 회사종류)
     if 회사종류 == '자사+경쟁사':
         회사종류마스크 = ((df_리뷰_감성분석결과['name'] == '경쟁사') | (df_리뷰_감성분석결과['name'] == '꽃피우는시간'))
     if 회사종류 == '꽃피우는 시간':
@@ -147,7 +147,7 @@ with col1_4:
         st.write('예시 : 뿌리, 제라늄, 식물, 응애')
         키워드 = [키워드]
     elif 키워드.find(',') != -1:
-        st.write('설정된 키워드: ', 키워드)
+        st.write('설정된 단어: ', 키워드)
         키워드 = [i.strip() for i in 키워드.split(',')]
     else:
         # st.write('문제가 생겼어요.')
