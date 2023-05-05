@@ -96,8 +96,13 @@ with col3_3:
     키워드 = st.text_input('키워드를 입력해주세요', '제라늄')
     if 키워드.find(',') == -1:
         st.write('예시 : 뿌리, 제라늄, 식물, 응애')
-    if 키워드.find(',') != -1:
+        키워드 = [키워드]
+        키워드
+    else 키워드.find(',') != -1:
         st.write('설정된 키워드: ', 키워드)
+        키워드 = [i.strip() for i in 키워드.split(',')]
+        키워드
+     
 ########################################################################################################################
 def get_count_top_words(df, start_date=None, last_date=None, num_words=10, name=None, sentiment = None, item = None, source = None , 품사='noun'):
     if name is not None:
