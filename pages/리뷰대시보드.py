@@ -49,6 +49,7 @@ with st.container():
 with col0_3:
     api키 = os.getenv('API_KEY')
     api키
+    st.secrets["API_KEY"]
     긍부정 = st.radio(
     "긍정 부정 선택",
     ('All', 'Positive', 'Negative'), horizontal=True)
