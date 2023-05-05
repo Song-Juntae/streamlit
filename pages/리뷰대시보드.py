@@ -75,8 +75,8 @@ with col1_4:
     ''
 
 with col3_1:
-    추가불용어 = st.text_input('불용어를 추가하세요', '예시 : 영양제, 식물, 배송')
-    st.write('추가된 불용어: ', 추가불용어)
+    추가불용어 = st.text_input('불용어를 추가하세요', '')
+    st.write('예시 : 영양제, 식물, 배송', '추가된 불용어: ', 추가불용어)
 
 with col3_2:
     단어수 = st.slider(
