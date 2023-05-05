@@ -28,7 +28,7 @@ def lda_modeling(tokens, num_topics, passes=10):
                                             random_state=100) 
     return model, corpus, dictionary
 
-def print_topic_model(topics, rating):
+def print_topic_model(topics, rating, key):
     topic_values = []
     for topic in topics:
         topic_value = topic[1]
@@ -36,7 +36,7 @@ def print_topic_model(topics, rating):
     topic_model = pd.DataFrame({"topic_num": list(range(1, len(topics) + 1)), "word_prop": topic_values})
     
     # 토글 생성
-    if st.checkbox('토픽별 구성 단어 비율 확인하기'):
+    if st.checkbox('토픽별 구성 단어 비율 확인하기', key=key):
     # 토글이 선택되었을 때 데이터프레임 출력
         st.write(topic_model)
 
@@ -73,7 +73,7 @@ def topic_wordcloud(model,num_topics):
     st.pyplot(fig, use_container_width=True)
 
 # 명사기준 토픽분석(6개씩 나오게 한건 이전 연구자료들 참고)
-def n_get_topic_model(data, topic_number, passes=10, num_words=6):
+def n_get_topic_model(data, topic_number, passes=10, num_words=6, key):
     df = pd.read_csv(data)
 
     # 불용어 리스트
@@ -96,13 +96,13 @@ def n_get_topic_model(data, topic_number, passes=10, num_words=6):
 
     rating = 'pos' 
     topics = model.print_topics(num_words=num_words)
-    print_topic_model(topics, rating)
+    print_topic_model(topics, rating, key)
 
     # 토픽별 워드클라우드 시각화
     topic_wordcloud(model, num_topics=topic_number)
 
 # 명사+동사+형용사 기준 토픽분석
-def nv_get_topic_model(data, topic_number, passes=10, num_words=6):
+def nv_get_topic_model(data, topic_number, passes=10, num_words=6, key):
     df = pd.read_csv(data)
 
     # 불용어 리스트
@@ -125,7 +125,7 @@ def nv_get_topic_model(data, topic_number, passes=10, num_words=6):
 
     rating = 'pos' 
     topics = model.print_topics(num_words=num_words)
-    print_topic_model(topics, rating)
+    print_topic_model(topics, rating, key)
 
     # 토픽별 워드클라우드 시각화
     topic_wordcloud(model, num_topics=topic_number)
@@ -155,9 +155,9 @@ with tab1:
     file_path = '/app/streamlit/data/자사긍정(6차).csv'
 
     if n_v_type =='명사':
-        n_get_topic_model(file_path,8)
+        n_get_topic_model(file_path,8 , 11)
     else:
-        nv_get_topic_model(file_path,10)
+        nv_get_topic_model(file_path,10, 12)
 
 with tab2:
     col1_2, col2_2 = st.beta_columns(2)    
@@ -175,9 +175,9 @@ with tab2:
     file_path = '/app/streamlit/data/자사부정(6차).csv'
 
     if n_v_type =='명사':
-        n_get_topic_model(file_path,4)
+        n_get_topic_model(file_path,4, 22)
     else:
-        nv_get_topic_model(file_path,5)
+        nv_get_topic_model(file_path,5, 22)
 
 with tab3:
     col1_3, col2_3 = st.beta_columns(2)    
