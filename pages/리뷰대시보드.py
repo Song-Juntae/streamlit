@@ -211,7 +211,7 @@ with col4_1:
     st.plotly_chart(pie_chart, use_container_width=True)
 with col4_2:
     # st.plotly_chart(words)
-    바차트 = go.Figure([go.Bar(x=list(words.keys()),y=list(words.values()))])
+    바차트 = go.Figure(data=[go.Bar(x=list(words.keys()),y=list(words.values()))])
     st.plotly_chart(바차트, use_container_width=True)
 ########################################################################################################################
 # 워드클라우드
