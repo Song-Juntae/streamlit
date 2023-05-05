@@ -10,6 +10,9 @@ import ast
 from datetime import datetime
 from datetime import timedelta
 
+import warnings
+warnings.filterwarnings("ignore", message="PyplotGlobalUseWarning")
+
 from collections import Counter
 import numpy as np
 import pandas as pd
@@ -65,7 +68,7 @@ if 긍부정 == '부정리뷰😫':
 with col1_1:
     option = st.selectbox(
         '🍀단어기준선택🍀',
-        ('카운트', 'td-idf'))
+        ('빈도(Count)', '중요도(TF-IDF)'))
     st.write('이것: ', option)
 
 with col1_2:
@@ -121,11 +124,11 @@ with col2_4:
 기간마스크 = ((df_리뷰_감성분석결과['time'] >= pd.to_datetime(start_date)) & (df_리뷰_감성분석결과['time'] <= pd.to_datetime(end_date)))
 
 with col2_1:
-    추가불용어 = st.text_input('불용어를 추가하세요', '')
+    추가불용어 = st.text_input('🍀포함하지 않을 단어입력🍀', '')
     if 추가불용어 == '':
         st.write('예시 : 영양제, 식물, 배송')
     if 추가불용어 != '':
-        st.write('추가된 불용어: ', 추가불용어)
+        st.write('제거한 단어: ', 추가불용어)
 
 with col2_2:
     단어수 = st.slider(
@@ -201,9 +204,9 @@ if 품사옵션 == '명사+동사+형용사':
 카운트 = get_count_top_words(df_리뷰_감성분석결과[기간마스크 & 회사종류마스크], num_words=단어수, 품사=품사)
 tdidf = get_tfidf_top_words(df_리뷰_감성분석결과[기간마스크 & 회사종류마스크], num_words=단어수, 품사=품사)
 
-if option == '카운트':
+if option == '빈도(Count)':
     words = 카운트
-if option == 'td-idf':
+if option == '중요도(TF-IDF)':
     words = tdidf
 ########################################################################################################################
 # 사용자 입력후 사용할 데이터 정리
