@@ -41,7 +41,7 @@ with st.container():
 with st.container():
     col3_1, col3_2 = st.columns([1,1])
 with st.container():
-    col4_1, col4_2, col4_3, col4_4 = st.columns([1,1,1,1])
+    col4_1, col4_2, col4_3 = st.columns([1,1,2])
 ########################################################################################################################
 # 사용자 입력
 with col0_3:
