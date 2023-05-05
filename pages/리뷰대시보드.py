@@ -111,7 +111,7 @@ with col1_4:
     type(start_date) == type(df_리뷰_감성분석결과['time'][0])
     df_리뷰_감성분석결과['time'][0]
     pd.Timestamp(start_date)
-    type(pd.Timestamp(start_date)) == type(df_리뷰_감성분석결과['time'][0])
+    type(pd.Timestamp(start_date[0])) == type(df_리뷰_감성분석결과['time'][0])
     기간마스크 = ((df_리뷰_감성분석결과['time'] >= start_date & df_리뷰_감성분석결과['time'] <= end_date))
 
 with col3_1:
