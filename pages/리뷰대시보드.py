@@ -47,6 +47,8 @@ with st.container():
 ########################################################################################################################
 # 사용자 입력
 with col0_3:
+    api키 = os.getenv('API_KEY')
+    api키
     긍부정 = st.radio(
     "긍정 부정 선택",
     ('All', 'Positive', 'Negative'), horizontal=True)
