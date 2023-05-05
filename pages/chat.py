@@ -10,7 +10,7 @@ API
 openai.api_key = API
  
 def generate_response(prompt):
-    completions = openai.Completion.create (
+    completions = openai.Completion.create(
         engine="text-davinci-003",
         prompt=prompt,
         max_tokens=1024,
