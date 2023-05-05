@@ -47,9 +47,9 @@ def print_topic_model(topics, rating):
 
 # 시각화1. 각 주제에서 상위 N개 키워드의 워드 클라우드
 def topic_wordcloud(model):
-    cand_mask = np.array(Image.open('/app/busypeople-stramlit/data/circle.png'))
+    cand_mask = np.array(Image.open('/app/streamlit/data/circle.png'))
     cloud = WordCloud(background_color='white',
-                      font_path = "/app/busypeople-stramlit/font/NanumBarunGothic.ttf",
+                      font_path = "/app/streamlit/font/NanumBarunGothic.ttf",
                       width=500,
                       height=500,
                       max_words=15,
@@ -85,7 +85,7 @@ def get_topic_model(data, num_topics=4, passes=10, num_words=15):
     # 문장 리스트 생성
     reviews = []
     for i in range(len(df)):
-        reviews.append(to_list(df['kha_nng_은어전처리_sentence'][i]))
+        reviews.append(to_list(df['noun'][i]))
 
     # 텍스트 데이터 전처리
     # 불용어 제거, 단어 인코딩 및 빈도수 계산
