@@ -76,6 +76,7 @@ with col1_3:
         회사종류마스크 = ((df_리뷰_감성분석결과['name'] == '경쟁사') | (df_리뷰_감성분석결과['name'] == '꽃피우는시간'))
     if 회사종류 == '꽃피우는 시간':
         회사종류마스크 = (df_리뷰_감성분석결과['name'] == '꽃피우는시간')
+
 with col1_4:
     start_date = st.date_input(
         '시작날짜',
@@ -85,11 +86,6 @@ with col1_4:
         '마지막날짜',
         value=datetime.today() - timedelta(days=45)
     )
-    if 회사종류 == '꽃피우는 시간':
-        start_date = st.date_input("시작 날짜",
-                                    value=datetime.today() - timedelta(days=45),
-                                    min_value=datetime(2021, 12, 31),
-                                    max_value=datetime(2023, 4, 19))
 
 with col3_1:
     추가불용어 = st.text_input('불용어를 추가하세요', '')
