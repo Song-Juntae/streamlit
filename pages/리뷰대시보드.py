@@ -37,11 +37,11 @@ with st.container():
 with st.container():
     col1_1, col1_2, col1_3, col1_4 = st.columns([1,1,1,1])
 with st.container():
-    col2_1, col2_2 = st.columns([1,1])
+    col2_1, col2_2, col2_3, col2_4 = st.columns([1,1,1,1])
 with st.container():
-    col3_1, col3_2, col3_3, col3_4  = st.columns([1,1,1,1])
+    col3_1, col3_2 = st.columns([1,1])
 with st.container():
-    col4_1, col4_2, col4_3 = st.columns([1,1,2])
+    col4_1, col4_2, col4_3, col4_4 = st.columns([1,1,1,1])
 ########################################################################################################################
 # 사용자 입력
 with col0_3:
@@ -92,31 +92,35 @@ with col1_3:
     if 회사종류 == '경쟁사All':
         회사종류마스크 = (df_리뷰_감성분석결과['name'] == '경쟁사')
 
-with col1_4:
-    시작날짜 = df_리뷰_감성분석결과['time'][회사종류마스크].min()
-    마지막날짜 = df_리뷰_감성분석결과['time'][회사종류마스크].max()
+
+시작날짜 = df_리뷰_감성분석결과['time'][회사종류마스크].min()
+마지막날짜 = df_리뷰_감성분석결과['time'][회사종류마스크].max()
+
+with col2_3:
     start_date = st.date_input(
         '시작날짜',
         value=시작날짜,
         min_value=시작날짜,
         max_value=마지막날짜
-    ),
+    )
+with col2_4:
     end_date = st.date_input(
         '마지막날짜',
         value=마지막날짜,
         min_value=시작날짜,
         max_value=마지막날짜
     )
-    기간마스크 = ((df_리뷰_감성분석결과['time'] >= pd.to_datetime(start_date[0])) & (df_리뷰_감성분석결과['time'] <= pd.to_datetime(end_date)))
 
-with col3_1:
+기간마스크 = ((df_리뷰_감성분석결과['time'] >= pd.to_datetime(start_date[0])) & (df_리뷰_감성분석결과['time'] <= pd.to_datetime(end_date)))
+
+with col2_1:
     추가불용어 = st.text_input('불용어를 추가하세요', '')
     if 추가불용어 == '':
         st.write('예시 : 영양제, 식물, 배송')
     if 추가불용어 != '':
         st.write('추가된 불용어: ', 추가불용어)
 
-with col3_2:
+with col2_2:
     단어수 = st.slider(
         '단어 수를 조정하세요',
         10, 300, step=1)
@@ -127,7 +131,7 @@ if 추가불용어.find(',') != -1:
 if 추가불용어.find(',') == -1:
     stopwords.append(추가불용어) 
 
-with col3_3:
+with col1_4:
     키워드 = st.text_input('키워드를 입력해주세요', '제라늄')
     if 키워드.find(',') == -1:
         st.write('예시 : 뿌리, 제라늄, 식물, 응애')
@@ -206,7 +210,7 @@ with col4_2:
     st.plotly_chart(바차트, use_container_width=True)
 ########################################################################################################################
 # 워드클라우드
-with col2_1:
+with col3_1:
     cand_mask = np.array(Image.open('/app/streamlit/data/circle.png'))
     워드클라우드 = WordCloud(
         background_color="white", 
@@ -301,7 +305,7 @@ def 네트워크(reviews):
 
 
 
-with col2_2:
+with col3_2:
     try:
         net = 네트워크(reviews)
         net.save_graph(f'/app/streamlit/pyvis_graph.html')
