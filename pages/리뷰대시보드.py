@@ -101,14 +101,14 @@ with col1_4:
     start_date = st.date_input(
         '시작날짜',
         value=시작날짜,
-        min_value=datetime(시작날짜),
-        max_value=datetime(마지막날짜)
+        min_value=pd.datetime(시작날짜),
+        max_value=pd.datetime(마지막날짜)
     ),
     end_date = st.date_input(
         '마지막날짜',
         value=마지막날짜,
-        min_value=datetime(시작날짜),
-        max_value=datetime(마지막날짜)
+        min_value=pd.datetime(시작날짜),
+        max_value=pd.datetime(마지막날짜)
     )
     type(start_date) == type(end_date)
     end_date
