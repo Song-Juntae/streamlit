@@ -108,7 +108,7 @@ if 키워드.find(',') == -1:
     st.write('예시 : 뿌리, 제라늄, 식물, 응애')
     키워드 = [키워드]
 
-reviews = [eval(i) for i in 마스크된데이터프레임[품사]]
+reviews = [eval(i) for i in 마스크된데이터프레임['품사']]
 reviews
 
 # def 네트워크(reviews):
