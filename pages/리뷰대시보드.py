@@ -143,6 +143,10 @@ if 추가불용어.find(',') == -1:
     stopwords.append(추가불용어) 
 
 with col1_4:
+    options = st.multiselect(
+    'What are your favorite colors',
+    ['Green', 'Yellow', 'Red', 'Blue'],
+    ['Yellow', 'Red'])
     키워드 = st.text_input('🍀네트워크 단어입력🍀', '제라늄')
     if 키워드.find(',') == -1:
         st.write('예시 : 뿌리, 제라늄, 식물, 응애')
@@ -203,6 +207,7 @@ if 품사옵션 == '명사+동사+형용사':
     품사 = 'n_v_ad'
 
 마스크된데이터프레임 = df_리뷰_감성분석결과[긍부정마스크 & 기간마스크 & 회사종류마스크]
+reviews = [eval(i) for i in 마스크된데이터프레임[품사]]
 
 카운트 = get_count_top_words(마스크된데이터프레임, num_words=단어수, 품사=품사)
 tdidf = get_tfidf_top_words(마스크된데이터프레임, num_words=단어수, 품사=품사)
@@ -246,8 +251,6 @@ with col3_1:
     st.image(워드클라우드.to_array(), use_column_width=True)
 ########################################################################################################################
 # 네트워크 차트
-
-reviews = [eval(i) for i in 마스크된데이터프레임[품사]]
 
 def 네트워크(reviews):
     networks = []
