@@ -34,6 +34,8 @@ df_리뷰_감성분석결과 = pd.read_csv('/app/streamlit/data/리뷰6차.csv')
 df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'])
  
 
+마스크된데이터프레임 = df_리뷰_감성분석결과[긍부정마스크 & 기간마스크 & 회사종류마스크]
+
 키워드 = st.text_input('🍀네트워크 단어입력🍀', '제라늄')
 if 키워드.find(',') == -1:
     st.write('예시 : 뿌리, 제라늄, 식물, 응애')
