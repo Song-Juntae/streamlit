@@ -217,6 +217,7 @@ if option == '중요도(TF-IDF)':
 ########################################################################################################################
 # 파이차트
 with col4_1:
+    마스크된데이터프레임
     df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment'].value_counts())
     pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
     st.plotly_chart(pie_chart, use_container_width=True)
