@@ -143,12 +143,11 @@ if 추가불용어.find(',') == -1:
     stopwords.append(추가불용어) 
 
 with col1_4:
-    options = st.multiselect(
-    'What are your favorite colors',
-    ['Green', 'Yellow', 'Red', 'Blue'],
-    ['Yellow', 'Red'])
     키워드 = st.text_input('🍀네트워크 단어입력🍀', '제라늄')
-    if 키워드.find(',') == -1:
+    if 키워드 == '':
+        키워드 = '제라늄'
+        st.write('단어를 입력해주세요. 예시 : 뿌리, 제라늄, 식물, 응애', 키워드)
+    elif 키워드.find(',') == -1:
         st.write('예시 : 뿌리, 제라늄, 식물, 응애')
         키워드 = [키워드]
     elif 키워드.find(',') != -1:
