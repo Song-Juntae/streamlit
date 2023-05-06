@@ -202,8 +202,10 @@ if 품사옵션 == '명사':
 if 품사옵션 == '명사+동사+형용사':
     품사 = 'n_v_ad'
 
-카운트 = get_count_top_words(df_리뷰_감성분석결과[기간마스크 & 회사종류마스크], num_words=단어수, 품사=품사)
-tdidf = get_tfidf_top_words(df_리뷰_감성분석결과[기간마스크 & 회사종류마스크], num_words=단어수, 품사=품사)
+마스크된데이터프레임 = df_리뷰_감성분석결과[긍부정마스크 & 기간마스크 & 회사종류마스크]
+
+카운트 = get_count_top_words(마스크된데이터프레임, num_words=단어수, 품사=품사)
+tdidf = get_tfidf_top_words(마스크된데이터프레임, num_words=단어수, 품사=품사)
 
 if option == '빈도(Count)':
     words = 카운트
@@ -215,7 +217,7 @@ if option == '중요도(TF-IDF)':
 ########################################################################################################################
 # 파이차트
 with col4_1:
-    df_파이차트 = pd.DataFrame(df_리뷰_감성분석결과['sentiment'].value_counts())
+    df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment'].value_counts())
     pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
     st.plotly_chart(pie_chart, use_container_width=True)
 with col4_2:
@@ -242,7 +244,7 @@ with col3_1:
 ########################################################################################################################
 # 네트워크 차트
 
-reviews = [eval(i) for i in df_리뷰_감성분석결과[기간마스크 & 회사종류마스크][품사]]
+reviews = [eval(i) for i in 마스크된데이터프레임[품사]]
 
 def 네트워크(reviews):
     networks = []
@@ -328,11 +330,11 @@ with col3_2:
 ########################################################################################################################
 with col4_3:
     if len(키워드) == 1:
-        보여줄df = df_리뷰_감성분석결과[df_리뷰_감성분석결과['noun'].str.contains(키워드[0])]
+        보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains(키워드[0])]
         st.dataframe(보여줄df[['name','sentiment','review_sentence', 'noun', 'replace_slang_sentence']])
         키워드 = [키워드]
     elif len(키워드) > 1:
-        보여줄df = df_리뷰_감성분석결과[df_리뷰_감성분석결과['noun'].str.contains('|'.join(키워드))]
+        보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains('|'.join(키워드))]
         st.dataframe(보여줄df[['name','sentiment','review_sentence']], use_container_width=True)
 ########################################################################################################################
 import ast
