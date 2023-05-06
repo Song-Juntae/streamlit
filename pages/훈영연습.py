@@ -182,11 +182,11 @@ def 네트워크(reviews):
 
 네트워크 = 네트워크(reviews)
 
-with col3_2:
-    try:
-        net = 네트워크[0]
-        net.save_graph(f'/app/streamlit/pyvis_graph.html')
-        HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
-        components.html(HtmlFile.read(), height=435)
-    except:
-        st.write('존재하지 않는 키워드예요.')
+
+try:
+    net = 네트워크[0]
+    net.save_graph(f'/app/streamlit/pyvis_graph.html')
+    HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
+    components.html(HtmlFile.read(), height=435)
+except:
+    st.write('존재하지 않는 키워드예요.')
