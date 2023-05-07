@@ -268,10 +268,10 @@ with col4_2:
 expander = st.expander('네트워크 세부필터')
 with expander:
     키워드 = st_tags(
-        label = '제거할 키워드',
+        label = '알아볼 키워드',
         text = '직접 입력해보세요',
-        value = ['식물', '화분'],
-        suggestions = ['식물', '화분'],
+        value = ['식물'],
+        suggestions = ['식물', '제라늄'],
         key = '1')
 
 
