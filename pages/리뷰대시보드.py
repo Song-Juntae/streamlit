@@ -48,7 +48,7 @@ txt = st.text_area('Text to analyze', '''
     was the season of Light, it was the season of Darkness, it
     was the spring of hope, it was the winter of despair, (...)
     ''')
-st.write('Sentiment:', run_sentiment_analysis(txt))
+# st.write('Sentiment:', run_sentiment_analysis(txt))
 ########################################################################################################################
 # 레이아웃
 #1_1 : 품사, 1_2 : 제품, 1_3 : 시작날짜, 1_4: 마지막 날짜
