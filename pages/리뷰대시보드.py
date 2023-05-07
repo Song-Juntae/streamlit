@@ -72,7 +72,7 @@ if 긍부정 == '부정':
 
 with col1_1:
     품사옵션 = st.selectbox(
-        '키워드 종류',
+        '데이터 타입',
         ('명사', '명사+동사+형용사'))
     # st.write('선택품사: ', 품사옵션)
 
@@ -463,10 +463,15 @@ def print_topic_model(topics, rating, key):
         topic_values.append(topic_value)
     topic_model = pd.DataFrame({"topic_num": list(range(1, len(topics) + 1)), "word_prop": topic_values})
     
-    # 토글 생성
-    if st.checkbox('토픽별 구성 단어 비율 확인하기', key=key):
-    # 토글이 선택되었을 때 데이터프레임 출력
-        st.dataframe(topic_model, use_container_width=True)
+    # # 토글 생성
+    # if st.checkbox('토픽별 구성 단어 비율 확인하기', key=key):
+    # # 토글이 선택되었을 때 데이터프레임 출력
+    #     st.dataframe(topic_model, use_container_width=True)
+
+expander = st.expander('토픽별 구성 단어 비율 확인하기')
+with expander:
+    st.dataframe(topic_model, use_container_width=True)
+
 
 
 # 시각화1. 각 주제에서 상위 N개 키워드의 워드 클라우드
