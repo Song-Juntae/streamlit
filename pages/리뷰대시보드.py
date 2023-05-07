@@ -383,7 +383,7 @@ import ast
 
 fix_stop_words = [ '합니다', '하는', '할', '하고', '한다','하다','되다','같다','자다','되다','있다','써다','않다','해보다','주다','되어다', 
              '그리고', '입니다', '그', '등', '이런', '및','제', '더','언늘','결국','생각','식물키',
-             '감사','ㅋㅋ','진짜','완전','요ㅎ','사용','정도','엄마','아이','원래','식물']
+             '감사','진짜','완전','요ㅎ','사용','정도','엄마','아이','원래','식물','흐흐','하하','정말']
 
 def to_list(text):
     return ast.literal_eval(text)
@@ -428,7 +428,7 @@ def topic_wordcloud(model,num_topics):
     
     topics = model.show_topics(formatted=False)
 
-    # 모델마다 토픽개수가 달라서 rows, cols이 토픽의 개수마다 바뀜
+    # 모델마다 토픽개수가 달라서 rows, cols이 토픽의 개수마다 바뀜주기
     fig, axes = plt.subplots(1, num_topics, figsize=(12,8), sharex=True, sharey=True)
 
     for i, ax in enumerate(axes.flatten()):
@@ -445,8 +445,8 @@ def topic_wordcloud(model,num_topics):
     plt.tight_layout()
     st.pyplot(fig, use_container_width=True)
 
-# 명사기준 토픽분석(6개씩 나오게 한건 이전 연구자료들 참고)
-def n_get_topic_model(data, topic_number, passes=10, num_words=6, key=None):
+# 명사기준 토픽분석(7개씩 나오게 한건 이전 연구자료들 참고)
+def n_get_topic_model(data, topic_number, passes=10, num_words=7, key=None):
     df = pd.read_csv(data)
 
     # 불용어 리스트
@@ -475,7 +475,7 @@ def n_get_topic_model(data, topic_number, passes=10, num_words=6, key=None):
     topic_wordcloud(model, num_topics=topic_number)
 
 # 명사+동사+형용사 기준 토픽분석
-def nv_get_topic_model(data, topic_number, passes=10, num_words=6, key=None):
+def nv_get_topic_model(data, topic_number, passes=10, num_words=7, key=None):
     df = pd.read_csv(data)
 
     # 불용어 리스트
@@ -506,9 +506,6 @@ def nv_get_topic_model(data, topic_number, passes=10, num_words=6, key=None):
 
 ########################여기서부터 streamlit 구현 #########################
 
-st.title('리뷰_토픽모델링')
-
-
 
 tab1, tab2, tab3, tab4 = st.tabs(["**S**", "**W**", "**O**", "**T**"])
 
@@ -525,10 +522,10 @@ with tab1:
     st.header("Strength(강점)")
     st.write('자사의 긍정리뷰들을 토픽모델링한 결과입니다. :sunglasses:')
 
-    file_path = '/app/streamlit/data/자사긍정(6차).csv'
+    file_path = '/app/streamlit/data/자사긍정(8차).csv'
 
     if n_v_type =='명사':
-        n_get_topic_model(file_path,8 , key='준탱이1')
+        n_get_topic_model(file_path,9 , key='준탱이1')
     else:
         nv_get_topic_model(file_path,10, key='준탱이2')
 
@@ -545,12 +542,12 @@ with tab2:
     st.header("Weakness(약점)")
     st.write('자사의 부정리뷰들을 토픽모델링한 결과입니다. :sweat:')
 
-    file_path = '/app/streamlit/data/자사부정(6차).csv'
+    file_path = '/app/streamlit/data/자사부정(8차).csv'
 
     if n_v_type =='명사':
         n_get_topic_model(file_path,4, key='준탱이3')
     else:
-        nv_get_topic_model(file_path,5, key='준탱이4')
+        nv_get_topic_model(file_path,8, key='준탱이4')
 
 with tab3:
     col1_3_, col2_3_ = st.beta_columns(2)    
@@ -565,7 +562,7 @@ with tab3:
     st.header("Opportunity(기회)")
     st.write('경쟁사의 부정리뷰들을 토픽모델링한 결과입니다. :wink:')
 
-    file_path = '/app/streamlit/data/경쟁사부정(6차).csv'
+    file_path = '/app/streamlit/data/경쟁사부정(8차).csv'
 
     if n_v_type =='명사':
         n_get_topic_model(file_path,10, key='준탱이5')
@@ -585,12 +582,12 @@ with tab4:
     st.header("Treatment(위협)")
     st.write('경쟁사의 긍정리뷰들을 토픽모델링한 결과입니다. :confounded:')
 
-    file_path = '/app/streamlit/data/경쟁사긍정(6차).csv'
+    file_path = '/app/streamlit/data/경쟁사긍정(8차).csv'
 
     if n_v_type =='명사':
-        n_get_topic_model(file_path,9, key='준탱이7')
+        n_get_topic_model(file_path,10, key='준탱이7')
     else:
-        nv_get_topic_model(file_path,9, key='준탱이8')
+        nv_get_topic_model(file_path,10, key='준탱이8')
 ########################################################################################################################
 ########################################################################################################################
 ########################################################################################################################
