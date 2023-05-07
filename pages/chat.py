@@ -8,6 +8,8 @@ st.markdown("해당 결과를 보고 궁금한 점은 ChatGPT에게 물어보세
 openai.api_key = st.secrets["MIN_API_KEY"]
 openai.organization= st.secrets["MIN_ORG_ID"]
 
+openai.Model.list()
+
 # messages = []
 # while True:
 #     user_content = input("user : ")
@@ -30,8 +32,8 @@ openai.organization= st.secrets["MIN_ORG_ID"]
 # # chatGPT
 # openai.api_key = str(API)
 
-completion = openai.Completion.create(model="ada", prompt="Hello world")
-completion
+# completion = openai.Completion.create(model="ada", prompt="Hello world")
+# completion
 
 # completions
  
