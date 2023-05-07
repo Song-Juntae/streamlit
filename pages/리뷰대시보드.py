@@ -151,6 +151,10 @@ with expander:
         suggestions = ['식물', '화분'],
         key = '1')
 
+# 4. 워클 + 바차트
+with st.container():
+    col4_1, col4_2 = st.columns([2,2])
+
 # with col2_1:
 #     option = st.selectbox(
 #         '🍀단어기준선택🍀',
@@ -169,19 +173,7 @@ with expander:
 #         st.write('예시 : 영양제, 식물, 배송')
 #     if 추가불용어 != '':
 #         st.write('제거한 단어: ', 추가불용어)
-########################################################################################################################
-# 4. 워클 + 바차트
-with st.container():
-    col4_1, col4_2 = st.columns([2,2])
-# 5. 넽웤 세부필터
-with st.container():
-    col5_1, col5_2 = st.columns([1,1])
-# 6. 넽웤 + 파이차트
-with st.container():
-    col6_1, col6_2 = st.columns([3,1])
-# 7. 넽웤 데이터 프레임
-with st.container():
-    col7_1, col7_2 = st.columns([3,1])
+
 ########################################################################################################################
 # 워드 클라우드 
 def get_count_top_words(df, start_date=None, last_date=None, num_words=200, name=None, sentiment = None, item = None, source = None , 품사='noun'):
@@ -272,7 +264,17 @@ with col4_2:
     # st.plotly_chart(words)
     바차트 = go.Figure([go.Bar(x=list(words.keys()),y=list(words.values()))])
     st.plotly_chart(바차트, use_container_width=True)
+########################################################################################################################
 
+# 5. 넽웤 세부필터
+with st.container():
+    col5_1, col5_2 = st.columns([1,1])
+# 6. 넽웤 + 파이차트
+with st.container():
+    col6_1, col6_2 = st.columns([3,1])
+# 7. 넽웤 데이터 프레임
+with st.container():
+    col7_1, col7_2 = st.columns([3,1])
 ########################################################################################################################
 with col5_1:
     키워드 = st.text_input('🍀네트워크 단어입력🍀', '제라늄')
