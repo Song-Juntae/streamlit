@@ -115,7 +115,7 @@ end_date = st.date_input(
 키워드 = ['응애', '제라늄', '스킨답서스']
 
 reviews = [eval(i) for i in 마스크된데이터프레임[품사]]
-reviews
+
 def 네트워크(reviews):
     networks = []
     for review in reviews:
