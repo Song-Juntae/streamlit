@@ -574,7 +574,7 @@ with tab1:
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
 
-    st.write('꽃피우는시간의 긍정리뷰들의 주제별 키워드를 분석한 결과입니다. :sunglasses:')
+    st.write('자사 긍정리뷰들의 주제별 키워드를 분석한 결과입니다. :sunglasses:')
 
     file_path = '/app/streamlit/data/자사긍정(9차).csv'
 
@@ -593,7 +593,7 @@ with tab2:
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
 
-    st.write('꽃피우는시간의 부정리뷰들의 주제별 키워드를 분석한 결과입니다. :sweat:')
+    st.write('자사 부정리뷰들의 주제별 키워드를 분석한 결과입니다. :sweat:')
 
     file_path = '/app/streamlit/data/자사부정(9차).csv'
 
@@ -612,7 +612,7 @@ with tab3:
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
     
-    st.write('경쟁사의 부정리뷰들의 주제별 키워드를 분석한 결과입니다. :wink:')
+    st.write('경쟁사 부정리뷰들의 주제별 키워드를 분석한 결과입니다. :wink:')
 
     file_path = '/app/streamlit/data/경쟁사부정(9차).csv'
 
@@ -631,7 +631,7 @@ with tab4:
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
 
-    st.write('경쟁사의 긍정리뷰들의 주제별 키워드를 분석한 결과입니다. :confounded:')
+    st.write('경쟁사 긍정리뷰들의 주제별 키워드를 분석한 결과입니다. :confounded:')
 
     file_path = '/app/streamlit/data/경쟁사긍정(9차).csv'
 
