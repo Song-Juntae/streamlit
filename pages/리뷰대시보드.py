@@ -147,8 +147,8 @@ with expander:
     stopwords = st_tags(
         label = '제거할 키워드',
         text = '직접 입력해보세요',
-        value = ['식물', '화분'],
-        suggestions = ['식물', '화분'],
+        value = ['식물', '효과', '배송'],
+        suggestions = ['식물', '효과', '배송'],
         key = '1')
 
 # 4. 워클 + 바차트
@@ -265,6 +265,8 @@ with col4_2:
     바차트 = go.Figure([go.Bar(x=list(words.keys()),y=list(words.values()))])
     st.plotly_chart(바차트, use_container_width=True)
 ########################################################################################################################
+st.markdown('**🔎 키워드 DeepDive**')
+
 expander = st.expander('네트워크 세부필터')
 with expander:
     키워드 = st.text_input('🍀네트워크 단어입력🍀', '제라늄')
