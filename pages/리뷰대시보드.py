@@ -152,6 +152,74 @@ with col3_1:
         st.write('제거한 단어: ', 추가불용어)
 
 ########################################################################################################################
+# 워드 클라우드 
+def get_count_top_words(df, start_date=None, last_date=None, num_words=200, name=None, sentiment = None, item = None, source = None , 품사='noun'):
+    if name is not None:
+        df = df[df['name'] == name]
+    if sentiment is not None:
+        df = df[df['sentiment'] == sentiment]
+    if item is not None:
+        df = df[df['item'] == item]
+    if source is not None:
+        df = df[df['source'] == source]
+    if start_date is None:
+        start_date = df['time'].min().strftime('%Y-%m-%d')
+    if last_date is None:
+        last_date = df['time'].max().strftime('%Y-%m-%d')
+    df = df[(df['time'] >= start_date) & (df['time'] <= last_date)]
+    count_vectorizer = CountVectorizer(stop_words=stopwords)
+    count = count_vectorizer.fit_transform(df[품사].values)
+    count_df = pd.DataFrame(count.todense(), columns=count_vectorizer.get_feature_names_out())
+    count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
+    return count_top_words
+
+def get_tfidf_top_words(df, start_date=None, last_date=None, num_words=200, name=None, sentiment = None, item = None, source = None, 품사='noun' ):
+    if name is not None:
+        df = df[df['name'] == name]
+    if sentiment is not None:
+        df = df[df['sentiment'] == sentiment]
+    if item is not None:
+        df = df[df['item'] == item]
+    if source is not None:
+        df = df[df['source'] == source]
+    if start_date is None:
+        start_date = df['time'].min().strftime('%Y-%m-%d')
+    if last_date is None:
+        last_date = df['time'].max().strftime('%Y-%m-%d')
+    df = df[(df['time'] >= start_date) & (df['time'] <= last_date)]
+    tfidf_vectorizer = TfidfVectorizer(stop_words=stopwords)
+    tfidf = tfidf_vectorizer.fit_transform(df[품사].values)
+    tfidf_df = pd.DataFrame(tfidf.todense(), columns=tfidf_vectorizer.get_feature_names_out())
+    tfidf_top_words = tfidf_df.sum().sort_values(ascending=False).head(num_words).to_dict()
+    return tfidf_top_words
+########################################################################################################################
+
+
+기간마스크 = ((df_리뷰_감성분석결과['time'] >= pd.to_datetime(start_date)) & (df_리뷰_감성분석결과['time'] <= pd.to_datetime(end_date)))
+
+
+if 추가불용어.find(',') != -1:
+    stopwords.extend([i.strip() for i in 추가불용어.split(',')])
+if 추가불용어.find(',') == -1:
+    stopwords.append(추가불용어) 
+
+if 품사옵션 == '명사':
+    품사 = 'noun'
+if 품사옵션 == '명사+동사+형용사':
+    품사 = 'n_v_ad'
+
+마스크된데이터프레임 = df_리뷰_감성분석결과[긍부정마스크 & 기간마스크 & 회사종류마스크]
+reviews = [eval(i) for i in 마스크된데이터프레임[품사]]
+
+카운트 = get_count_top_words(마스크된데이터프레임, num_words=단어수, 품사=품사)
+tdidf = get_tfidf_top_words(마스크된데이터프레임, num_words=단어수, 품사=품사)
+
+if option == '빈도(Count)':
+    words = 카운트
+if option == '중요도(TF-IDF)':
+    words = tdidf
+
+########################################################################################################################
 # 워드클라우드
 with col4_1:
     cand_mask = np.array(Image.open('/app/streamlit/data/circle.png'))
@@ -175,6 +243,7 @@ with col4_2:
     st.plotly_chart(바차트, use_container_width=True)
 
 ########################################################################################################################
+
 # 5. 넽웤 세부필터
 with st.container():
     col5_1, col5_2 = st.columns([1,1])
@@ -184,7 +253,7 @@ with st.container():
 # 7. 넽웤 데이터 프레임
 with st.container():
     col7_1, col7_2 = st.columns([3,1])
-########################################################################################################################
+
 with col5_1:
     키워드 = st.text_input('🍀네트워크 단어입력🍀', '제라늄')
     if 키워드 == '':
@@ -213,8 +282,28 @@ with col6_1:
         components.html(HtmlFile.read(), height=435)
     except:
         st.write('존재하지 않는 키워드예요.')
+
+########################################################################################################################
+# 파이차트
+with col6_2:
+    if len(키워드) > 1:
+        df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment'][마스크된데이터프레임['replace_slang_sentence'].str.contains('|'.join(키워드))].value_counts())
+    if len(키워드) == 1:
+        df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment'][마스크된데이터프레임['replace_slang_sentence'].str.contains(키워드[0])].value_counts())
+    pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
+    st.plotly_chart(pie_chart, use_container_width=True)
+########################################################################################################################
+with col7_1:
+    if len(키워드) == 1:
+        보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains(키워드[0])]
+        st.dataframe(보여줄df[['name','sentiment','review_sentence', 'noun', 'replace_slang_sentence']])
+        키워드 = [키워드]
+    elif len(키워드) > 1:
+        보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains('|'.join(키워드))]
+        st.dataframe(보여줄df[['name','sentiment','review_sentence']], use_container_width=True)
 ########################################################################################################################
 # 네트워크 차트
+
 def 네트워크(reviews):
     networks = []
     for review in reviews:
@@ -288,31 +377,13 @@ def 네트워크(reviews):
 네트워크 = 네트워크(reviews)
 ########################################################################################################################
 
-########################################################################################################################
-# 파이차트
-with col6_2:
-    if len(키워드) > 1:
-        df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment'][마스크된데이터프레임['replace_slang_sentence'].str.contains('|'.join(키워드))].value_counts())
-    if len(키워드) == 1:
-        df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment'][마스크된데이터프레임['replace_slang_sentence'].str.contains(키워드[0])].value_counts())
-    pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
-    st.plotly_chart(pie_chart, use_container_width=True)
-########################################################################################################################
-with col7_1:
-    if len(키워드) == 1:
-        보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains(키워드[0])]
-        st.dataframe(보여줄df[['name','sentiment','review_sentence', 'noun', 'replace_slang_sentence']])
-        키워드 = [키워드]
-    elif len(키워드) > 1:
-        보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains('|'.join(키워드))]
-        st.dataframe(보여줄df[['name','sentiment','review_sentence']], use_container_width=True)
 
 ########################################################################################################################
 import ast
 
 fix_stop_words = [ '합니다', '하는', '할', '하고', '한다','하다','되다','같다','자다','되다','있다','써다','않다','해보다','주다','되어다', 
              '그리고', '입니다', '그', '등', '이런', '및','제', '더','언늘','결국','생각','식물키',
-             '감사','진짜','완전','요ㅎ','사용','정도','엄마','아이','원래','식물','흐흐','하하','정말']
+             '감사','ㅋㅋ','진짜','완전','요ㅎ','사용','정도','엄마','아이','원래','식물']
 
 def to_list(text):
     return ast.literal_eval(text)
@@ -357,7 +428,7 @@ def topic_wordcloud(model,num_topics):
     
     topics = model.show_topics(formatted=False)
 
-    # 모델마다 토픽개수가 달라서 rows, cols이 토픽의 개수마다 바뀜주기
+    # 모델마다 토픽개수가 달라서 rows, cols이 토픽의 개수마다 바뀜
     fig, axes = plt.subplots(1, num_topics, figsize=(12,8), sharex=True, sharey=True)
 
     for i, ax in enumerate(axes.flatten()):
@@ -374,8 +445,8 @@ def topic_wordcloud(model,num_topics):
     plt.tight_layout()
     st.pyplot(fig, use_container_width=True)
 
-# 명사기준 토픽분석(7개씩 나오게 한건 이전 연구자료들 참고)
-def n_get_topic_model(data, topic_number, passes=10, num_words=7, key=None):
+# 명사기준 토픽분석(6개씩 나오게 한건 이전 연구자료들 참고)
+def n_get_topic_model(data, topic_number, passes=10, num_words=6, key=None):
     df = pd.read_csv(data)
 
     # 불용어 리스트
@@ -404,7 +475,7 @@ def n_get_topic_model(data, topic_number, passes=10, num_words=7, key=None):
     topic_wordcloud(model, num_topics=topic_number)
 
 # 명사+동사+형용사 기준 토픽분석
-def nv_get_topic_model(data, topic_number, passes=10, num_words=7, key=None):
+def nv_get_topic_model(data, topic_number, passes=10, num_words=6, key=None):
     df = pd.read_csv(data)
 
     # 불용어 리스트
@@ -435,6 +506,9 @@ def nv_get_topic_model(data, topic_number, passes=10, num_words=7, key=None):
 
 ########################여기서부터 streamlit 구현 #########################
 
+st.title('리뷰_토픽모델링')
+
+
 
 tab1, tab2, tab3, tab4 = st.tabs(["**S**", "**W**", "**O**", "**T**"])
 
@@ -451,10 +525,10 @@ with tab1:
     st.header("Strength(강점)")
     st.write('자사의 긍정리뷰들을 토픽모델링한 결과입니다. :sunglasses:')
 
-    file_path = '/app/streamlit/data/자사긍정(8차).csv'
+    file_path = '/app/streamlit/data/자사긍정(6차).csv'
 
     if n_v_type =='명사':
-        n_get_topic_model(file_path,9 , key='준탱이1')
+        n_get_topic_model(file_path,8 , key='준탱이1')
     else:
         nv_get_topic_model(file_path,10, key='준탱이2')
 
@@ -471,12 +545,12 @@ with tab2:
     st.header("Weakness(약점)")
     st.write('자사의 부정리뷰들을 토픽모델링한 결과입니다. :sweat:')
 
-    file_path = '/app/streamlit/data/자사부정(8차).csv'
+    file_path = '/app/streamlit/data/자사부정(6차).csv'
 
     if n_v_type =='명사':
         n_get_topic_model(file_path,4, key='준탱이3')
     else:
-        nv_get_topic_model(file_path,8, key='준탱이4')
+        nv_get_topic_model(file_path,5, key='준탱이4')
 
 with tab3:
     col1_3_, col2_3_ = st.beta_columns(2)    
@@ -491,7 +565,7 @@ with tab3:
     st.header("Opportunity(기회)")
     st.write('경쟁사의 부정리뷰들을 토픽모델링한 결과입니다. :wink:')
 
-    file_path = '/app/streamlit/data/경쟁사부정(8차).csv'
+    file_path = '/app/streamlit/data/경쟁사부정(6차).csv'
 
     if n_v_type =='명사':
         n_get_topic_model(file_path,10, key='준탱이5')
@@ -511,12 +585,12 @@ with tab4:
     st.header("Treatment(위협)")
     st.write('경쟁사의 긍정리뷰들을 토픽모델링한 결과입니다. :confounded:')
 
-    file_path = '/app/streamlit/data/경쟁사긍정(8차).csv'
+    file_path = '/app/streamlit/data/경쟁사긍정(6차).csv'
 
     if n_v_type =='명사':
-        n_get_topic_model(file_path,10, key='준탱이7')
+        n_get_topic_model(file_path,9, key='준탱이7')
     else:
-        nv_get_topic_model(file_path,10, key='준탱이8')
+        nv_get_topic_model(file_path,9, key='준탱이8')
 ########################################################################################################################
 ########################################################################################################################
 ########################################################################################################################
