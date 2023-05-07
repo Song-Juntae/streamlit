@@ -8,7 +8,8 @@ st.markdown("해당 결과를 보고 궁금한 점은 ChatGPT에게 물어보세
 openai.api_key = st.secrets["MIN_API_KEY"]
 openai.organization= st.secrets["MIN_ORG_ID"]
 
-openai.Model.list()
+리스트 = openai.Model.list()
+리스트
 
 # messages = []
 # while True:
