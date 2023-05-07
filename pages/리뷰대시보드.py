@@ -284,8 +284,9 @@ with expander:
             키워드 = [i.strip() for i in 키워드.split(',')]
         else:
             st.error('This is an error', icon="🚨")
-    except:
-        st.error('오류가 발생했습니다.', icon="🚨")
+    except KeyError:
+        st.error(f"해당 '{keyword}' 키워드는 존재하지 않습니다.")
+        return
    
 
 # # 5. 넽웤 세부필터
