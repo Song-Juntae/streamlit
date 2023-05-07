@@ -103,10 +103,8 @@ def 네트워크(network_list, all_keywords):
     net.from_nx(G)
     return [net, similar_words]
 
-네트워크 = 네트워크(network_list, all_keywords)
-네트워크
-
 try:
+    네트워크 = 네트워크(network_list, all_keywords)
     net = 네트워크[0]
     net.save_graph(f'/app/streamlit/pyvis_graph.html')
     HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
