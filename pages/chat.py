@@ -8,19 +8,6 @@ st.markdown("해당 결과를 보고 궁금한 점은 ChatGPT에게 물어보세
 openai.api_key = st.secrets["MIN_API_KEY"]
 openai.organization= st.secrets["MIN_ORG_ID"]
 
-리스트 = openai.Model.list()
-리스트
-
-response = openai.ChatCompletion.create(
-  model="gpt-3.5-turbo",
-  messages=[
-        {"role": "system", "content": "You are well versed in gardening."},
-        {"role": "user", "content": "What should I do if the plants I grow are powerless?"},
-    ]
-)
-
-response['choices'][0]['message']['content']
-
 # messages = []
 # while True:
 #     user_content = input("user : ")
