@@ -41,7 +41,7 @@ stopwords = ['언늘', '결국', '생각', '후기', '감사', '진짜', '완전
 # title
 st.title('자사/경쟁사 리뷰 모니터링 대시보드')      
 
-txt = st.text_area('Text to analyze', '''
+st.text_area('Text to analyze', '''
     It was the best of times, it was the worst of times, it was
     the age of wisdom, it was the age of foolishness, it was
     the epoch of belief, it was the epoch of incredulity, it
