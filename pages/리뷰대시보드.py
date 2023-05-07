@@ -151,19 +151,19 @@ with col2_2:
         10, 300, step=1)
     st.write('단어수: ', 단어수)
 
-
-
-
 with col3_1:
     추가불용어 = st.text_input('🍀포함하지 않을 단어입력🍀', '')
     if 추가불용어 == '':
         st.write('예시 : 영양제, 식물, 배송')
     if 추가불용어 != '':
         st.write('제거한 단어: ', 추가불용어)
-    if 추가불용어.find(',') != -1:
-        stopwords.extend([i.strip() for i in 추가불용어.split(',')])
-    if 추가불용어.find(',') == -1:
-        stopwords.append(추가불용어) 
+
+if 추가불용어.find(',') != -1:
+    stopwords.extend([i.strip() for i in 추가불용어.split(',')])
+if 추가불용어.find(',') == -1:
+    stopwords.append(추가불용어) 
+
+
 ########################################################################################################################
 # 네트워크 
 def get_count_top_words(df, start_date=None, last_date=None, num_words=200, name=None, sentiment = None, item = None, source = None , 품사='noun'):
