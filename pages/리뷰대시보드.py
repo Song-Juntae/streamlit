@@ -52,8 +52,8 @@ with st.container():
 # 2,3. 워클 세부 필터
 with st.container():
     col2_1, col2_2= st.columns([1,1])
-# with st.container():
-#     col3_1= st.columns([1])
+with st.container():
+    col3_1= st.columns([1])
 # 4. 워클 + 바차트
 with st.container():
     col4_1, col4_2 = st.columns([2,2])
