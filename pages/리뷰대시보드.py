@@ -465,7 +465,7 @@ def print_topic_model(topics, rating, key):
     topic_model = pd.DataFrame({"topic_num": list(range(1, len(topics) + 1)), "word_prop": topic_values})
     
     # 토글 생성
-    if st.checkbox('토픽별 구성 단어 비율 확인하기', key=key):
+    if st.checkbox('주제별 구성 단어 비율 확인', key=key):
     # 토글이 선택되었을 때 데이터프레임 출력
         st.dataframe(topic_model, use_container_width=True)
 
@@ -561,7 +561,7 @@ def nv_get_topic_model(data, topic_number, passes=10, num_words=7, key=None):
 
 
 ########################여기서부터 streamlit 구현 #########################
-
+st.subheader('**🔎SWOT 분석**')
 tab1, tab2, tab3, tab4 = st.tabs(["**Strength(강점)**", "**Weakness(약점)**", "**Opportunity(기회)**", "**Treatment(위협)**"])
 
 with tab1:
@@ -574,7 +574,6 @@ with tab1:
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
 
-    st.header("Strength(강점)")
     st.write('꽃피우는시간의 긍정리뷰들의 주제별 키워드를 분석한 결과입니다. :sunglasses:')
 
     file_path = '/app/streamlit/data/자사긍정(9차).csv'
@@ -594,7 +593,6 @@ with tab2:
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
 
-    st.header("Weakness(약점)")
     st.write('꽃피우는시간의 부정리뷰들의 주제별 키워드를 분석한 결과입니다. :sweat:')
 
     file_path = '/app/streamlit/data/자사부정(9차).csv'
@@ -614,7 +612,6 @@ with tab3:
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
     
-    st.header("Opportunity(기회)")
     st.write('경쟁사의 부정리뷰들의 주제별 키워드를 분석한 결과입니다. :wink:')
 
     file_path = '/app/streamlit/data/경쟁사부정(9차).csv'
@@ -634,7 +631,6 @@ with tab4:
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
 
-    st.header("Treatment(위협)")
     st.write('경쟁사의 긍정리뷰들의 주제별 키워드를 분석한 결과입니다. :confounded:')
 
     file_path = '/app/streamlit/data/경쟁사긍정(9차).csv'
