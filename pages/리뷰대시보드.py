@@ -465,7 +465,7 @@ def print_topic_model(topics, rating, key):
     topic_model = pd.DataFrame({"topic_num": list(range(1, len(topics) + 1)), "word_prop": topic_values})
     
     # 토글 생성
-    if st.checkbox('주제별 구성 단어 비율 확인', key=key):
+    if st.expander('주제별 구성 단어 비율 확인', key=key):
     # 토글이 선택되었을 때 데이터프레임 출력
         st.dataframe(topic_model, use_container_width=True)
 
