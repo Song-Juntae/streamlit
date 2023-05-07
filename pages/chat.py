@@ -6,7 +6,7 @@ st.header("ChatGPT-3 (Demo)")
 st.markdown("해당 결과를 보고 궁금한 점은 ChatGPT에게 물어보세요.")
 
 openai.api_key = st.secrets["MIN_API_KEY"]
-st.secrets["MIN_ORG_ID"]
+openai.organization= st.secrets["MIN_ORG_ID"]
 
 # messages = []
 # while True:
