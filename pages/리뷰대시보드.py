@@ -222,13 +222,14 @@ if option == '중요도(TF-IDF)':
 with st.container():
     col4_1, col4_2 = st.columns([2,2])
 # 5. 넽웤 세부필터
-# with st.container():
-#     col5_1 = st.columns([1])
+with st.container():
+    col5_1, col5_2 = st.columns([1,1])
 # 6. 넽웤 + 파이차트
 with st.container():
     col6_1, col6_2 = st.columns([3,1])
 # 7. 넽웤 데이터 프레임
-
+with st.container():
+    col7_1, col7_2 = st.columns([3,1])
 
 ########################################################################################################################
 # 사용자 입력후 사용할 데이터 정리
