@@ -34,7 +34,7 @@ from wordcloud import WordCloud
 df_리뷰_감성분석결과 = pd.read_csv('/app/streamlit/data/리뷰6차.csv')
 df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'])
  
-all_keywords = ['응애', '제라늄', '스킨답서스', '훈영']
+all_keywords = ['응애', '제라늄', '스킨답서스']
 network_list = [eval(i) for i in df_리뷰_감성분석결과['noun']]
 
 def 네트워크(network_list, all_keywords):
