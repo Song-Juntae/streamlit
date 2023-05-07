@@ -57,7 +57,8 @@ with st.container():
 
 expander = st.expander('워드 클라우드 세부필터')
 with expander:
-    col2_1, col2_2,col3_1= st.beta_columns(3)  
+    col2_1, col2_2= st.beta_columns(2)
+    col3_1  
 
 # 4. 워클 + 바차트
 with st.container():
