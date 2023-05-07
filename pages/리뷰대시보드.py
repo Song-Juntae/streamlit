@@ -463,14 +463,16 @@ def print_topic_model(topics, rating, key):
         topic_values.append(topic_value)
     topic_model = pd.DataFrame({"topic_num": list(range(1, len(topics) + 1)), "word_prop": topic_values})
     
-    # # 토글 생성
-    # if st.checkbox('토픽별 구성 단어 비율 확인하기', key=key):
-    # # 토글이 선택되었을 때 데이터프레임 출력
-    #     st.dataframe(topic_model, use_container_width=True)
+    # 토글 생성
+    if st.checkbox('토픽별 구성 단어 비율 확인하기', key=key):
+    # 토글이 선택되었을 때 데이터프레임 출력
+        st.dataframe(topic_model, use_container_width=True)
+# with col0_0:
+#     st.dataframe(topic_model, use_container_width=True)
 
-expander = st.expander('토픽별 구성 단어 비율 확인하기')
-with expander:
-    st.dataframe(topic_model, use_container_width=True)
+# expander = st.expander('토픽별 구성 단어 비율 확인하기')
+# with expander:
+#     col0_0
 
 
 
