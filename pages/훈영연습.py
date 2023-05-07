@@ -83,7 +83,7 @@ def 네트워크(network_list, all_keywords):
     # 선의 길이를 변경 pos
     # plt.figure(figsize=(15,15))
     pos = nx.spring_layout(G, seed=42, k=0.15)
-    nx.draw(G, pos, font_family='NanumGothic', with_labels=True, node_size=node_size, node_color=node_colors, alpha=0.8, linewidths=1,
+    nx.draw(G, pos, with_labels=True, node_size=node_size, node_color=node_colors, alpha=0.8, linewidths=1,
             font_size=9, font_color="black", font_weight="medium", edge_color="grey", width=edge_weights)
 
     # 중심 노드들끼리 겹치는 단어 출력
