@@ -140,9 +140,11 @@ expander = st.expander('세부필터')
 with expander:
     col2_1, col2_2= st.beta_columns(2)    
     with col2_1:
+        with col2_1:
         option = st.selectbox(
             '기준',
             ('빈도(Count)', '상대 빈도(TF-IDF)'))
+        st.help('Count: 단어의 빈도 순으로 크기를 설정합니다.\nTF-IDF: 전체 리뷰 내 빈도와 개별 리뷰 내 빈도를 모두 고려해 크기를 설정합니다.')
         # st.write('선택기준: ', option)
 
     with col2_2:
