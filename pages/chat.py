@@ -7,18 +7,18 @@ st.markdown("해당 결과를 보고 궁금한 점은 ChatGPT에게 물어보세
 
 openai.api_key = st.secrets["MIN_API_KEY"]
 
-messages = []
-while True:
-    user_content = input("user : ")
-    messages.append({"role": "user", "content": f"{user_content}"})
+# messages = []
+# while True:
+#     user_content = input("user : ")
+#     messages.append({"role": "user", "content": f"{user_content}"})
 
-    completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
+#     completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
 
-    assistant_content = completion.choices[0].message["content"].strip()
+#     assistant_content = completion.choices[0].message["content"].strip()
 
-    messages.append({"role": "assistant", "content": f"{assistant_content}"})
+#     messages.append({"role": "assistant", "content": f"{assistant_content}"})
 
-    print(f"GPT : {assistant_content}")
+#     print(f"GPT : {assistant_content}")
 
     #코드출처: https://blog.naver.com/kimflstudio/223045193407
 
@@ -29,7 +29,8 @@ while True:
 # # chatGPT
 # openai.api_key = str(API)
 
-# completion = openai.Completion.create(model="ada", prompt="Hello world")
+completion = openai.Completion.create(model="ada", prompt="Hello world")
+completion
 
 # completions
  
