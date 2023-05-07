@@ -285,8 +285,8 @@ with expander:
         else:
             st.error('This is an error', icon="🚨")
     except KeyError:
-        st.error(f"해당 '{keyword}' 키워드는 존재하지 않습니다.")
-        return
+        st.error(f"해당 '{키워드}' 키워드는 존재하지 않습니다.")
+
    
 
 # # 5. 넽웤 세부필터
