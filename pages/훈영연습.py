@@ -32,7 +32,7 @@ from wordcloud import WordCloud
 # 데이터 로드 상수
 
 df = pd.read_csv('https://raw.githubusercontent.com/hollyisyoon/streamlit/main/data/df_%E1%84%90%E1%85%B3%E1%84%85%E1%85%A6%E1%86%AB%E1%84%83%E1%85%B3_github.csv')
-all_keywords = ['제라늄', '스킨답서스']
+all_keywords = ['제라늄', '해충', '응애']
 network_list = [eval(i) for i in df['제목+내용(nng)']]
 
 def 네트워크(network_list, all_keywords):
@@ -106,6 +106,6 @@ try:
     net = 네트워크[0]
     net.save_graph(f'/app/streamlit/pyvis_graph.html')
     HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
-    components.html(HtmlFile.read(), height=435)
+    components.html(HtmlFile.read(), height=600)
 except:
     st.warning('존재하지 않는 키워드예요.')
