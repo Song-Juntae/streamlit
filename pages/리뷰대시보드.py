@@ -263,6 +263,7 @@ with col4_1:
 
 with col4_2:
     # st.plotly_chart(words)
+    st.markdown('**키워드 빈도수**')
     바차트 = go.Figure([go.Bar(x=list(words.keys()),y=list(words.values()))])
     st.plotly_chart(바차트, use_container_width=True)
 ########################################################################################################################
