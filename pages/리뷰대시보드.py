@@ -59,7 +59,7 @@ with st.container():
 with col0_1:
     st.write('워드클라우드, 네트워크 공통필터')
 
-with col0_2:
+with col1_0:
     # st.secrets['API_KEY']
     긍부정 = st.radio(
     "🍀리뷰 선택🍀", ('All', '긍정', '부정'), horizontal=True)
