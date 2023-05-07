@@ -41,13 +41,7 @@ stopwords = ['언늘', '결국', '생각', '후기', '감사', '진짜', '완전
 # title
 st.title('자사/경쟁사 리뷰 모니터링 대시보드')      
 
-st.text_area('Text to analyze', '''
-    It was the best of times, it was the worst of times, it was
-    the age of wisdom, it was the age of foolishness, it was
-    the epoch of belief, it was the epoch of incredulity, it
-    was the season of Light, it was the season of Darkness, it
-    was the spring of hope, it was the winter of despair, (...)
-    ''')
+st.text_area('기본 설정하기')
 # st.write('Sentiment:', run_sentiment_analysis(txt))
 ########################################################################################################################
 # 레이아웃
