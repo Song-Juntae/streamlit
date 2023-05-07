@@ -425,7 +425,7 @@ expander = st.expander('키워드가 포함된 리뷰')
 with expander:
     if len(키워드) == 1:
         보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains(키워드[0])]
-        st.dataframe(보여줄df[['name','sentiment','review_sentence', 'noun', 'replace_slang_sentence']])
+        st.dataframe(보여줄df[['name','sentiment','review_sentence', 'noun']])
         키워드 = [키워드]
     elif len(키워드) > 1:
         보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains('|'.join(키워드))]
