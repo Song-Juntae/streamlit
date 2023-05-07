@@ -140,7 +140,6 @@ expander = st.expander('세부필터')
 with expander:
     col2_1, col2_2= st.beta_columns(2)    
     with col2_1:
-        with col2_1:
         option = st.selectbox(
             '기준',
             ('빈도(Count)', '상대 빈도(TF-IDF)'))
