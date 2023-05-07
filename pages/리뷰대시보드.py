@@ -273,34 +273,6 @@ with col5_1:
         st.error('This is an error', icon="🚨")
         # st.write(f'{키워드}는 {회사종류}에 없는단어입니다. 다른 단어를 입력해주세요. 추천키워드: 제라늄, 배송')
 
-
-with col6_1:
-    try:
-        net = 네트워크[0]
-        net.save_graph(f'/app/streamlit/pyvis_graph.html')
-        HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
-        components.html(HtmlFile.read(), height=435)
-    except:
-        st.write('존재하지 않는 키워드예요.')
-
-########################################################################################################################
-# 파이차트
-with col6_2:
-    if len(키워드) > 1:
-        df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment'][마스크된데이터프레임['replace_slang_sentence'].str.contains('|'.join(키워드))].value_counts())
-    if len(키워드) == 1:
-        df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment'][마스크된데이터프레임['replace_slang_sentence'].str.contains(키워드[0])].value_counts())
-    pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
-    st.plotly_chart(pie_chart, use_container_width=True)
-########################################################################################################################
-with col7_1:
-    if len(키워드) == 1:
-        보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains(키워드[0])]
-        st.dataframe(보여줄df[['name','sentiment','review_sentence', 'noun', 'replace_slang_sentence']])
-        키워드 = [키워드]
-    elif len(키워드) > 1:
-        보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains('|'.join(키워드))]
-        st.dataframe(보여줄df[['name','sentiment','review_sentence']], use_container_width=True)
 ########################################################################################################################
 # 네트워크 차트
 
@@ -377,6 +349,34 @@ def 네트워크(reviews):
 네트워크 = 네트워크(reviews)
 ########################################################################################################################
 
+
+with col6_1:
+    try:
+        net = 네트워크[0]
+        net.save_graph(f'/app/streamlit/pyvis_graph.html')
+        HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
+        components.html(HtmlFile.read(), height=435)
+    except:
+        st.write('존재하지 않는 키워드예요.')
+
+########################################################################################################################
+# 파이차트
+with col6_2:
+    if len(키워드) > 1:
+        df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment'][마스크된데이터프레임['replace_slang_sentence'].str.contains('|'.join(키워드))].value_counts())
+    if len(키워드) == 1:
+        df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment'][마스크된데이터프레임['replace_slang_sentence'].str.contains(키워드[0])].value_counts())
+    pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
+    st.plotly_chart(pie_chart, use_container_width=True)
+########################################################################################################################
+with col7_1:
+    if len(키워드) == 1:
+        보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains(키워드[0])]
+        st.dataframe(보여줄df[['name','sentiment','review_sentence', 'noun', 'replace_slang_sentence']])
+        키워드 = [키워드]
+    elif len(키워드) > 1:
+        보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains('|'.join(키워드))]
+        st.dataframe(보여줄df[['name','sentiment','review_sentence']], use_container_width=True)
 
 ########################################################################################################################
 import ast
