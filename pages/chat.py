@@ -11,6 +11,16 @@ openai.organization= st.secrets["MIN_ORG_ID"]
 리스트 = openai.Model.list()
 리스트
 
+response = openai.ChatCompletion.create(
+  model="gpt-3.5-turbo",
+  messages=[
+        {"role": "system", "content": "You are well versed in gardening."},
+        {"role": "user", "content": "What should I do if the plants I grow are powerless?"},
+    ]
+)
+
+response['choices'][0]['message']['content']
+
 # messages = []
 # while True:
 #     user_content = input("user : ")
