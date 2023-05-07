@@ -16,3 +16,4 @@ streamlit-elements
 Pillow
 openai
 streamlit_chat
+streamlit-tags
