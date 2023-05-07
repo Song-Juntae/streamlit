@@ -285,7 +285,7 @@ with expander:
         else:
             st.error('This is an error', icon="🚨")
     except:
-        st.write('존재하지 않는 키워드예요.')
+        st.error('오류가 발생했습니다.', icon="🚨")
    
 
 # # 5. 넽웤 세부필터
