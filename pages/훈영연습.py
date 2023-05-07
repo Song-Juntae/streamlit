@@ -34,12 +34,12 @@ from wordcloud import WordCloud
 df_리뷰_감성분석결과 = pd.read_csv('/app/streamlit/data/리뷰6차.csv')
 df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'])
  
-키워드 = ['응애', '제라늄', '스킨답서스']
-reviews = [eval(i) for i in df_리뷰_감성분석결과['noun']]
+all_keywords = ['응애', '제라늄', '스킨답서스', '훈영']
+network_list = [eval(i) for i in df_리뷰_감성분석결과['noun']]
 
-def 네트워크(reviews, 키워드):
+def 네트워크(network_list, all_keywords):
     networks = []
-    for review in reviews:
+    for review in network_list:
         network_review = [w for w in review if len(w) > 1]
         networks.append(network_review)
 
@@ -48,7 +48,7 @@ def 네트워크(reviews, 키워드):
     G = nx.Graph(font_path='/app/streamlit/font/NanumBarunGothic.ttf')
 
     # 중심 노드들을 노드로 추가
-    for keyword in 키워드:
+    for keyword in all_keywords:
         G.add_node(keyword)
         # 주어진 키워드와 가장 유사한 20개의 단어 추출
         similar_words = model.wv.most_similar(keyword, topn=20)
@@ -63,7 +63,7 @@ def 네트워크(reviews, 키워드):
     # 노드 크기 설정
     node_size = []
     for node in G.nodes():
-        if node in 키워드:
+        if node in all_keywords:
             node_size.append(5000)
         else:
             node_size.append(1000)
@@ -90,8 +90,8 @@ def 네트워크(reviews, 키워드):
 
     # 중심 노드들끼리 겹치는 단어 출력
     overlapping_키워드 = set()
-    for i, keyword1 in enumerate(키워드):
-        for j, keyword2 in enumerate(키워드):
+    for i, keyword1 in enumerate(all_keywords):
+        for j, keyword2 in enumerate(all_keywords):
             if i < j and keyword1 in G and keyword2 in G:
                 if nx.has_path(G, keyword1, keyword2):
                     overlapping_키워드.add(keyword1)
@@ -103,7 +103,8 @@ def 네트워크(reviews, 키워드):
     net.from_nx(G)
     return [net, similar_words]
 
-네트워크 = 네트워크(reviews, 키워드)
+네트워크 = 네트워크(network_list, all_keywords)
+네트워크
 
 try:
     net = 네트워크[0]
@@ -111,4 +112,4 @@ try:
     HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
     components.html(HtmlFile.read(), height=435)
 except:
-    st.write('존재하지 않는 키워드예요.')
+    st.warning('존재하지 않는 키워드예요.')
