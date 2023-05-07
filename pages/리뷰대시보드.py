@@ -152,6 +152,88 @@ with col3_1:
         st.write('제거한 단어: ', 추가불용어)
 
 ########################################################################################################################
+# 워드클라우드
+with col4_1:
+    cand_mask = np.array(Image.open('/app/streamlit/data/circle.png'))
+    워드클라우드 = WordCloud(
+        background_color="white", 
+        max_words=1000,
+        font_path = "/app/streamlit/font/NanumBarunGothic.ttf", 
+        contour_width=3, 
+        colormap='Spectral', 
+        contour_color='white',
+        # mask=cand_mask,
+        width=800,
+        height=400
+        ).generate_from_frequencies(words)
+
+    st.image(워드클라우드.to_array(), use_column_width=True)
+
+with col4_2:
+    # st.plotly_chart(words)
+    바차트 = go.Figure([go.Bar(x=list(words.keys()),y=list(words.values()))])
+    st.plotly_chart(바차트, use_container_width=True)
+
+########################################################################################################################
+# 5. 넽웤 세부필터
+with st.container():
+    col5_1, col5_2 = st.columns([1,1])
+# 6. 넽웤 + 파이차트
+with st.container():
+    col6_1, col6_2 = st.columns([3,1])
+# 7. 넽웤 데이터 프레임
+with st.container():
+    col7_1, col7_2 = st.columns([3,1])
+
+with col5_1:
+    키워드 = st.text_input('🍀네트워크 단어입력🍀', '제라늄')
+    if 키워드 == '':
+        키워드 = ['제라늄']
+        st.write('단어를 입력해주세요.')
+        st.write(' 예시 : 뿌리, 제라늄, 식물, 응애')
+        st.write('설정된 단어: ', 키워드[0])
+    elif 키워드.find(',') == -1:
+        st.write('예시 : 뿌리, 제라늄, 식물, 응애')
+        키워드 = [키워드]
+    elif 키워드.find(',') != -1:
+        st.write('설정된 단어: ', 키워드)
+        키워드 = [i.strip() for i in 키워드.split(',')]
+    else:
+        # st.write('문제가 생겼어요.')
+        # st.error(키워드)
+        st.error('This is an error', icon="🚨")
+        # st.write(f'{키워드}는 {회사종류}에 없는단어입니다. 다른 단어를 입력해주세요. 추천키워드: 제라늄, 배송')
+
+
+with col6_1:
+    try:
+        net = 네트워크[0]
+        net.save_graph(f'/app/streamlit/pyvis_graph.html')
+        HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
+        components.html(HtmlFile.read(), height=435)
+    except:
+        st.write('존재하지 않는 키워드예요.')
+
+########################################################################################################################
+# 파이차트
+with col6_2:
+    if len(키워드) > 1:
+        df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment'][마스크된데이터프레임['replace_slang_sentence'].str.contains('|'.join(키워드))].value_counts())
+    if len(키워드) == 1:
+        df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment'][마스크된데이터프레임['replace_slang_sentence'].str.contains(키워드[0])].value_counts())
+    pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
+    st.plotly_chart(pie_chart, use_container_width=True)
+########################################################################################################################
+with col7_1:
+    if len(키워드) == 1:
+        보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains(키워드[0])]
+        st.dataframe(보여줄df[['name','sentiment','review_sentence', 'noun', 'replace_slang_sentence']])
+        키워드 = [키워드]
+    elif len(키워드) > 1:
+        보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains('|'.join(키워드))]
+        st.dataframe(보여줄df[['name','sentiment','review_sentence']], use_container_width=True)
+
+########################################################################################################################
 # 워드 클라우드 
 def get_count_top_words(df, start_date=None, last_date=None, num_words=200, name=None, sentiment = None, item = None, source = None , 품사='noun'):
     if name is not None:
@@ -218,89 +300,6 @@ if option == '빈도(Count)':
     words = 카운트
 if option == '중요도(TF-IDF)':
     words = tdidf
-
-########################################################################################################################
-# 워드클라우드
-with col4_1:
-    cand_mask = np.array(Image.open('/app/streamlit/data/circle.png'))
-    워드클라우드 = WordCloud(
-        background_color="white", 
-        max_words=1000,
-        font_path = "/app/streamlit/font/NanumBarunGothic.ttf", 
-        contour_width=3, 
-        colormap='Spectral', 
-        contour_color='white',
-        # mask=cand_mask,
-        width=800,
-        height=400
-        ).generate_from_frequencies(words)
-
-    st.image(워드클라우드.to_array(), use_column_width=True)
-
-with col4_2:
-    # st.plotly_chart(words)
-    바차트 = go.Figure([go.Bar(x=list(words.keys()),y=list(words.values()))])
-    st.plotly_chart(바차트, use_container_width=True)
-
-########################################################################################################################
-
-# 5. 넽웤 세부필터
-with st.container():
-    col5_1, col5_2 = st.columns([1,1])
-# 6. 넽웤 + 파이차트
-with st.container():
-    col6_1, col6_2 = st.columns([3,1])
-# 7. 넽웤 데이터 프레임
-with st.container():
-    col7_1, col7_2 = st.columns([3,1])
-
-with col5_1:
-    키워드 = st.text_input('🍀네트워크 단어입력🍀', '제라늄')
-    if 키워드 == '':
-        키워드 = ['제라늄']
-        st.write('단어를 입력해주세요.')
-        st.write(' 예시 : 뿌리, 제라늄, 식물, 응애')
-        st.write('설정된 단어: ', 키워드[0])
-    elif 키워드.find(',') == -1:
-        st.write('예시 : 뿌리, 제라늄, 식물, 응애')
-        키워드 = [키워드]
-    elif 키워드.find(',') != -1:
-        st.write('설정된 단어: ', 키워드)
-        키워드 = [i.strip() for i in 키워드.split(',')]
-    else:
-        # st.write('문제가 생겼어요.')
-        # st.error(키워드)
-        st.error('This is an error', icon="🚨")
-        # st.write(f'{키워드}는 {회사종류}에 없는단어입니다. 다른 단어를 입력해주세요. 추천키워드: 제라늄, 배송')
-
-
-with col6_1:
-    try:
-        net = 네트워크[0]
-        net.save_graph(f'/app/streamlit/pyvis_graph.html')
-        HtmlFile = open(f'/app/streamlit/pyvis_graph.html', 'r', encoding='utf-8')
-        components.html(HtmlFile.read(), height=435)
-    except:
-        st.write('존재하지 않는 키워드예요.')
-
-########################################################################################################################
-# 파이차트
-with col6_2:
-    if len(키워드) > 1:
-        df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment'][마스크된데이터프레임['replace_slang_sentence'].str.contains('|'.join(키워드))].value_counts())
-    if len(키워드) == 1:
-        df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment'][마스크된데이터프레임['replace_slang_sentence'].str.contains(키워드[0])].value_counts())
-    pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
-    st.plotly_chart(pie_chart, use_container_width=True)
-########################################################################################################################
-with col7_1:
-    if len(키워드) == 1:
-        보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains(키워드[0])]
-        st.dataframe(보여줄df[['name','sentiment','review_sentence', 'noun', 'replace_slang_sentence']])
-        키워드 = [키워드]
-    elif len(키워드) > 1:
-        보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains('|'.join(키워드))]
-        st.dataframe(보여줄df[['name','sentiment','review_sentence']], use_container_width=True)
 ########################################################################################################################
 # 네트워크 차트
 
