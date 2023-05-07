@@ -269,20 +269,23 @@ st.markdown('**🔎 키워드 DeepDive**')
 
 expander = st.expander('네트워크 세부필터')
 with expander:
-    키워드 = st.text_input('🍀네트워크 단어입력🍀', '제라늄')
-    if 키워드 == '':
-        키워드 = ['제라늄']
-        st.write('단어를 입력해주세요.')
-        st.write(' 예시 : 뿌리, 제라늄, 식물, 응애')
-        st.write('설정된 단어: ', 키워드[0])
-    elif 키워드.find(',') == -1:
-        st.write('예시 : 뿌리, 제라늄, 식물, 응애')
-        키워드 = [키워드]
-    elif 키워드.find(',') != -1:
-        st.write('설정된 단어: ', 키워드)
-        키워드 = [i.strip() for i in 키워드.split(',')]
-    else:
-        st.error('This is an error', icon="🚨")
+    try:
+        키워드 = st.text_input('🍀네트워크 단어입력🍀', '제라늄')
+        if 키워드 == '':
+            키워드 = ['제라늄']
+            st.write('단어를 입력해주세요.')
+            st.write(' 예시 : 뿌리, 제라늄, 식물, 응애')
+            st.write('설정된 단어: ', 키워드[0])
+        elif 키워드.find(',') == -1:
+            st.write('예시 : 뿌리, 제라늄, 식물, 응애')
+            키워드 = [키워드]
+        elif 키워드.find(',') != -1:
+            st.write('설정된 단어: ', 키워드)
+            키워드 = [i.strip() for i in 키워드.split(',')]
+        else:
+            st.error('This is an error', icon="🚨")
+    except:
+        st.write('존재하지 않는 키워드예요.')
    
 
 # # 5. 넽웤 세부필터
