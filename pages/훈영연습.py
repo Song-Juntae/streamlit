@@ -116,7 +116,7 @@ end_date = st.date_input(
 
 reviews = [eval(i) for i in 마스크된데이터프레임[품사]]
 
-def 네트워크(reviews):
+def 네트워크(reviews, 키워드):
     networks = []
     for review in reviews:
         network_review = [w for w in review if len(w) > 1]
@@ -182,7 +182,7 @@ def 네트워크(reviews):
     net.from_nx(G)
     return [net, similar_words]
 
-네트워크 = 네트워크(reviews)
+네트워크 = 네트워크(reviews, 키워드)
 네트워크
 
 # # try:
