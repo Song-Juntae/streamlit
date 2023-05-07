@@ -219,22 +219,7 @@ if option == '빈도(Count)':
 if option == '중요도(TF-IDF)':
     words = tdidf
 
-
 ########################################################################################################################
-
-# 5. 넽웤 세부필터
-with st.container():
-    col5_1, col5_2 = st.columns([1,1])
-# 6. 넽웤 + 파이차트
-with st.container():
-    col6_1, col6_2 = st.columns([3,1])
-# 7. 넽웤 데이터 프레임
-with st.container():
-    col7_1, col7_2 = st.columns([3,1])
-
-########################################################################################################################
-# 사용자 입력후 사용할 데이터 정리
-
 # 워드클라우드
 with col4_1:
     cand_mask = np.array(Image.open('/app/streamlit/data/circle.png'))
@@ -257,7 +242,17 @@ with col4_2:
     바차트 = go.Figure([go.Bar(x=list(words.keys()),y=list(words.values()))])
     st.plotly_chart(바차트, use_container_width=True)
 
+########################################################################################################################
 
+# 5. 넽웤 세부필터
+with st.container():
+    col5_1, col5_2 = st.columns([1,1])
+# 6. 넽웤 + 파이차트
+with st.container():
+    col6_1, col6_2 = st.columns([3,1])
+# 7. 넽웤 데이터 프레임
+with st.container():
+    col7_1, col7_2 = st.columns([3,1])
 
 
 ########################################################################################################################
