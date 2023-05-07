@@ -561,8 +561,7 @@ def nv_get_topic_model(data, topic_number, passes=10, num_words=6, key=None):
 
 ########################여기서부터 streamlit 구현 #########################
 
-st.title('리뷰_토픽모델링')
-
+st.subheader('**🔎 키워드로 알아보는 SWOT 분석**')
 
 
 tab1, tab2, tab3, tab4 = st.tabs(["**S**", "**W**", "**O**", "**T**"])
