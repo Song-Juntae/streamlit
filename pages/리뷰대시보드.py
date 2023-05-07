@@ -166,21 +166,6 @@ def get_tfidf_top_words(df, start_date=None, last_date=None, num_words=200, name
     tfidf_top_words = tfidf_df.sum().sort_values(ascending=False).head(num_words).to_dict()
     return tfidf_top_words
 ########################################################################################################################
-if 품사옵션 == '명사':
-    품사 = 'noun'
-if 품사옵션 == '명사+동사+형용사':
-    품사 = 'n_v_ad'
-
-마스크된데이터프레임 = df_리뷰_감성분석결과[긍부정마스크 & 기간마스크 & 회사종류마스크]
-reviews = [eval(i) for i in 마스크된데이터프레임[품사]]
-
-카운트 = get_count_top_words(마스크된데이터프레임, num_words=단어수, 품사=품사)
-tdidf = get_tfidf_top_words(마스크된데이터프레임, num_words=단어수, 품사=품사)
-
-if option == '빈도(Count)':
-    words = 카운트
-if option == '중요도(TF-IDF)':
-    words = tdidf
 
 
 기간마스크 = ((df_리뷰_감성분석결과['time'] >= pd.to_datetime(start_date)) & (df_리뷰_감성분석결과['time'] <= pd.to_datetime(end_date)))
@@ -208,6 +193,23 @@ if 추가불용어.find(',') != -1:
     stopwords.extend([i.strip() for i in 추가불용어.split(',')])
 if 추가불용어.find(',') == -1:
     stopwords.append(추가불용어) 
+
+if 품사옵션 == '명사':
+    품사 = 'noun'
+if 품사옵션 == '명사+동사+형용사':
+    품사 = 'n_v_ad'
+
+마스크된데이터프레임 = df_리뷰_감성분석결과[긍부정마스크 & 기간마스크 & 회사종류마스크]
+reviews = [eval(i) for i in 마스크된데이터프레임[품사]]
+
+카운트 = get_count_top_words(마스크된데이터프레임, num_words=단어수, 품사=품사)
+tdidf = get_tfidf_top_words(마스크된데이터프레임, num_words=단어수, 품사=품사)
+
+if option == '빈도(Count)':
+    words = 카운트
+if option == '중요도(TF-IDF)':
+    words = tdidf
+
 
 ########################################################################################################################
 # with st.container():
