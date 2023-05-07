@@ -583,7 +583,7 @@ with tab1:
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
 
-    st.header("Strength(강점)")
+    st.subheader("Strength(강점)")
     st.write('꽃피우는 시간의 긍정리뷰들을 토픽모델링한 결과입니다. :sunglasses:')
 
     file_path = '/app/streamlit/data/자사긍정(6차).csv'
@@ -603,7 +603,7 @@ with tab2:
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
 
-    st.header("Weakness(약점)")
+    st.subheader("Weakness(약점)")
     st.write('꽃피우는 시간의 부정리뷰들을 토픽모델링한 결과입니다. :sweat:')
 
     file_path = '/app/streamlit/data/자사부정(6차).csv'
@@ -623,7 +623,7 @@ with tab3:
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
     
-    st.header("Opportunity(기회)")
+    st.subheader("Opportunity(기회)")
     st.write('경쟁사의 부정리뷰들을 토픽모델링한 결과입니다. :wink:')
 
     file_path = '/app/streamlit/data/경쟁사부정(6차).csv'
@@ -643,7 +643,7 @@ with tab4:
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
 
-    st.header("Treatment(위협)")
+    st.subheader("Treatment(위협)")
     st.write('경쟁사의 긍정리뷰들을 토픽모델링한 결과입니다. :confounded:')
 
     file_path = '/app/streamlit/data/경쟁사긍정(6차).csv'
