@@ -254,8 +254,8 @@ with col4_1:
         colormap='Spectral', 
         contour_color='white',
         # mask=cand_mask,
-        width=800,
-        height=400
+        # width=800,
+        # height=400
         ).generate_from_frequencies(words)
 
     st.image(워드클라우드.to_array(), use_column_width=True)
