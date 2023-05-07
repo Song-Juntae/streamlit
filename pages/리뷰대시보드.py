@@ -34,7 +34,9 @@ from wordcloud import WordCloud
 df_리뷰_감성분석결과 = pd.read_csv('/app/streamlit/data/리뷰9차.csv')
 # df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'])
 
-df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'], format='%Y-%m-%d')
+# df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'], format='%Y-%m-%d')
+df_리뷰_감성분석결과['time'] = datetime.strptime(df_리뷰_감성분석결과['time'], '%Y-%m-%d')
+
 
 
 stopwords = ['언늘', '결국', '생각', '후기', '감사', '진짜', '완전', '사용', '요즘', '정도', '이번', '달리뷰', '결과', 
