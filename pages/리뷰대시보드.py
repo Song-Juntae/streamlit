@@ -48,12 +48,17 @@ with st.container():
 # 1. 워클, 넽웤 공통 옵션
 with st.container():
     col1_1, col1_2, col1_3, col1_4 = st.columns([1,1,1,1])
-# 2,3. 워클 세부 필터
-with st.container():
-    col2_1, col2_2= st.columns([1,1])
-# 3. 워클 세부 필터
-with st.container():
-    col3_1, col3_2= st.columns([1,1])
+# # 2,3. 워클 세부 필터
+# with st.container():
+#     col2_1, col2_2= st.columns([1,1])
+# # 3. 워클 세부 필터
+# with st.container():
+#     col3_1, col3_2= st.columns([1,1])
+
+expander = st.expander('워드 클라우드 세부필터')
+with expander:
+    col2_1, col2_2,col3_1= st.beta_columns(3)  
+
 # 4. 워클 + 바차트
 with st.container():
     col4_1, col4_2 = st.columns([2,2])
