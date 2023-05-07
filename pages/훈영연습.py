@@ -47,8 +47,8 @@ from wordcloud import WordCloud
         # st.error(키워드)
         st.error('This is an error', icon="🚨")
         # st.write(f'{키워드}는 {회사종류}에 없는단어입니다. 다른 단어를 입력해주세요. 추천키워드: 제라늄, 배송')
-
 키워드
+
 
 # df_리뷰_감성분석결과 = pd.read_csv('/app/streamlit/data/리뷰6차.csv')
 # df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'])
