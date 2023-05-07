@@ -62,7 +62,7 @@ with col0_1:
 with col1_0:
     # st.secrets['API_KEY']
     긍부정 = st.selectbox(
-    "🍀리뷰 선택🍀", ('All', '긍정', '부정'))
+    "긍/부정 리뷰", ('All', '긍정', '부정'))
 if 긍부정 == 'All':
     긍부정마스크 = ((df_리뷰_감성분석결과['sentiment'] == '긍정') | (df_리뷰_감성분석결과['sentiment'] == '부정'))
 if 긍부정 == '긍정':
@@ -72,13 +72,13 @@ if 긍부정 == '부정':
 
 with col1_1:
     품사옵션 = st.selectbox(
-        '🍀품사선택🍀',
+        '키워드 종류',
         ('명사', '명사+동사+형용사'))
     # st.write('선택품사: ', 품사옵션)
 
 with col1_2:
     회사종류 = st.selectbox(
-        '🍀제품선택🍀',
+        '자사/경쟁사',
         ('자사+경쟁사', '꽃피우는 시간', '경쟁사-식물영양제', 
          '경쟁사-뿌리영양제', 
          '경쟁사-살충제',
@@ -106,14 +106,14 @@ with col1_2:
 
 with col1_3:
     start_date = st.date_input(
-        '🍀시작날짜🍀',
+        '시작 날짜',
         value=시작날짜,
         min_value=시작날짜,
         max_value=마지막날짜
     )
 with col1_4:
     end_date = st.date_input(
-        '🍀마지막날짜🍀',
+        '끝 날짜',
         value=마지막날짜,
         min_value=시작날짜,
         max_value=마지막날짜
@@ -134,13 +134,13 @@ with expander:
     col2_1, col2_2= st.beta_columns(2)    
     with col2_1:
         option = st.selectbox(
-            '🍀단어기준선택🍀',
-            ('빈도(Count)', '중요도(TF-IDF)'))
+            '기준',
+            ('단순 빈도(Countvecterize)', '상대 빈도(TF-IDF)'))
         # st.write('선택기준: ', option)
 
     with col2_2:
         단어수 = st.slider(
-            '🍀단어 수 조정하기🍀',
+            '🍀키워드 수 조정🍀',
             10, 300, step=1)
         # st.write('단어수: ', 단어수)
    
@@ -158,7 +158,7 @@ with st.container():
 # with col2_1:
 #     option = st.selectbox(
 #         '🍀단어기준선택🍀',
-#         ('빈도(Count)', '중요도(TF-IDF)'))
+#         ('단순 빈도(Countvecterize)', '상대 빈도(TF-IDF)'))
 #     st.write('선택기준: ', option)
 
 # with col2_2:
@@ -237,9 +237,9 @@ reviews = [eval(i) for i in 마스크된데이터프레임[품사]]
 카운트 = get_count_top_words(마스크된데이터프레임, num_words=단어수, 품사=품사)
 tdidf = get_tfidf_top_words(마스크된데이터프레임, num_words=단어수, 품사=품사)
 
-if option == '빈도(Count)':
+if option == '단순 빈도(Countvecterize)':
     words = 카운트
-if option == '중요도(TF-IDF)':
+if option == '상대 빈도(TF-IDF)':
     words = tdidf
 
 ########################################################################################################################
@@ -269,23 +269,24 @@ st.markdown('**🔎 키워드 DeepDive**')
 
 expander = st.expander('네트워크 세부필터')
 with expander:
-    try:
-        키워드 = st.text_input('🍀네트워크 단어입력🍀', '제라늄')
+        키워드 = st.text_input('🍀네트워크 키워드입력🍀', '제라늄')
         if 키워드 == '':
             키워드 = ['제라늄']
-            st.write('단어를 입력해주세요.')
+            st.write('키워드를 입력해주세요.')
             st.write(' 예시 : 뿌리, 제라늄, 식물, 응애')
-            st.write('설정된 단어: ', 키워드[0])
+            st.write('설정된 키워드: ', 키워드[0])
         elif 키워드.find(',') == -1:
             st.write('예시 : 뿌리, 제라늄, 식물, 응애')
             키워드 = [키워드]
         elif 키워드.find(',') != -1:
-            st.write('설정된 단어: ', 키워드)
+            st.write('설정된 키워드: ', 키워드)
             키워드 = [i.strip() for i in 키워드.split(',')]
         else:
             st.error('This is an error', icon="🚨")
-    except KeyError:
-        st.error(f"해당 '{키워드}' 키워드는 존재하지 않습니다.")
+# try:
+#     키워드 = 키워드(standard_df, new_df)
+# except:
+#     st.warning("⚠️ 해당 기간 동안 신규 키워드가 존재하지 않습니다")
 
    
 
