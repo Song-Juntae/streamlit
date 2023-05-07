@@ -58,7 +58,6 @@ with st.container():
 # 워클, 넽웤 공통필터
 with col0_1:
     st.markdown('🔽워드클라우드, 네트워크 공통필터🔽')
-    st.subheader('**🔎 키워드 워드클라우드**')
 
 with col1_0:
     # st.secrets['API_KEY']
@@ -129,7 +128,7 @@ with col1_4:
 # with st.container():
 #     col3_1, col3_2= st.columns([1,1])
 
-
+st.subheader('**🔎 키워드 워드클라우드**')
 expander = st.expander('워드 클라우드 세부필터')
 with expander:
     col2_1, col2_2= st.beta_columns(2)    
