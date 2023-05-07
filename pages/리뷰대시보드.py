@@ -130,7 +130,7 @@ with col1_4:
 
 expander = st.expander('워드 클라우드 세부필터')
 with expander:
-    col1, col2= st.beta_columns(2)    
+    col2_1, col2_2= st.beta_columns(2)    
     with col2_1:
         option = st.selectbox(
             '🍀단어기준선택🍀',
