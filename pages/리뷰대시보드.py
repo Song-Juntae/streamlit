@@ -568,7 +568,7 @@ def nv_get_topic_model(data, topic_number, passes=10, num_words=7, key=None):
 
 ########################여기서부터 streamlit 구현 #########################
 st.subheader('**🔎SWOT 분석**')
-tab1, tab2, tab3, tab4 = st.tabs(["**Strength(강점)**", "**Weakness(약점)**", "**Opportunity(기회)**", "**Treatment(위협)**"])
+tab1, tab2, tab3, tab4 = st.tabs(["**Strength(강점)**", "**Weakness(약점)**", "**Opportunity(기회)**", "**Threat(위협)**"])
 
 with tab1:
     col1_, col2_ = st.beta_columns(2)    
