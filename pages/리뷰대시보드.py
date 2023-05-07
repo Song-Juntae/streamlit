@@ -265,10 +265,19 @@ with col4_2:
     바차트 = go.Figure([go.Bar(x=list(words.keys()),y=list(words.values()))])
     st.plotly_chart(바차트, use_container_width=True)
 ########################################################################################################################
+expander = st.expander('네트워크 세부필터')
+with expander:
+    키워드 = st_tags(
+        label = '제거할 키워드',
+        text = '직접 입력해보세요',
+        value = ['식물', '화분'],
+        suggestions = ['식물', '화분'],
+        key = '1')
 
-# 5. 넽웤 세부필터
-with st.container():
-    col5_1, col5_2 = st.columns([1,1])
+
+# # 5. 넽웤 세부필터
+# with st.container():
+#     col5_1, col5_2 = st.columns([1,1])
 # 6. 넽웤 + 파이차트
 with st.container():
     col6_1, col6_2 = st.columns([3,1])
