@@ -136,13 +136,13 @@ with expander:
         option = st.selectbox(
             '🍀단어기준선택🍀',
             ('빈도(Count)', '중요도(TF-IDF)'))
-        st.write('선택기준: ', option)
+        # st.write('선택기준: ', option)
 
     with col2_2:
         단어수 = st.slider(
             '🍀단어 수 조정하기🍀',
             10, 300, step=1)
-        st.write('단어수: ', 단어수)
+        # st.write('단어수: ', 단어수)
    
     stopwords = st_tags(
         label = '제거할 키워드',
