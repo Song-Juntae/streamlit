@@ -119,6 +119,48 @@ with col1_4:
     )
 
 ########################################################################################################################
+########################################################################################################################
+# 워드 클라우드 
+def get_count_top_words(df, start_date=None, last_date=None, num_words=200, name=None, sentiment = None, item = None, source = None , 품사='noun'):
+    if name is not None:
+        df = df[df['name'] == name]
+    if sentiment is not None:
+        df = df[df['sentiment'] == sentiment]
+    if item is not None:
+        df = df[df['item'] == item]
+    if source is not None:
+        df = df[df['source'] == source]
+    if start_date is None:
+        start_date = df['time'].min().strftime('%Y-%m-%d')
+    if last_date is None:
+        last_date = df['time'].max().strftime('%Y-%m-%d')
+    df = df[(df['time'] >= start_date) & (df['time'] <= last_date)]
+    count_vectorizer = CountVectorizer(stop_words=stopwords)
+    count = count_vectorizer.fit_transform(df[품사].values)
+    count_df = pd.DataFrame(count.todense(), columns=count_vectorizer.get_feature_names_out())
+    count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
+    return count_top_words
+
+def get_tfidf_top_words(df, start_date=None, last_date=None, num_words=200, name=None, sentiment = None, item = None, source = None, 품사='noun' ):
+    if name is not None:
+        df = df[df['name'] == name]
+    if sentiment is not None:
+        df = df[df['sentiment'] == sentiment]
+    if item is not None:
+        df = df[df['item'] == item]
+    if source is not None:
+        df = df[df['source'] == source]
+    if start_date is None:
+        start_date = df['time'].min().strftime('%Y-%m-%d')
+    if last_date is None:
+        last_date = df['time'].max().strftime('%Y-%m-%d')
+    df = df[(df['time'] >= start_date) & (df['time'] <= last_date)]
+    tfidf_vectorizer = TfidfVectorizer(stop_words=stopwords)
+    tfidf = tfidf_vectorizer.fit_transform(df[품사].values)
+    tfidf_df = pd.DataFrame(tfidf.todense(), columns=tfidf_vectorizer.get_feature_names_out())
+    tfidf_top_words = tfidf_df.sum().sort_values(ascending=False).head(num_words).to_dict()
+    return tfidf_top_words
+
 # 워클 세부 필터
 # # 2,3. 워클 세부 필터
 # with st.container():
@@ -181,47 +223,7 @@ with st.container():
 # 7. 넽웤 데이터 프레임
 with st.container():
     col7_1, col7_2 = st.columns([3,1])
-########################################################################################################################
-# 워드 클라우드 
-def get_count_top_words(df, start_date=None, last_date=None, num_words=200, name=None, sentiment = None, item = None, source = None , 품사='noun'):
-    if name is not None:
-        df = df[df['name'] == name]
-    if sentiment is not None:
-        df = df[df['sentiment'] == sentiment]
-    if item is not None:
-        df = df[df['item'] == item]
-    if source is not None:
-        df = df[df['source'] == source]
-    if start_date is None:
-        start_date = df['time'].min().strftime('%Y-%m-%d')
-    if last_date is None:
-        last_date = df['time'].max().strftime('%Y-%m-%d')
-    df = df[(df['time'] >= start_date) & (df['time'] <= last_date)]
-    count_vectorizer = CountVectorizer(stop_words=stopwords)
-    count = count_vectorizer.fit_transform(df[품사].values)
-    count_df = pd.DataFrame(count.todense(), columns=count_vectorizer.get_feature_names_out())
-    count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
-    return count_top_words
 
-def get_tfidf_top_words(df, start_date=None, last_date=None, num_words=200, name=None, sentiment = None, item = None, source = None, 품사='noun' ):
-    if name is not None:
-        df = df[df['name'] == name]
-    if sentiment is not None:
-        df = df[df['sentiment'] == sentiment]
-    if item is not None:
-        df = df[df['item'] == item]
-    if source is not None:
-        df = df[df['source'] == source]
-    if start_date is None:
-        start_date = df['time'].min().strftime('%Y-%m-%d')
-    if last_date is None:
-        last_date = df['time'].max().strftime('%Y-%m-%d')
-    df = df[(df['time'] >= start_date) & (df['time'] <= last_date)]
-    tfidf_vectorizer = TfidfVectorizer(stop_words=stopwords)
-    tfidf = tfidf_vectorizer.fit_transform(df[품사].values)
-    tfidf_df = pd.DataFrame(tfidf.todense(), columns=tfidf_vectorizer.get_feature_names_out())
-    tfidf_top_words = tfidf_df.sum().sort_values(ascending=False).head(num_words).to_dict()
-    return tfidf_top_words
 ########################################################################################################################
 
 
