@@ -34,29 +34,7 @@ from wordcloud import WordCloud
 df_리뷰_감성분석결과 = pd.read_csv('/app/streamlit/data/리뷰9차.csv')
 # df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'])
 
-import re
-import pandas as pd
-
-def parse_date(date_string):
-    date_regex = r'(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})'
-    match = re.search(date_regex, date_string)
-    if match:
-        year = int(match.group(1))
-        month = int(match.group(2))
-        day = int(match.group(3))
-        hour = int(match.group(4))
-        minute = int(match.group(5))
-        second = int(match.group(6))
-        return pd.Timestamp(year=year, month=month, day=day, hour=hour, minute=minute, second=second)
-    else:
-        return pd.NaT
-
-df_리뷰_감성분석결과['time'] = df_리뷰_감성분석결과['time'].apply(parse_date)
-
-
-
-
-# df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'], format='%Y-%m-%d %H:%M:%S')
+df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'], format='%Y-%m-%d)
 
 
 stopwords = ['언늘', '결국', '생각', '후기', '감사', '진짜', '완전', '사용', '요즘', '정도', '이번', '달리뷰', '결과', 
