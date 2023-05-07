@@ -39,7 +39,7 @@ stopwords = ['언늘', '결국', '생각', '후기', '감사', '진짜', '완전
 
 ########################################################################################################################
 # title
-st.title('소비자 반응 모니터링 대시보드')             
+st.title('자사/경쟁사 리뷰 모니터링 대시보드')             
 ########################################################################################################################
 # 레이아웃
 #1_1 : 품사, 1_2 : 제품, 1_3 : 시작날짜, 1_4: 마지막 날짜
@@ -57,12 +57,12 @@ with st.container():
 ########################################################################################################################
 # 워클, 넽웤 공통필터
 with col0_1:
-    st.markdown('🔽워드클라우드, 네트워크 공통필터🔽')
+    st.markdown('대시보드 기본 설정하기')
 
 with col1_0:
     # st.secrets['API_KEY']
     긍부정 = st.selectbox(
-    "긍/부정 리뷰", ('All', '긍정', '부정'))
+    "리뷰타입", ('All', '긍정', '부정'))
 if 긍부정 == 'All':
     긍부정마스크 = ((df_리뷰_감성분석결과['sentiment'] == '긍정') | (df_리뷰_감성분석결과['sentiment'] == '부정'))
 if 긍부정 == '긍정':
@@ -78,7 +78,7 @@ with col1_1:
 
 with col1_2:
     회사종류 = st.selectbox(
-        '자사/경쟁사',
+        '제품타입',
         ('자사+경쟁사', '꽃피우는 시간', '경쟁사-식물영양제', 
          '경쟁사-뿌리영양제', 
          '경쟁사-살충제',
@@ -106,14 +106,14 @@ with col1_2:
 
 with col1_3:
     start_date = st.date_input(
-        '시작 날짜',
+        '시작 일',
         value=시작날짜,
         min_value=시작날짜,
         max_value=마지막날짜
     )
 with col1_4:
     end_date = st.date_input(
-        '끝 날짜',
+        '마지막 일',
         value=마지막날짜,
         min_value=시작날짜,
         max_value=마지막날짜
@@ -128,19 +128,19 @@ with col1_4:
 # with st.container():
 #     col3_1, col3_2= st.columns([1,1])
 
-st.subheader('**🔎 키워드 워드클라우드**')
-expander = st.expander('워드 클라우드 세부필터')
+st.subheader('**🔎 중요 키워드 알아보기**')
+expander = st.expander('중요 키워드 조정하기')
 with expander:
     col2_1, col2_2= st.beta_columns(2)    
     with col2_1:
         option = st.selectbox(
             '기준',
-            ('단순 빈도(Countvecterize)', '상대 빈도(TF-IDF)'))
+            ('빈도(Count)', '상대 빈도(TF-IDF)'))
         # st.write('선택기준: ', option)
 
     with col2_2:
         단어수 = st.slider(
-            '🍀키워드 수 조정🍀',
+            '키워드 수',
             10, 300, step=1)
         # st.write('단어수: ', 단어수)
    
@@ -237,7 +237,7 @@ reviews = [eval(i) for i in 마스크된데이터프레임[품사]]
 카운트 = get_count_top_words(마스크된데이터프레임, num_words=단어수, 품사=품사)
 tdidf = get_tfidf_top_words(마스크된데이터프레임, num_words=단어수, 품사=품사)
 
-if option == '단순 빈도(Countvecterize)':
+if option == '빈도(Count)':
     words = 카운트
 if option == '상대 빈도(TF-IDF)':
     words = tdidf
@@ -266,11 +266,11 @@ with col4_2:
     바차트 = go.Figure([go.Bar(x=list(words.keys()),y=list(words.values()))])
     st.plotly_chart(바차트, use_container_width=True)
 ########################################################################################################################
-st.subheader('**🔎 키워드 DeepDive**')
+st.subheader('**🔎연관 키워드 알아보기**')
 
-expander = st.expander('네트워크 세부필터')
+expander = st.expander('연관 키워드 조정하기')
 with expander:
-        키워드 = st.text_input('🍀네트워크 키워드입력🍀', '제라늄')
+        키워드 = st.text_input('알아볼 키워드', '제라늄')
         if 키워드 == '':
             키워드 = ['제라늄']
             st.write('키워드를 입력해주세요.')
@@ -414,7 +414,7 @@ with col6_2:
 # with st.container():
 #     col7_1, col7_2 = st.columns([3,1])
 
-expander = st.expander('네트워크 키워드가 포함된 리뷰 보기')
+expander = st.expander('키워드가 포함된 리뷰 보기')
 with expander:
     if len(키워드) == 1:
         보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains(키워드[0])]
@@ -568,7 +568,7 @@ def nv_get_topic_model(data, topic_number, passes=10, num_words=6, key=None):
 
 ########################여기서부터 streamlit 구현 #########################
 
-st.subheader('**🔎 키워드로 알아보는 SWOT 분석**')
+st.subheader('**🔎SWOT 키워드 알아보기**')
 
 
 tab1, tab2, tab3, tab4 = st.tabs(["**S**", "**W**", "**O**", "**T**"])
@@ -579,12 +579,12 @@ with tab1:
     with col1_:
         n_v_type = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'], key='selectbox1')
     with col2_:
-        input_str = st.text_input('불용어를 추가하실 수 있습니다.', key='stopwords_input1')
+        input_str = st.text_input('제거할 키워드 :', key='stopwords_input1')
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
 
     st.header("Strength(강점)")
-    st.write('자사의 긍정리뷰들을 토픽모델링한 결과입니다. :sunglasses:')
+    st.write('꽃피우는 시간의 긍정리뷰들을 토픽모델링한 결과입니다. :sunglasses:')
 
     file_path = '/app/streamlit/data/자사긍정(6차).csv'
 
@@ -599,12 +599,12 @@ with tab2:
     with col1_2_:
         n_v_type = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'], key='selectbox2')
     with col2_2_:
-        input_str = st.text_input('불용어를 추가하실 수 있습니다.', key='stopwords_input2')
+        input_str = st.text_input('제거할 키워드 :', key='stopwords_input2')
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
 
     st.header("Weakness(약점)")
-    st.write('자사의 부정리뷰들을 토픽모델링한 결과입니다. :sweat:')
+    st.write('꽃피우는 시간의 부정리뷰들을 토픽모델링한 결과입니다. :sweat:')
 
     file_path = '/app/streamlit/data/자사부정(6차).csv'
 
@@ -619,7 +619,7 @@ with tab3:
     with col1_3_:
         n_v_type = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'], key='selectbox3')
     with col2_3_:
-        input_str = st.text_input('불용어를 추가하실 수 있습니다.', key='stopwords_input3')
+        input_str = st.text_input('제거할 키워드 :', key='stopwords_input3')
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
     
@@ -639,7 +639,7 @@ with tab4:
     with col1_4_:
         n_v_type = st.selectbox('데이터 타입',['명사', '명사+동사+형용사'], key='selectbox4')
     with col2_4_:
-        input_str = st.text_input('불용어를 추가하실 수 있습니다.', key='stopwords_input4')
+        input_str = st.text_input('제거할 키워드 :', key='stopwords_input4')
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
 
