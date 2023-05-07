@@ -477,7 +477,7 @@ def topic_wordcloud(model,num_topics):
                       font_path = "/app/streamlit/font/NanumBarunGothic.ttf",
                       width=500,
                       height=500,
-                      max_words=15,
+                      max_words=7,
                       colormap='tab10',
                       prefer_horizontal=1.0,
                       mask=cand_mask)
