@@ -1,6 +1,6 @@
 import streamlit as st
 import streamlit.components.v1 as components
-from streamlit_tags import st_tags
+import streamlit_tags as st_tags
 
 import plotly.express as px
 import plotly.graph_objects as go
