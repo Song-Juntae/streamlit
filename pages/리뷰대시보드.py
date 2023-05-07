@@ -59,22 +59,22 @@ with st.container():
 with col0_1:
     st.write('워드클라우드, 네트워크 공통필터')
 
-with col1_0:
+with col0_2:
     # st.secrets['API_KEY']
     긍부정 = st.radio(
     "🍀리뷰 선택🍀", ('All', '긍정리뷰😊', '부정리뷰😫'), horizontal=True)
 if 긍부정 == 'All':
     긍부정마스크 = ((df_리뷰_감성분석결과['sentiment'] == '긍정') | (df_리뷰_감성분석결과['sentiment'] == '부정'))
-if 긍부정 == '긍정리뷰😊':
+if 긍부정 == '긍정':
     긍부정마스크 = (df_리뷰_감성분석결과['sentiment'] == '긍정')
-if 긍부정 == '부정리뷰😫':
+if 긍부정 == '부정':
     긍부정마스크 = (df_리뷰_감성분석결과['sentiment'] == '부정')
 
 with col1_1:
     품사옵션 = st.selectbox(
         '🍀품사선택🍀',
         ('명사', '명사+동사+형용사'))
-    st.write('선택품사: ', 품사옵션)
+    # st.write('선택품사: ', 품사옵션)
 
 with col1_2:
     회사종류 = st.selectbox(
@@ -85,7 +85,7 @@ with col1_2:
          '경쟁사-식물등',
          '경쟁사All',
          ))
-    st.write('선택제품: ', 회사종류)
+    # st.write('선택제품: ', 회사종류)
     if 회사종류 == '자사+경쟁사':
         회사종류마스크 = ((df_리뷰_감성분석결과['name'] == '경쟁사') | (df_리뷰_감성분석결과['name'] == '꽃피우는시간'))
     if 회사종류 == '꽃피우는 시간':
