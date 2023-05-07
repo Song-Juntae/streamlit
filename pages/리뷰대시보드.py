@@ -35,7 +35,8 @@ df_리뷰_감성분석결과 = pd.read_csv('/app/streamlit/data/리뷰9차.csv')
 # df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'])
 
 # df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'], format='%Y-%m-%d')
-df_리뷰_감성분석결과['time'] = datetime.strptime(df_리뷰_감성분석결과['time'], '%Y-%m-%d')
+# df_리뷰_감성분석결과['time'] = datetime.strptime(df_리뷰_감성분석결과['time'], '%Y-%m-%d')
+df_리뷰_감성분석결과['time'] = df_리뷰_감성분석결과['time'].apply(lambda x: datetime.strptime(x, '%Y-%m-%d'))
 
 
 
