@@ -61,8 +61,8 @@ with col0_1:
 
 with col1_0:
     # st.secrets['API_KEY']
-    긍부정 = st.radio(
-    "🍀리뷰 선택🍀", ('All', '긍정', '부정'), horizontal=True)
+    긍부정 = st.selectbox(
+    "🍀리뷰 선택🍀", ('All', '긍정', '부정'))
 if 긍부정 == 'All':
     긍부정마스크 = ((df_리뷰_감성분석결과['sentiment'] == '긍정') | (df_리뷰_감성분석결과['sentiment'] == '부정'))
 if 긍부정 == '긍정':
