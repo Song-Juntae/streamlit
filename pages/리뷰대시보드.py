@@ -175,7 +175,6 @@ with col4_2:
     st.plotly_chart(바차트, use_container_width=True)
 
 ########################################################################################################################
-
 # 5. 넽웤 세부필터
 with st.container():
     col5_1, col5_2 = st.columns([1,1])
@@ -214,98 +213,8 @@ with col6_1:
         components.html(HtmlFile.read(), height=435)
     except:
         st.write('존재하지 않는 키워드예요.')
-
 ########################################################################################################################
-# 파이차트
-with col6_2:
-    if len(키워드) > 1:
-        df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment'][마스크된데이터프레임['replace_slang_sentence'].str.contains('|'.join(키워드))].value_counts())
-    if len(키워드) == 1:
-        df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment'][마스크된데이터프레임['replace_slang_sentence'].str.contains(키워드[0])].value_counts())
-    pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
-    st.plotly_chart(pie_chart, use_container_width=True)
-########################################################################################################################
-with col7_1:
-    if len(키워드) == 1:
-        보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains(키워드[0])]
-        st.dataframe(보여줄df[['name','sentiment','review_sentence', 'noun', 'replace_slang_sentence']])
-        키워드 = [키워드]
-    elif len(키워드) > 1:
-        보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains('|'.join(키워드))]
-        st.dataframe(보여줄df[['name','sentiment','review_sentence']], use_container_width=True)
-########################################################################################################################
-# 워드 클라우드 
-def get_count_top_words(df, start_date=None, last_date=None, num_words=200, name=None, sentiment = None, item = None, source = None , 품사='noun'):
-    if name is not None:
-        df = df[df['name'] == name]
-    if sentiment is not None:
-        df = df[df['sentiment'] == sentiment]
-    if item is not None:
-        df = df[df['item'] == item]
-    if source is not None:
-        df = df[df['source'] == source]
-    if start_date is None:
-        start_date = df['time'].min().strftime('%Y-%m-%d')
-    if last_date is None:
-        last_date = df['time'].max().strftime('%Y-%m-%d')
-    df = df[(df['time'] >= start_date) & (df['time'] <= last_date)]
-    count_vectorizer = CountVectorizer(stop_words=stopwords)
-    count = count_vectorizer.fit_transform(df[품사].values)
-    count_df = pd.DataFrame(count.todense(), columns=count_vectorizer.get_feature_names_out())
-    count_top_words = count_df.sum().sort_values(ascending=False).head(num_words).to_dict()
-    return count_top_words
-
-def get_tfidf_top_words(df, start_date=None, last_date=None, num_words=200, name=None, sentiment = None, item = None, source = None, 품사='noun' ):
-    if name is not None:
-        df = df[df['name'] == name]
-    if sentiment is not None:
-        df = df[df['sentiment'] == sentiment]
-    if item is not None:
-        df = df[df['item'] == item]
-    if source is not None:
-        df = df[df['source'] == source]
-    if start_date is None:
-        start_date = df['time'].min().strftime('%Y-%m-%d')
-    if last_date is None:
-        last_date = df['time'].max().strftime('%Y-%m-%d')
-    df = df[(df['time'] >= start_date) & (df['time'] <= last_date)]
-    tfidf_vectorizer = TfidfVectorizer(stop_words=stopwords)
-    tfidf = tfidf_vectorizer.fit_transform(df[품사].values)
-    tfidf_df = pd.DataFrame(tfidf.todense(), columns=tfidf_vectorizer.get_feature_names_out())
-    tfidf_top_words = tfidf_df.sum().sort_values(ascending=False).head(num_words).to_dict()
-    return tfidf_top_words
-########################################################################################################################
-
-
-기간마스크 = ((df_리뷰_감성분석결과['time'] >= pd.to_datetime(start_date)) & (df_리뷰_감성분석결과['time'] <= pd.to_datetime(end_date)))
-
-
-if 추가불용어.find(',') != -1:
-    stopwords.extend([i.strip() for i in 추가불용어.split(',')])
-if 추가불용어.find(',') == -1:
-    stopwords.append(추가불용어) 
-
-if 품사옵션 == '명사':
-    품사 = 'noun'
-if 품사옵션 == '명사+동사+형용사':
-    품사 = 'n_v_ad'
-
-마스크된데이터프레임 = df_리뷰_감성분석결과[긍부정마스크 & 기간마스크 & 회사종류마스크]
-reviews = [eval(i) for i in 마스크된데이터프레임[품사]]
-
-카운트 = get_count_top_words(마스크된데이터프레임, num_words=단어수, 품사=품사)
-tdidf = get_tfidf_top_words(마스크된데이터프레임, num_words=단어수, 품사=품사)
-
-if option == '빈도(Count)':
-    words = 카운트
-if option == '중요도(TF-IDF)':
-    words = tdidf
-
-########################################################################################################################
-
-
 # 네트워크 차트
-
 def 네트워크(reviews):
     networks = []
     for review in reviews:
@@ -379,6 +288,24 @@ def 네트워크(reviews):
 네트워크 = 네트워크(reviews)
 ########################################################################################################################
 
+########################################################################################################################
+# 파이차트
+with col6_2:
+    if len(키워드) > 1:
+        df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment'][마스크된데이터프레임['replace_slang_sentence'].str.contains('|'.join(키워드))].value_counts())
+    if len(키워드) == 1:
+        df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment'][마스크된데이터프레임['replace_slang_sentence'].str.contains(키워드[0])].value_counts())
+    pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
+    st.plotly_chart(pie_chart, use_container_width=True)
+########################################################################################################################
+with col7_1:
+    if len(키워드) == 1:
+        보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains(키워드[0])]
+        st.dataframe(보여줄df[['name','sentiment','review_sentence', 'noun', 'replace_slang_sentence']])
+        키워드 = [키워드]
+    elif len(키워드) > 1:
+        보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains('|'.join(키워드))]
+        st.dataframe(보여줄df[['name','sentiment','review_sentence']], use_container_width=True)
 
 ########################################################################################################################
 import ast
