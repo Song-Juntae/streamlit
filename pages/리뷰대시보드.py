@@ -31,7 +31,7 @@ from pyvis.network import Network
 from wordcloud import WordCloud
 ########################################################################################################################
 # 데이터 로드 상수
-df_리뷰_감성분석결과 = pd.read_csv('/app/streamlit/data/리뷰9차.csv')
+df_리뷰_감성분석결과 = pd.read_csv('/app/streamlit/data/리뷰7차(수정).csv')
 df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'])
 
 # df_리뷰_감성분석결과['time'] = pd.to_datetime(df_리뷰_감성분석결과['time'], format='%Y-%m-%d')
