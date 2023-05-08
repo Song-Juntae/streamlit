@@ -740,7 +740,7 @@ tab1, tab2= st.tabs(["**자사**", "**경쟁사**"])
 with tab1:
     st.write('제품/배송/사용법으로 자사의 리뷰를 분류한 결과입니다. 😊')
     with st.container():
-        url = "https://public.tableau.com/views/_16834834308600/1_1?:language=ko-KR&:showVizHome=no&:embed=true"
+        url = "https://public.tableau.com/views/_16835258920980/1_1?:language=ko-KR&:showVizHome=no&:embed=true"
         html = f'''
             <iframe src={url} width=1600 height=900></iframe>
         '''
@@ -749,7 +749,7 @@ with tab1:
 with tab2:
     st.write('제품/배송/사용법으로 경쟁사의 리뷰를 분류한 결과입니다. 😊')
     with st.container():
-        url = "https://public.tableau.com/views/_16834834308600/1_1?:language=ko-KR&:showVizHome=no&:embed=true"
+        url = "https://public.tableau.com/views/1_16835240938720/1_1?:language=ko-KR&:showVizHome=no&:embed=true"
         html = f'''
             <iframe src={url} width=1600 height=900></iframe>
         '''
