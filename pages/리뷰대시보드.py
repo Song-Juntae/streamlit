@@ -63,6 +63,8 @@ with st.container():
     col1_0, col1_1, col1_2, col1_3, col1_4 = st.columns([1,1,1,1,1])
 ########################################################################################################################
 # 워클, 넽웤 공통필터
+st.write("")
+
 with col0_1:
     st.markdown('🎚️기본 설정')
 
@@ -135,6 +137,8 @@ with col1_4:
 # # 3. 워클 세부 필터
 # with st.container():
 #     col3_1, col3_2= st.columns([1,1])
+st.write("")
+st.write("")
 
 st.subheader('**🔎 중요 키워드 발굴**')
 expander = st.expander('세부필터')
@@ -276,6 +280,9 @@ with col4_2:
     바차트 = go.Figure([go.Bar(x=list(words.keys()),y=list(words.values()))])
     st.plotly_chart(바차트, use_container_width=True)
 ########################################################################################################################
+st.write("")
+st.write("")
+
 st.subheader('**🔎연관 키워드 탐색**')
 
 expander = st.expander('세부필터')
@@ -434,6 +441,7 @@ with expander:
         보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains('|'.join(키워드))]
         st.dataframe(보여줄df[['name','sentiment','review_sentence']], use_container_width=True)
 
+
 # with col7_1:
 #     if len(키워드) == 1:
 #         보여줄df = 마스크된데이터프레임[마스크된데이터프레임['noun'].str.contains(키워드[0])]
@@ -568,7 +576,8 @@ def nv_get_topic_model(data, topic_number, passes=10, num_words=7, key=None):
     # 토픽별 워드클라우드 시각화
     topic_wordcloud(model, num_topics=topic_number)
 
-
+st.write("")
+st.write("")
 ########################여기서부터 streamlit 구현 #########################
 st.subheader('**🔎SWOT 분석**')
 tab1, tab2, tab3, tab4 = st.tabs(["**Strength(강점)**", "**Weakness(약점)**", "**Opportunity(기회)**", "**Threat(위협)**"])
@@ -649,12 +658,14 @@ with tab4:
     else:
         nv_get_topic_model(file_path,10, key='준탱이8')
 ########################################################################################################################
-
+st.write("")
+st.write("")
 ########################Tableau 구현 #########################
-st.subheader('**🔎자사/경쟁사 리뷰 분류**')
+st.subheader('**🔎자사/경쟁사 리뷰 분류 분석**')
 tab1, tab2= st.tabs(["**자사**", "**경쟁사**"])
 
 with tab1:
+    st.write('제품/배송/사용법으로 자사의 리뷰를 분류한 결과입니다. 😊')
     with st.container():
         url = "https://public.tableau.com/views/_16834834308600/1_1?:language=ko-KR&:showVizHome=no&:embed=true"
         html = f'''
@@ -663,6 +674,7 @@ with tab1:
         st.markdown(html, unsafe_allow_html=True)
 
 with tab2:
+    st.write('제품/배송/사용법으로 경쟁사의 리뷰를 분류한 결과입니다. 😊')
     with st.container():
         url = "https://public.tableau.com/views/_16834834308600/1_1?:language=ko-KR&:showVizHome=no&:embed=true"
         html = f'''
