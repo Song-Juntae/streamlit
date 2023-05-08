@@ -425,9 +425,9 @@ with col6_1:
 with col6_2:
     st.markdown('**키워드 긍/부정 리뷰 비율**')
     if len(키워드) > 1:
-        df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment'][마스크된데이터프레임['review_sentence'].str.contains('|'.join(키워드))].value_counts())
+        df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment', 'time'][마스크된데이터프레임['review_sentence'].str.contains('|'.join(키워드))].value_counts())
     if len(키워드) == 1:
-        df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment'][마스크된데이터프레임['review_sentence'].str.contains(키워드[0])].value_counts())
+        df_파이차트 = pd.DataFrame(마스크된데이터프레임['sentiment', 'time'][마스크된데이터프레임['review_sentence'].str.contains(키워드[0])].value_counts())
     pie_chart = go.Figure(data=[go.Pie(labels=list(df_파이차트.index), values=df_파이차트['count'])])
     st.plotly_chart(pie_chart, use_container_width=True)
 ########################################################################################################################
