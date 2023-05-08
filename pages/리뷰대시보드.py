@@ -625,43 +625,110 @@ with tab2:
     else:
         nv_get_topic_model(file_path,8, key='준탱이4')
 
+# 추가수정 필요############################################################################
 with tab3:
-    col1_3_, col2_3_ = st.beta_columns(2)    
+    col1_3_, col2_3_, col3_3_ = st.beta_columns(3)    
 
     with col1_3_:
         n_v_type = st.selectbox('데이터 유형',['명사', '명사+동사+형용사'], key='selectbox3')
     with col2_3_:
+        d_type = st.selectbox('제품',['경쟁사-식물영양제', '경쟁사-뿌리영양제', '경쟁사-살충제',
+                                     '경쟁사-식물등', '경쟁사 전체'], key='selectbox3_1_')
+    with col3_3_:
         input_str = st.text_input('제거할 키워드 :', key='stopwords_input3')
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
     
     st.write('경쟁사 부정리뷰들의 주제별 키워드를 분석한 결과입니다. :wink:')
 
-    file_path = '/app/streamlit/data/경쟁사부정(9차).csv'
-
-    if n_v_type =='명사':
+    if n_v_type =='명사' and d_type == '경쟁사 전체' :
+        file_path = '/app/streamlit/data/경쟁사부정(10차).csv'
         n_get_topic_model(file_path,10, key='준탱이5')
-    else:
+    elif n_v_type =='명사+동사+형용사' and d_type == '경쟁사 전체' :
+        file_path = '/app/streamlit/data/경쟁사부정(10차).csv'
         nv_get_topic_model(file_path,8, key='준탱이6')
 
+    elif n_v_type =='명사' and d_type == '경쟁사-식물영양제' :
+        file_path = '/app/streamlit/data/경쟁사(식물영양제)부정(10차).csv'
+        n_get_topic_model(file_path,10, key='준탱이7')
+    elif n_v_type =='명사+동사+형용사' and d_type == '경쟁사-식물영양제' :
+        file_path = '/app/streamlit/data/경쟁사(식물영양제)부정(10차).csv'
+        nv_get_topic_model(file_path,8, key='준탱이8')
+    
+    elif n_v_type =='명사' and d_type == '경쟁사-뿌리영양제' :
+        file_path = '/app/streamlit/data/경쟁사(뿌리영양제)부정(10차).csv'
+        n_get_topic_model(file_path,10, key='준탱이9')
+    elif n_v_type =='명사+동사+형용사' and d_type == '경쟁사-뿌리영양제' :
+        file_path = '/app/streamlit/data/경쟁사(뿌리영양제)부정(10차).csv'
+        nv_get_topic_model(file_path,8, key='준탱이10')
+    
+    elif n_v_type =='명사' and d_type == '경쟁사-살충제' :
+        file_path = '/app/streamlit/data/경쟁사(살충제)부정(10차).csv'
+        n_get_topic_model(file_path,10, key='준탱이11')
+    elif n_v_type =='명사+동사+형용사' and d_type == '경쟁사-살충제' :
+        file_path = '/app/streamlit/data/경쟁사(살충제)부정(10차).csv'
+        nv_get_topic_model(file_path,8, key='준탱이12')
+    
+    elif n_v_type =='명사' and d_type == '경쟁사-식물등' :
+        file_path = '/app/streamlit/data/경쟁사(식물등)부정(10차).csv'
+        n_get_topic_model(file_path,10, key='준탱이13')
+    elif n_v_type =='명사+동사+형용사' and d_type == '경쟁사-식물등' :
+        file_path = '/app/streamlit/data/경쟁사(식물등)부정(10차).csv'
+        nv_get_topic_model(file_path,8, key='준탱이14')
+    
+
 with tab4:
-    col1_4_, col2_4_ = st.beta_columns(2)    
+    col1_4_, col2_4_, col3_4_ = st.beta_columns(3)     
 
     with col1_4_:
         n_v_type = st.selectbox('데이터 유형',['명사', '명사+동사+형용사'], key='selectbox4')
+    
     with col2_4_:
+        d_type = st.selectbox('제품',['경쟁사-식물영양제', '경쟁사-뿌리영양제', '경쟁사-살충제',
+                                     '경쟁사-식물등', '경쟁사 전체'], key='selectbox4_1_')
+    with col3_4_:
         input_str = st.text_input('제거할 키워드 :', key='stopwords_input4')
         stop_words = fix_stop_words.copy()
         stopwords = stop_words.extend([x.strip() for x in input_str.split(',')])
 
     st.write('경쟁사 긍정리뷰들의 주제별 키워드를 분석한 결과입니다. :confounded:')
 
-    file_path = '/app/streamlit/data/경쟁사긍정(9차).csv'
+    if n_v_type =='명사' and d_type == '경쟁사 전체' :
+        file_path = '/app/streamlit/data/경쟁사긍정(10차).csv'
+        n_get_topic_model(file_path,10, key='준탱이15')
+    elif n_v_type =='명사+동사+형용사' and d_type == '경쟁사 전체' :
+        file_path = '/app/streamlit/data/경쟁사긍정(10차).csv'
+        nv_get_topic_model(file_path,8, key='준탱이16')
 
-    if n_v_type =='명사':
-        n_get_topic_model(file_path,10, key='준탱이7')
-    else:
-        nv_get_topic_model(file_path,10, key='준탱이8')
+    elif n_v_type =='명사' and d_type == '경쟁사-식물영양제' :
+        file_path = '/app/streamlit/data/경쟁사(식물영양제)긍정(10차).csv'
+        n_get_topic_model(file_path,10, key='준탱이17')
+    elif n_v_type =='명사+동사+형용사' and d_type == '경쟁사-식물영양제' :
+        file_path = '/app/streamlit/data/경쟁사(식물영양제)긍정(10차).csv'
+        nv_get_topic_model(file_path,8, key='준탱이18')
+    
+    elif n_v_type =='명사' and d_type == '경쟁사-뿌리영양제' :
+        file_path = '/app/streamlit/data/경쟁사(뿌리영양제)긍정(10차).csv'
+        n_get_topic_model(file_path,10, key='준탱이19')
+    elif n_v_type =='명사+동사+형용사' and d_type == '경쟁사-뿌리영양제' :
+        file_path = '/app/streamlit/data/경쟁사(뿌리영양제)긍정(10차).csv'
+        nv_get_topic_model(file_path,8, key='준탱이20')
+    
+    elif n_v_type =='명사' and d_type == '경쟁사-살충제' :
+        file_path = '/app/streamlit/data/경쟁사(살충제)긍정(10차).csv'
+        n_get_topic_model(file_path,10, key='준탱이21')
+    elif n_v_type =='명사+동사+형용사' and d_type == '경쟁사-살충제' :
+        file_path = '/app/streamlit/data/경쟁사(살충제)긍정(10차).csv'
+        nv_get_topic_model(file_path,8, key='준탱이22')
+    
+    elif n_v_type =='명사' and d_type == '경쟁사-식물등' :
+        file_path = '/app/streamlit/data/경쟁사(식물등)긍정(10차).csv'
+        n_get_topic_model(file_path,10, key='준탱이23')
+    elif n_v_type =='명사+동사+형용사' and d_type == '경쟁사-식물등' :
+        file_path = '/app/streamlit/data/경쟁사(식물등)긍정(10차).csv'
+        nv_get_topic_model(file_path,8, key='준탱이24')
+
+
 ########################################################################################################################
 st.write("")
 st.write("")
