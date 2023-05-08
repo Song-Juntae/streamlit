@@ -654,7 +654,16 @@ with tab4:
 st.subheader('**🔎자사/경쟁사 리뷰 분류**')
 tab1, tab2= st.tabs(["**자사**", "**경쟁사**"])
 
-with st.container():
+with tab1:
+    with st.container():
+    url = "https://public.tableau.com/views/_16834834308600/1_1?:language=ko-KR&:showVizHome=no&:embed=true"
+    html = f'''
+        <iframe src={url} width=1600 height=900></iframe>
+    '''
+    st.markdown(html, unsafe_allow_html=True)
+
+with tab2:
+    with st.container():
     url = "https://public.tableau.com/views/_16834834308600/1_1?:language=ko-KR&:showVizHome=no&:embed=true"
     html = f'''
         <iframe src={url} width=1600 height=900></iframe>
