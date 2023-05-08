@@ -742,7 +742,7 @@ with tab1:
     with st.container():
         url = "https://public.tableau.com/views/_16835258920980/1_1?:language=ko-KR&:showVizHome=no&:embed=true"
         html = f'''
-            <iframe src={url} width=1600 height=900></iframe>
+            <iframe src={url} width=1800 height=900></iframe>
         '''
         st.markdown(html, unsafe_allow_html=True)
 
@@ -751,7 +751,7 @@ with tab2:
     with st.container():
         url = "https://public.tableau.com/views/1_16835240938720/1_1?:language=ko-KR&:showVizHome=no&:embed=true"
         html = f'''
-            <iframe src={url} width=1600 height=900></iframe>
+            <iframe src={url} width=1800 height=900></iframe>
         '''
         st.markdown(html, unsafe_allow_html=True)
 ########################################################################################################################
