@@ -650,7 +650,7 @@ with tab4:
         nv_get_topic_model(file_path,10, key='준탱이8')
 ########################################################################################################################
 with st.container():
-    url = "https://public.tableau.com/app/profile/.66173505/viz/_16834834308600/1_1?publish=yes:language=ko-KR&:showVizHome=no&:embed=true"
+    url = "https://public.tableau.com/app/profile/.66173505/viz/_16834834308600/1_1?:language=ko-KR&:showVizHome=no&:embed=tru"
     html = f'''
         <iframe src={url} width=1600 height=900></iframe>
     '''
