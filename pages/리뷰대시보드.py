@@ -652,7 +652,7 @@ with tab4:
 
 ########################Tableau 구현 #########################
 st.subheader('**🔎자사/경쟁사 리뷰 분류**')
-tab1, tab2= st.tabs(["**자사**", "**경쟁사**""])
+tab1, tab2= st.tabs(["**자사**", "**경쟁사**"])
 
 with st.container():
     url = "https://public.tableau.com/views/_16834834308600/1_1?:language=ko-KR&:showVizHome=no&:embed=true"
