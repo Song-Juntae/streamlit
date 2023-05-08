@@ -64,6 +64,8 @@ with st.container():
 ########################################################################################################################
 # 워클, 넽웤 공통필터
 st.write("")
+st.write("")
+st.write("")
 
 with col0_1:
     st.markdown('🎚️기본 설정')
@@ -137,6 +139,7 @@ with col1_4:
 # # 3. 워클 세부 필터
 # with st.container():
 #     col3_1, col3_2= st.columns([1,1])
+st.write("")
 st.write("")
 st.write("")
 
@@ -280,6 +283,7 @@ with col4_2:
     바차트 = go.Figure([go.Bar(x=list(words.keys()),y=list(words.values()))])
     st.plotly_chart(바차트, use_container_width=True)
 ########################################################################################################################
+st.write("")
 st.write("")
 st.write("")
 
@@ -578,6 +582,7 @@ def nv_get_topic_model(data, topic_number, passes=10, num_words=7, key=None):
 
 st.write("")
 st.write("")
+st.write("")
 ########################여기서부터 streamlit 구현 #########################
 st.subheader('**🔎SWOT 분석**')
 tab1, tab2, tab3, tab4 = st.tabs(["**Strength(강점)**", "**Weakness(약점)**", "**Opportunity(기회)**", "**Threat(위협)**"])
@@ -658,6 +663,7 @@ with tab4:
     else:
         nv_get_topic_model(file_path,10, key='준탱이8')
 ########################################################################################################################
+st.write("")
 st.write("")
 st.write("")
 ########################Tableau 구현 #########################
